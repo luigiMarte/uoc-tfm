@@ -1,0 +1,31 @@
+ {
+  "buttons": {
+    "editProfile":"Editar perfíl",
+    "save":"Guardar",
+    "search": "Buscar",
+    "send": "Enviar"
+  },
+  "alias": "Alias",
+  "email":"Email",
+  "cell_phone": "Móvil",
+  "city": "Ciudad",
+  "country": "País",
+  "drone":"Drone",
+  "drone_brand": "Marca de drone",
+  "drone_model": "Modelo de drone",
+  "lang_en": "en",
+  "lang_english": "Inglés",
+  "lang_sp": "es",
+  "lang_spanish": "Español",
+  "log_in": "iniciar sesión",
+  "login_title": "Inicio de sesión",
+  "name": "Nombre",
+  "password" :"Contraseña",
+  "postal_code": "Código postal",
+  "results":"Resultados",
+  "sign_in": "registro",
+  "sign_in_title": "Registro",
+  "terms_of_use":"Acepto los términos de uso",
+  "title":"Drones app",
+  "user": "Usuario"
+}

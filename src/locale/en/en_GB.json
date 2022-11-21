@@ -1,0 +1,31 @@
+{
+  "buttons": {
+    "editProfile":"Edit profile",
+    "save":"Save",
+    "search": "Search",
+    "send": "Send"
+  } ,
+  "alias": "Nick",
+  "email":"Email",
+  "cell_phone": "Cell phone",
+  "city": "City",
+  "country": "Country",
+  "drone":"Drone",
+  "drone_brand": "Drone brand",
+  "drone_model": "Drone model",
+  "lang_en": "en",
+  "lang_english": "English",
+  "lang_sp": "sp",
+  "lang_spanish": "Spanish",
+  "log_in": "log in",
+  "login_title": "Log in",
+  "name": "Name",
+  "password" :"Password",
+  "postal_code": "Postal Code",
+  "results":"Results",
+  "sign in": "sign in",
+  "sign_in_title": "Sign in",
+  "terms_of_use":" I accept the terms of use",
+  "title":"Drones app",
+  "user": "User"
+}
