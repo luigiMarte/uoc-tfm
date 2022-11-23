@@ -17,7 +17,7 @@
         <ul class="nav-list d-flex flex-direction-row">
           <li class="pr-2">
             <RouterLink to="login">
-              {{ $t("log_in") }} testing code
+              {{ $t("log_in") }}
             </RouterLink>
           </li>
           <li class="pr-2">

@@ -10,6 +10,7 @@ import "./assets/main.css";
 // Multi language locale
 import { createI18n } from "vue-i18n";
 import messages from "@intlify/unplugin-vue-i18n/messages";
+//import locales from "@/locale/index.js";
 // Maps
 import OpenLayersMap from "vue3-openlayers";
 import "vue3-openlayers/dist/vue3-openlayers.css";
