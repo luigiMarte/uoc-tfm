@@ -27,12 +27,23 @@
           </li>
           <li class="pr-2">
             <b-nav-item-dropdown text="Lang">
+              <!-- <select v-model="$i18n.locale">
+                <option
+                  v-for="locale in $i18n.availableLocales"
+                  :key="`locale-${locale}`"
+                  :value="locale"
+                >
+                  {{ locale }} 22
+                </option>
+              </select> -->
               <b-dropdown-item
-                v-for="option in languages.options"
-                :key="option.value"
-                @click="setLanguage(option.value)"
-                >{{ $t(option.text) }}</b-dropdown-item
-              >
+                v-model="$i18n.locale"
+                v-for="locale in $i18n.availableLocales"
+                :key="`locale-${locale}`"
+                :value="locale"
+                @click="setLanguage(locale)"
+                >{{ $t(locale === "en_GB" ? "lang_en" : "lang_sp") }}
+              </b-dropdown-item>
             </b-nav-item-dropdown>
           </li>
         </ul>
@@ -42,32 +53,14 @@
 </template>
 
 <script>
-// import { createI18n } from "vue-i18n";
 export default {
   name: "NavBar",
   data() {
-    return {
-      selectedLanguage: "",
-      languages: {
-        selectedOption: "",
-        options: [
-          {
-            value: "en_GB",
-            text: "lang_en",
-          },
-          {
-            value: "es_SP",
-            text: "lang_sp",
-          },
-        ],
-      },
-    };
+    return {};
   },
   methods: {
     setLanguage(value) {
-      console.log(value);
-      this.selectedLanguage = value;
-      //createI18n.locale = value;
+      this.$i18n.locale = value;
     },
   },
 };
