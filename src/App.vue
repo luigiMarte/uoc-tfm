@@ -1,13 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
-import NavBar from "./components/navbar/index.vue";
+import responsiveNab from "./components/header/responsiveNab.vue";
 import AppFooter from "./components/footer/index.vue";
 </script>
 
 <template>
   <div class="app">
     <header>
-      <NavBar></NavBar>
+      <responsiveNab></responsiveNab>
     </header>
     <main>
       <RouterView />

@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="mb-5">{{ $t("login_title") }}</p>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form>
       <b-form-group
         id="input-group-1"
         class="mt-4"
@@ -10,12 +10,13 @@
       >
         <b-form-input
           id="input-1"
-          v-model="form.user"
+          v-model="form.email"
           type="text"
           placeholder=""
           required
         ></b-form-input>
       </b-form-group>
+
       <b-form-group
         id="input-group-2"
         class="mt-4"
@@ -31,46 +32,42 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button class="col-12 mt-4" type="submit" variant="primary">{{
-        $t("buttons.send")
-      }}</b-button>
+      <b-row>
+        <b-col>
+          <b-button class="col-6" variant="primary" @click="clearForm()">{{
+            $t("buttons.clear")
+          }}</b-button></b-col
+        >
+        <b-col>
+          <b-button class="col-6" variant="primary" @click="sendForm()">{{
+            $t("buttons.send")
+          }}</b-button></b-col
+        >
+      </b-row>
     </b-form>
   </div>
 </template>
 
 <script>
+import { userLogin } from "@/services/api/auth";
+
 export default {
   name: "loginForm",
   data() {
     return {
       form: {
-        user: "",
-        password: null,
+        email: "",
+        password: "",
       },
-
-      show: true,
     };
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      //alert(JSON.stringify(this.form));
-      this.userLogin();
-    },
-    userLogin() {
-      this.$router.push({ name: "user" });
-    },
-    onReset(event) {
-      event.preventDefault();
-      // Reset our form values
-      this.form.user = "";
-      this.form.password = "";
-      this.form.checked = [];
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
+    async sendForm() {
+      await userLogin({
+        email: this.form.email,
+        password: this.form.password,
       });
+      this.$router.push({ name: "user" });
     },
   },
 };

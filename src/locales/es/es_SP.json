@@ -1,10 +1,12 @@
  {
   "buttons": {
+    "clear": "borrar",
     "editProfile":"Editar perfíl",
     "save":"Guardar",
     "search": "Buscar",
     "send": "Enviar"
   },
+  "about": "About",
   "alias": "Alias",
   "email":"Email",
   "cell_phone": "Móvil",
@@ -21,9 +23,12 @@
   "login_title": "Inicio de sesión",
   "name": "Nombre",
   "password" :"Contraseña",
-  "postal_code": "Código postal",
-  "results":"Resultados",
+  "postal_code": "Código postal", 
+  "profile": "Perfil",
+  "results":"Results",
+  "search": "Busqueda",
   "sign_in": "registro",
+  "register":"Registro",
   "sign_in_title": "Registro",
   "terms_of_use":"Acepto los términos de uso",
   "title":"Drones app",

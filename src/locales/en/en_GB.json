@@ -1,10 +1,12 @@
 {
   "buttons": {
+    "clear": "clear",
     "editProfile":"Edit profile",
     "save":"Save",
     "search": "Search",
     "send": "Send"
   } ,
+  "about": "About",
   "alias": "Nick",
   "email":"Email",
   "cell_phone": "Cell phone",
@@ -22,7 +24,10 @@
   "name": "Name",
   "password" :"Password",
   "postal_code": "Postal Code",
+  "profile": "Profile",
   "results":"Results",
+  "register":"Register",
+  "search": "Search",
   "sign_in": "sign in",
   "sign_in_title": "Sign in",
   "terms_of_use":" I accept the terms of use",
