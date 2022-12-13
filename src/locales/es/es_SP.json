@@ -6,6 +6,12 @@
     "search": "Buscar",
     "send": "Enviar"
   },
+  "notification": {
+    "user_created_success": "Usuario creado correctamente"
+  },
+  "errors":{
+    "error_ocurred" : "Se ha producido un error"
+  },
   "about": "About",
   "alias": "Alias",
   "email":"Email",

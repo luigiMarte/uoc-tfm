@@ -22,6 +22,6 @@ export function createUser(params) {
  */
 export function userLogin(params) {
   debugger;
-  console.log(params);
+  console.log("API params -->", params);
   return axios.post("http://localhost:3000/api/auth/sign_in", params);
 }

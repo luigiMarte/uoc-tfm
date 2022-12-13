@@ -1,6 +1,15 @@
 <template>
   <b-container class="mt-4">
     <p class="mb-5">{{ $t("sign_in_title") }}</p>
+    <b-row>
+      <b-col cols="2"></b-col>
+      <b-col cols="8">
+        <b-alert v-model="showAlert" :variant="alertVariant">{{
+          $t(alertMessage)
+        }}</b-alert>
+      </b-col>
+      <b-col cols="2"></b-col>
+    </b-row>
 
     <b-form class="mb-4 vh-100 text-center" align-v="center">
       <b-row>
@@ -66,6 +75,7 @@
 
 <script>
 import { getUsers } from "@/services/api/auth";
+
 //import { createUser } from "@/services/api/auth";
 //import axios from "axios";
 
@@ -81,45 +91,57 @@ export default {
         email: "",
         password: "",
       },
-
+      alertVariant: "",
+      alertMessage: "",
       show: true,
+      showAlert: false,
     };
   },
 
   created() {
     // this.showResponse();
     // this.showState();
-    //this.test();
   },
   methods: {
-    // test() {
-    //   let post = {
-    //     username: "test luis4",
-    //     email: "testluis4@gmail.com",
-    //     password: "12345",
-    //   };
-    //   axios
-    //     .post("http://localhost:3000/api/auth/sign_up", post)
-    //     .then((result) => {
-    //       console.log("test-post", result);
-    //     });
-    // },
     sendForm() {
       console.log("test-send");
-      // await createUser({
-      //   username: this.username,
-      //   email: this.email,
-      //   password: this.password,
-      // });
-      this.$store.dispatch("createNewUser", {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-      });
+      this.$store
+        .dispatch("createNewUser", {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log("Resp desde FORM", response);
+          if (response.status === 200) {
+            this.alertMessage = "notification.user_created_success";
+            this.alertVariant = "success";
+            this.showAlert = true;
+            setTimeout(() => {
+              this.showAlert = false;
+              this.$router.push({ name: "login" });
+            }, 2000);
+          } else {
+            console.log(response.status);
+            this.alertVariant = "danger";
+            this.alertMessage = "errors.error_ocurred";
+            this.showAlert = true;
+            setTimeout(() => {
+              this.showAlert = false;
+            }, 2000);
+          }
+        });
     },
     async showResponse() {
       await getUsers().then((response) => {
         console.log("Resp", response);
+        if (response.status === 200) {
+          console.log("Do something");
+          this.router.push({ name: "login" });
+          //show confirmation
+        } else {
+          //show error
+        }
       });
     },
     showState() {

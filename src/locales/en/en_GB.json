@@ -6,6 +6,12 @@
     "search": "Search",
     "send": "Send"
   } ,
+  "notification": {
+    "user_created_success": "User created successfully"
+  },
+  "errors":{
+    "error_ocurred" : "Unexpected error occurred"
+  },
   "about": "About",
   "alias": "Nick",
   "email":"Email",

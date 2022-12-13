@@ -1,6 +1,15 @@
-<template></template>
+<template>
+  <b-container class="mt-4 m-bot-50">
+    <b-row class="justify-content-md-center">
+      <p>LANDING</p>
+      <register-form></register-form>
+    </b-row>
+  </b-container>
+</template>
 
-<script setup></script>
+<script setup>
+import registerForm from "../components/forms/register/registerForm.vue";
+</script>
 <style scoped lang="scss">
 /*
 
