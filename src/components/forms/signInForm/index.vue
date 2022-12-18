@@ -4,6 +4,7 @@
     <b-form class="mb-4" @submit="onSubmit" @reset="onReset" v-if="show">
       <b-row>
         <b-col cols="12" md="6">
+          <!-- Nombre-->
           <b-form-group
             id="input-group-1"
             class="mt-4"

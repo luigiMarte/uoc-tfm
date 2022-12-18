@@ -19,7 +19,7 @@
         label-for="input-2"
       >
         <b-form-input
-          id="input-1"
+          id="input-2"
           v-model="form.email"
           type="text"
           placeholder="Introduce una ciudad"

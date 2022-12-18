@@ -7,7 +7,8 @@
     "send": "Enviar"
   },
   "notification": {
-    "user_created_success": "Usuario creado correctamente"
+    "user_created_success": "Usuario creado correctamente",
+    "user_login_success" : "Autenticación correcta"
   },
   "errors":{
     "error_ocurred" : "Se ha producido un error"
@@ -21,22 +22,47 @@
   "drone":"Drone",
   "drone_brand": "Marca de drone",
   "drone_model": "Modelo de drone",
+  "go_to" :"Ir a",
+  "landing_text": "Elige a dónde quieres ir entre las siguientes opciones",
   "lang_en": "en",
   "lang_english": "Inglés",
   "lang_sp": "es",
   "lang_spanish": "Español",
+  "legislation": "Legislación",
+  "legislation_short_exp": "Volar un drone ha de hacerse siempre de acuerdo con la legilación del lugar en que su vuela. Revisa siempre la legislación antes volar",
+  "legislation_short_exp_2":"Accede a 'Global drone regulation' database para consultar la regulación de cualquier país del mundo.",
   "log_in": "iniciar sesión",
   "login_title": "Inicio de sesión",
   "name": "Nombre",
+  "my_profile": "Mi perfíl",
+  "my_profile_tab_exp": "Desde esta sección puedes consultar la información de tu perfil de usuario. También puedes editar tu perfil y actualizar tu información.",
   "password" :"Contraseña",
+  "phone":"Teléfono",
   "postal_code": "Código postal", 
   "profile": "Perfil",
   "results":"Results",
   "search": "Busqueda",
+  "search_tab_exp":"Desde la sección de búsqueda puedes encontrar pilotos de drones en una determinada ubicación y contactar con ellos",
   "sign_in": "registro",
+  "recommendation": "Te recomendamos visitar la sección about para entender bien como funciona la aplicación",
   "register":"Registro",
   "sign_in_title": "Registro",
   "terms_of_use":"Acepto los términos de uso",
   "title":"Drones app",
-  "user": "Usuario"
+  "user": "Usuario",
+  "weather": "El tiempo",
+  "weather_short_exp":"Consulta las condiciones climatológicas antes de volar y no corras riesgos innecesarios.",
+  "welcome" : "Bienvenido",
+  "wind_speed": "Velocidad viento",
+  "visibility": "Visibilidad",
+  "humidity": "Humedad",
+  "max-temp" :"Temperatura máxima",
+  "min-temp" : "Temperatura mínima",
+  "feels_like" : "Sensación térmica",
+  "flying_conditions" : "Condiciones de vuelo",
+  "optimum": "Óptimas",
+  "moderate": "Precaución",
+  "danger": "Desaconsejado",
+  "weather_prediction": "Clima previsto",
+  "weather_instructions": "Introduce una población para consultar la previsión del tiempo y las condiciones de vuelo "
 }

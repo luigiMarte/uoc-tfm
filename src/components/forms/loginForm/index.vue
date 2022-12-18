@@ -62,12 +62,40 @@ export default {
     };
   },
   methods: {
-    async sendForm() {
+    async sendForm2() {
       await userLogin({
         email: this.form.email,
         password: this.form.password,
       });
       this.$router.push({ name: "user" });
+    },
+    sendForm() {
+      console.log("test-send");
+      this.$store
+        .dispatch("userLogin", {
+          email: this.form.email,
+          password: this.form.password,
+        })
+        .then((response) => {
+          console.log("Resp desde login", response);
+          if (response.status === 200) {
+            this.alertMessage = "notification.user_login_success";
+            this.alertVariant = "success";
+            this.showAlert = true;
+            setTimeout(() => {
+              this.showAlert = false;
+              this.$router.push({ name: "HomeView" });
+            }, 2000);
+          } else {
+            console.log(response.status);
+            this.alertVariant = "danger";
+            this.alertMessage = "errors.error_login_ocurred";
+            this.showAlert = true;
+            setTimeout(() => {
+              this.showAlert = false;
+            }, 2000);
+          }
+        });
     },
   },
 };

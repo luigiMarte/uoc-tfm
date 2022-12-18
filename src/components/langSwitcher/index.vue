@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="switcher-container">
     <input
       id="toggle-on"
       class="toggle toggle-left"
@@ -40,6 +40,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.switcher-container {
+  position: absolute;
+  left: 30px;
+  top: 90px;
+  z-index: 9;
+}
+
 .btn {
   //border: 3px solid #1a1a1a;
   display: inline-block;

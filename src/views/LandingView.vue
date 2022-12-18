@@ -1,7 +1,7 @@
 <template>
+  <img src="@/assets/img/landing.jpg" alt="" />
   <b-container class="mt-4 m-bot-50">
     <b-row class="justify-content-md-center">
-      <p>LANDING</p>
       <register-form></register-form>
     </b-row>
   </b-container>
@@ -11,23 +11,15 @@
 import registerForm from "../components/forms/register/registerForm.vue";
 </script>
 <style scoped lang="scss">
-/*
-
-Boxer Template
-
-http://www.templatemo.com/tm-446-boxer
-
-*/
-
-body {
-  background: #fff;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 300;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-}
+// body {
+//   background: #fff;
+//   font-family: "Open Sans", sans-serif;
+//   font-weight: 300;
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   overflow-x: hidden;
+// }
 
 .tm-white a {
   color: #fff;

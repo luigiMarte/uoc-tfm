@@ -1,6 +1,12 @@
 <template>
   <b-container class="mt-4">
-    <p class="mb-5">{{ $t("sign_in_title") }}</p>
+    <div></div>
+    <b-row>
+      <b-col class="text-center">
+        <h3 class="mb-3">Crate your user account</h3>
+        <p>Complete the form to create your user account</p>
+      </b-col>
+    </b-row>
     <b-row>
       <b-col cols="2"></b-col>
       <b-col cols="8">
