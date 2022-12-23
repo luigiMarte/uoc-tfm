@@ -2,32 +2,7 @@
   <img src="@/assets/img/landing.jpg" alt="" />
   <b-container class="mt-4 m-bot-50">
     <div>
-      <div>
-        <button @click="modalShow = !modalShow">
-          <b-badge pill variant="secondary">?</b-badge>
-        </button>
-
-        <b-modal v-model="modalShow">
-          <b-card
-            title="You don't know your coordinates?"
-            sub-title="Card subtitle"
-          >
-            <b-card-text
-              >Enable your browser location and we calculate the for
-              you</b-card-text
-            >
-            <b-button @click="getCoordinates()"> calculate </b-button>
-            <div>
-              <b-card-text>Latitude: {{ latitude }}</b-card-text>
-              <b-card-text>Longuitude: {{ longitude }}</b-card-text>
-            </div>
-            <b-card-text>
-              If not working you alwais can use google maps to get
-              them</b-card-text
-            >
-          </b-card>
-        </b-modal>
-      </div>
+      <div></div>
     </div>
     <b-row class="justify-content-md-center">
       <register-form></register-form>
@@ -39,25 +14,9 @@
 import registerForm from "../components/forms/register/registerForm.vue";
 export default {
   components: registerForm,
-  methods: {
-    getCoordinates() {
-      this.$getLocation()
-        .then((coordinates) => {
-          console.log(coordinates);
-          this.latitude = coordinates.lat;
-          this.longitude = coordinates.lng;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-  },
+  methods: {},
   data() {
-    return {
-      modalShow: false,
-      latitude: "",
-      longitude: "",
-    };
+    return {};
   },
   created() {},
 };
