@@ -117,26 +117,32 @@ export default {
           email: this.email,
           password: this.password,
         })
-        .then((response) => {
-          console.log("Resp desde FORM", response);
-          if (response.status === 200) {
-            this.alertMessage = "notification.user_created_success";
-            this.alertVariant = "success";
-            this.showAlert = true;
-            setTimeout(() => {
-              this.showAlert = false;
-              this.$router.push({ name: "login" });
-            }, 2000);
-          } else {
-            console.log(response.status);
-            this.alertVariant = "danger";
-            this.alertMessage = "errors.error_ocurred";
-            this.showAlert = true;
-            setTimeout(() => {
-              this.showAlert = false;
-            }, 2000);
-          }
+        .then(() => {
+          setTimeout(() => {
+            this.showAlert = false;
+            this.$router.push({ name: "completeProfile" });
+          }, 2000);
         });
+      // .then((response) => {
+      //   console.log("Resp desde FORM", response);
+      //   if (response.status === 200) {
+      //     this.alertMessage = "notification.user_created_success";
+      //     this.alertVariant = "success";
+      //     this.showAlert = true;
+      //     setTimeout(() => {
+      //       this.showAlert = false;
+      //       this.$router.push({ name: "login" });
+      //     }, 2000);
+      //   } else {
+      //     console.log(response.status);
+      //     this.alertVariant = "danger";
+      //     this.alertMessage = "errors.error_ocurred";
+      //     this.showAlert = true;
+      //     setTimeout(() => {
+      //       this.showAlert = false;
+      //     }, 2000);
+      //   }
+      // });
     },
     async showResponse() {
       await getUsers().then((response) => {

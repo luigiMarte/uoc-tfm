@@ -4,7 +4,8 @@
     "editProfile":"Editar perfíl",
     "save":"Guardar",
     "search": "Buscar",
-    "send": "Enviar"
+    "send": "Enviar",
+    "update_profile":"Actualizar perfíl"
   },
   "notification": {
     "user_created_success": "Usuario creado correctamente",
@@ -12,6 +13,14 @@
   },
   "errors":{
     "error_ocurred" : "Se ha producido un error"
+  },
+  "locationModal":{
+    "title": "No sabes tus coordenadas?",
+    "hint_1":"Nosotros las aberiguaremos. Es necesario habilitar los permisos de localización de tu navegador o dispositivo",
+    "hint_2":"Si esto no funciona puedes usar Google Maps para obtener tus coordenadas ",
+    "button_text": "Obtener coordenadas",
+    "latitude":"Latitud",
+    "longitude":"Longitud"
   },
   "about": "About",
   "alias": "Alias",
@@ -47,6 +56,7 @@
   "recommendation": "Te recomendamos visitar la sección about para entender bien como funciona la aplicación",
   "register":"Registro",
   "sign_in_title": "Registro",
+  "tell_about_you": "Cuéntanos algo sobre ti",
   "terms_of_use":"Acepto los términos de uso",
   "title":"Drones app",
   "user": "Usuario",

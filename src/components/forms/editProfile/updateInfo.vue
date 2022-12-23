@@ -9,31 +9,6 @@
       </b-col>
       <b-col cols="2"></b-col>
     </b-row>
-    <!-- modal -->
-    <b-row>
-      <b-modal v-model="modalShow">
-        <b-card :title="$t('locationModal.title')" sub-title="Card subtitle">
-          <b-card-text>{{ $t("locationModal.hint_1") }}</b-card-text>
-          <b-button variant="outline-primary" @click="getCoordinates()">
-            <b-spinner v-if="spinner" small></b-spinner
-            ><span v-else>{{ $t("locationModal.button_text") }}</span>
-          </b-button>
-          <div class="mb-3 mt-3" v-if="showCoord">
-            <b-card-text
-              ><b>{{ $t("locationModal.latitude") }}</b>
-              {{ latitude }}</b-card-text
-            >
-            <b-card-text
-              ><b>{{ $t("locationModal.longitude") }}</b>
-              {{ longitude }}</b-card-text
-            >
-          </div>
-          <b-card-text class="mt-3">
-            {{ $t("locationModal.hint_2") }}</b-card-text
-          >
-        </b-card>
-      </b-modal>
-    </b-row>
     <b-row>
       <b-col v-if="showAvatar && avatarImg" md="6">
         <img
@@ -42,10 +17,10 @@
           alt="avatar"
         />
         <!-- <img
-          class="avatar-img"
-          src="@/assets/img/avatars/user_1.png"
-          alt="avatar"
-        /> -->
+            class="avatar-img"
+            src="@/assets/img/avatars/user_1.png"
+            alt="avatar"
+          /> -->
       </b-col>
     </b-row>
     <b-row class="card-box mb-3">
@@ -112,6 +87,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.alias"
+          :placeholder="userDetails.alias"
         ></b-form-input
       ></b-col>
     </b-row>
@@ -125,6 +101,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.country"
+          :placeholder="userDetails.country"
         ></b-form-input
       ></b-col>
       <b-col md="6" class="mb-3">
@@ -134,6 +111,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.city"
+          :placeholder="userDetails.city"
         ></b-form-input
       ></b-col>
     </b-row>
@@ -146,6 +124,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.postalCode"
+          :placeholder="userDetails.postalCode"
         ></b-form-input
       ></b-col>
       <b-col md="6" class="mb-3">
@@ -155,6 +134,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.phone"
+          :placeholder="userDetails.phone"
         ></b-form-input
       ></b-col>
     </b-row>
@@ -189,6 +169,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.droneBrand"
+          :placeholder="userDetails.droneBrand"
         ></b-form-input
       ></b-col>
 
@@ -199,6 +180,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.droneModel"
+          :placeholder="userDetails.droneModel"
         ></b-form-input
       ></b-col>
     </b-row>
@@ -206,20 +188,12 @@
     <b-row class="card-box mb-3">
       <b-col md="6" class="mb-3">
         <!-- latitude -->
-        <label
-          >{{ $t("latitude") }}
-          <b-badge
-            class="show-pointer"
-            @click="modalShow = !modalShow"
-            pill
-            variant="secondary"
-            >?</b-badge
-          >
-        </label>
+        <label>{{ $t("latitude") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
           v-model="formData.latitude"
+          :placeholder="userDetails.latitude"
         ></b-form-input
       ></b-col>
 
@@ -230,6 +204,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.longitude"
+          :placeholder="userDetails.longitude"
         ></b-form-input
       ></b-col>
     </b-row>
@@ -242,6 +217,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.price"
+          :placeholder="userDetails.price"
         ></b-form-input
       ></b-col>
 
@@ -252,6 +228,7 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.website"
+          :placeholder="userDetails.website"
         ></b-form-input
       ></b-col>
     </b-row>
@@ -263,9 +240,9 @@
         <b-form-textarea
           id="textarea"
           v-model="formData.aboutMe"
-          placeholder="Lorem ipsum..."
           rows="3"
           max-rows="6"
+          :placeholder="userDetails.aboutMe"
         ></b-form-textarea
       ></b-col>
     </b-row>
@@ -278,7 +255,7 @@
           type="submit"
           @click="sendForm()"
           variant="secondary"
-          >{{ $t("buttons.save") }}</b-button
+          >{{ $t("buttons.update_profile") }}</b-button
         >
       </div>
     </b-row>
@@ -286,6 +263,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "editProfile",
   data() {
@@ -317,28 +295,14 @@ export default {
       alertMessage: "",
       show: true,
       showAlert: false,
-      modalShow: false,
-      latitude: "",
-      longitude: "",
-      spinner: false,
-      showCoord: false,
     };
   },
+  computed: {
+    ...mapState({
+      userDetails: "userInfo",
+    }),
+  },
   methods: {
-    getCoordinates() {
-      this.spinner = true;
-      this.$getLocation()
-        .then((coordinates) => {
-          console.log(coordinates);
-          this.latitude = coordinates.lat;
-          this.longitude = coordinates.lng;
-          this.spinner = false;
-          this.showCoord = true;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
     setAvatar(value) {
       console.log("avatar", value);
       this.formData.avatar = value;
@@ -347,24 +311,11 @@ export default {
       this.selectedAvatar = avatarUrl + value + ".png";
       this.showAvatar = true;
     },
-    onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
-    },
-    saveData() {
-      console.log("save");
-      //this.$router.push({ name: "user" });
-    },
-    sendForm() {
-      console.log("test-send user");
-      //let userLoginInfo = this.$store.state.newUser;
-      const { username, email, password } = this.$store.state.newUser;
 
+    sendForm() {
+      //const { username, email, password } = this.$store.state.newUser;
       this.$store
-        .dispatch("completeNewUser", {
-          username,
-          email,
-          password,
+        .dispatch("updateProfile", {
           avatar: this.formData.avatar,
           alias: this.formData.alias,
           country: this.formData.country,
@@ -379,18 +330,15 @@ export default {
           longitude: this.formData.longitude,
           price: this.formData.price,
           website: this.formData.website,
-          enabled: false,
-          status: false,
         })
         .then((response) => {
           console.log("Resp desde FORM", response);
-          debugger;
           if (response.status === 200) {
             this.alertMessage = "notification.user_created_success";
             this.alertVariant = "success";
             this.showAlert = true;
             this.showAlert = false;
-            this.$router.push({ name: "login" });
+            this.$router.push({ path: "dashboard" });
           } else {
             console.log(response.status);
             this.alertVariant = "danger";
@@ -453,8 +401,5 @@ export default {
       font-weight: bold;
     }
   }
-}
-.show-pointer {
-  cursor: pointer;
 }
 </style>

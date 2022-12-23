@@ -18,17 +18,39 @@ export function getUserData(userId) {
 }
 
 /**
+ * GET: user data by ID
+ */
+export function getUser(userId) {
+  console.log(userId);
+  return axios.post(`"http://localhost:3000/api/auth/${userId}"`);
+}
+
+/**
  * POST: new user sign up
  */
 export function createUserData(params, userId, token) {
-  debugger;
-  console.log("api");
   console.log("api server", params, userId, token);
-  console.log("api out");
   //userId = "639dc0697f4bcfea89356276";
   //return axios.post(`"http://localhost:3000/api/userData/"${userId}`, params, {
   return axios.post(
     `"http://localhost:3000/api/userData/"${userId}`,
+    {
+      params,
+    },
+    {
+      headers: {
+        "x-access-token": token,
+      },
+    }
+  );
+}
+
+/**
+ * PUT: user profile update
+ */
+export function updateUserProfile(params, userId, token) {
+  return axios.put(
+    `http://localhost:3000/api/auth/${userId}`,
     {
       params,
     },

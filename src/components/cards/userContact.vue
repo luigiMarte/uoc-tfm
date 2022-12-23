@@ -3,7 +3,13 @@
     <b-row class="row-box mb-4">
       <b-col cols="12" class="mb-4">
         <b-row>
-          <b-col cols="6"><b-avatar text="BV" size="5rem"></b-avatar></b-col>
+          <b-col cols="6"
+            ><img
+              style="width: 150px"
+              class="avatar-img"
+              src="@/assets/img/avatars/user_4.png"
+              alt=""
+          /></b-col>
           <b-col cols="6">
             <p>
               <strong>{{ $t("name") }}</strong>
@@ -20,7 +26,10 @@
             </p></b-col
           >
           <b-col cols="12"
-            ><img src="https://picsum.photos/150/150" alt=""
+            ><img
+              src="@/assets/img/drones/autel.png"
+              alt=""
+              style="max-width: 15rem"
           /></b-col>
         </b-row>
       </b-col>
@@ -77,6 +86,13 @@
           >
           <b-col cols="12"><p>656554565</p></b-col>
         </b-row>
+        <b-row>
+          <b-col cols="12">
+            <b-badge variant="success" class="whatapp-badge">
+              <a href="https://wa.me/34636330363">WathsApp</a>
+            </b-badge>
+          </b-col>
+        </b-row>
       </b-col>
     </b-row>
   </b-container>
@@ -122,5 +138,11 @@ export default {
       font-weight: bold;
     }
   }
+}
+.whatapp-badge {
+  cursor: pointer;
+  height: toRem(30);
+  width: toRem(100);
+  font-size: toRem(17);
 }
 </style>

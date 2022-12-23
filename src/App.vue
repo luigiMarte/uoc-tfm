@@ -8,7 +8,7 @@ import AppFooter from "./components/footer/index.vue";
     <header>
       <responsiveNab></responsiveNab>
     </header>
-    <main class="general-container">
+    <main>
       <RouterView />
     </main>
     <AppFooter />
@@ -26,8 +26,5 @@ import AppFooter from "./components/footer/index.vue";
   display: block;
   margin: 0 auto 2rem;
   margin: 0 2rem 0 0;
-}
-.general-container {
-  margin-top: toRem(90);
 }
 </style>

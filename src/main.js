@@ -14,11 +14,14 @@ import i18n from "@/i18n";
 import OpenLayersMap from "vue3-openlayers";
 import "vue3-openlayers/dist/vue3-openlayers.css";
 
+import Vue3Geolocation from "vue3-geolocation";
+
 const app = createApp(App);
 
 app.use(store);
 app.use(router);
 app.use(i18n);
+app.use(Vue3Geolocation);
 
 app.use(OpenLayersMap);
 

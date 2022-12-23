@@ -1,5 +1,5 @@
 <script setup>
-import editProfile from "../components/forms/editProfile/updateInfo.vue";
+import editProfile from "../components/forms/editProfile/index.vue";
 </script>
 
 <template>

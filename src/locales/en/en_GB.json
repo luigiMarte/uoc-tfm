@@ -4,7 +4,8 @@
     "editProfile":"Edit profile",
     "save":"Save",
     "search": "Search",
-    "send": "Send"
+    "send": "Send",
+    "update_profile":"Update profile",
   } ,
   "notification": {
     "user_created_success": "User created successfully",
@@ -12,6 +13,14 @@
   },
   "errors":{
     "error_ocurred" : "Unexpected error occurred"
+  },
+  "locationModal":{
+    "title": "You don't know your coordinates ?",
+    "hint_1":"We will figure them out. It is necessary to enable the location permissions of your browser or device",
+    "hint_2":"If this doesn't work you can use Google Maps to get your coordinates ",
+    "button_text": "Get coordinates",
+    "latitude":"Latitude",
+    "longitude":"Longitude"
   },
   "about": "About",
   "alias": "Nick",
@@ -47,6 +56,7 @@
   "search_tab_exp":"From the search section you can find drone pilots in a certain location and contact them",
   "sign_in": "sign in",
   "sign_in_title": "Sign in",
+  "tell_about_you": "Tell us something about you",
   "terms_of_use":" I accept the terms of use",
   "title":"Drones app",
   "user": "User",

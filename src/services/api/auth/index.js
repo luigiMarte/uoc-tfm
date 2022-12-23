@@ -21,7 +21,17 @@ export function createUser(params) {
  * POST: User login
  */
 export function userLogin(params) {
-  debugger;
-  console.log("API params -->", params);
   return axios.post("http://localhost:3000/api/auth/sign_in", params);
+}
+
+/**
+ * GET: user data by ID
+ */
+export function getUser(userId) {
+  if (userId) {
+    return axios.get(`http://localhost:3000/api/auth/${userId}`);
+  } else {
+    console.log("User not found");
+  }
+  //return axios.get(`http://localhost:3000/api/auth/${userId}`);
 }
