@@ -27,4 +27,7 @@ import AppFooter from "./components/footer/index.vue";
   margin: 0 auto 2rem;
   margin: 0 2rem 0 0;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
 </style>

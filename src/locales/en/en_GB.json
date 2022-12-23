@@ -5,7 +5,7 @@
     "save":"Save",
     "search": "Search",
     "send": "Send",
-    "update_profile":"Update profile",
+    "update_profile":"Update profile"
   } ,
   "notification": {
     "user_created_success": "User created successfully",
@@ -41,6 +41,8 @@
   "legislation_short_exp":"Flying a drone must always be done in accordance with the legislation of the place where it flies. Always check the legislation before flying.",
   "legislation_short_exp_2":"Access the Global drone regulation database to consult the regulation of any country in the world.",
   "log_in": "log in",
+  "log_out": "log out",
+  "logout_message": "See you soon",
   "login_title": "Log in",
   "name": "Name",
   "my_profile": "My profile",

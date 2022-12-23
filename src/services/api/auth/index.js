@@ -14,6 +14,7 @@ export function getUsers() {
  */
 export function createUser(params) {
   console.log(params);
+  const baseUrl = import.meta.env.VITE_ROOT_API;
   return axios.post("http://localhost:3000/api/auth/sign_up", params);
 }
 

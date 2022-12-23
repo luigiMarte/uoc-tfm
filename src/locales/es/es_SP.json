@@ -41,6 +41,8 @@
   "legislation_short_exp": "Volar un drone ha de hacerse siempre de acuerdo con la legilación del lugar en que su vuela. Revisa siempre la legislación antes volar",
   "legislation_short_exp_2":"Accede a 'Global drone regulation' database para consultar la regulación de cualquier país del mundo.",
   "log_in": "iniciar sesión",
+  "log_out": "cerrar sesión",
+  "logout_message": "Hasta pronto",
   "login_title": "Inicio de sesión",
   "name": "Nombre",
   "my_profile": "Mi perfíl",

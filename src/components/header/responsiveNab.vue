@@ -10,7 +10,7 @@
             {{ $t("search") }}
           </RouterLink>
         </li>
-        <li class="nav-item">
+        <li v-if="$store.state.isLogin" class="nav-item">
           <RouterLink to="profile">
             {{ $t("profile") }}
           </RouterLink>
@@ -20,7 +20,12 @@
             {{ $t("about") }}
           </RouterLink>
         </li>
-        <li class="nav-item">
+        <li v-if="$store.state.isLogin" class="nav-item">
+          <div class="cursor-pointer" @click="UserLogout()">
+            {{ $t("log_out") }}
+          </div>
+        </li>
+        <li v-else class="nav-item">
           <RouterLink to="login">
             {{ $t("log_in") }}
           </RouterLink>
@@ -34,17 +39,39 @@
     </nav>
   </header>
   <langSwitcher></langSwitcher>
+  <!-- modal -->
+  <b-modal v-model="modalShow" ok-only title="Log out">
+    <p class="my-4">{{ $t("logout_message") }}</p>
+  </b-modal>
+
+  <!-- modal -->
 </template>
 
 <script>
 import langSwitcher from "@/components/langSwitcher/index.vue";
+import { mapState } from "vuex";
 export default {
   name: "responsiveNab",
   components: { langSwitcher },
   data() {
-    return {};
+    return {
+      alertMessage: "notification.user_created_success",
+      alertVariant: "success",
+      showAlert: false,
+      modalShow: false,
+    };
   },
+  computed: mapState(["token"]),
   methods: {
+    UserLogout() {
+      console.log("User logged out");
+      this.$store.commit("SET_LOGOUT");
+      this.modalShow = true;
+      setTimeout(() => {
+        this.modalShow = false;
+        this.$router.push({ name: "landing" });
+      }, 2000);
+    },
     setLanguage(value) {
       this.$i18n.locale = value;
     },
@@ -104,6 +131,9 @@ export default {
   justify-content: space-between;
   align-items: center;
   z-index: 9;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .nav-item {

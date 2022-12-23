@@ -16,7 +16,9 @@ export default {
   components: registerForm,
   methods: {},
   data() {
-    return {};
+    return {
+      publicEnvVar: "",
+    };
   },
   created() {},
 };

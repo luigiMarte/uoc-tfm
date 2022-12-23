@@ -10,6 +10,7 @@ export default createStore({
     userToken: "",
     token: "",
     userId: "",
+    isLogin: {},
     userInfo: {},
     newUser: {},
     newUserComplete: {},
@@ -29,6 +30,13 @@ export default createStore({
     SET_LOGIN(state, data) {
       state.token = data.token;
       state.userId = data.userId;
+      state.isLogin = true;
+    },
+    SET_LOGOUT(state) {
+      state.isLogin = false;
+      state.token = "";
+      state.userToken = "";
+      state.userId = "";
     },
     SET_DATA(state, data) {
       console.log("mutation data", data);
