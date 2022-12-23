@@ -1,1 +1,0 @@
-const s="/uoc-tfm/assets/user_2.6a097753.png",t="/uoc-tfm/assets/user_3.0a5c9626.png",o="/uoc-tfm/assets/user_6.1412e07d.png",_="/uoc-tfm/assets/user_7.ba0348e0.png";export{s as _,t as a,o as b,_ as c};
