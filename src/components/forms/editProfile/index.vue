@@ -185,22 +185,37 @@
       <b-col md="6" class="mb-3">
         <!-- Drone brand -->
         <label>{{ $t("drone_brand") }}</label>
-        <b-form-input
+        <b-form-select
           class="input-group-text"
           id="subject-id"
+          :options="options"
           v-model="formData.droneBrand"
-        ></b-form-input
-      ></b-col>
+          size="sm"
+        ></b-form-select>
+        <!-- <b-form-input
+          class="input-group-text"
+          id="subject-id"
+          :options="options"
+          v-model="formData.droneBrand"
+        ></b-form-input> -->
+      </b-col>
 
       <b-col md="6" class="mb-3">
         <!-- Drone model -->
         <label>{{ $t("drone_model") }}</label>
-        <b-form-input
+        <b-form-select
+          class="input-group-text"
+          id="subject-id"
+          :options="optionsModel"
+          v-model="formData.droneModel"
+          size="sm"
+        ></b-form-select>
+        <!-- <b-form-input
           class="input-group-text"
           id="subject-id"
           v-model="formData.droneModel"
-        ></b-form-input
-      ></b-col>
+        ></b-form-input> -->
+      </b-col>
     </b-row>
 
     <b-row class="card-box mb-3">
@@ -286,8 +301,12 @@
 </template>
 
 <script>
+//import CustomSelect from "@/components/custom-select";
 export default {
   name: "editProfile",
+  components: {
+    //CustomSelect,
+  },
   data() {
     return {
       cardFields: [],
@@ -322,7 +341,29 @@ export default {
       longitude: "",
       spinner: false,
       showCoord: false,
+      options: [
+        { value: "dji", text: "Dji" },
+        { value: "autel", text: "Autel" },
+      ],
+      optionsModel: [],
     };
+  },
+  watch: {
+    "formData.droneBrand"(newValue) {
+      console.log(newValue);
+      if (newValue === "dji") {
+        this.optionsModel = [
+          { value: "mini2", text: "Mini 2" },
+          { value: "mini3pro", text: "Mini 3 Pro" },
+        ];
+      }
+      if (newValue === "autel") {
+        this.optionsModel = [
+          { value: "autel_nano", text: "Autel Nano" },
+          { value: "autel_evo_nano", text: "Autel Evo Nano" },
+        ];
+      }
+    },
   },
   methods: {
     getCoordinates() {

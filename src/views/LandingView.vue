@@ -20,7 +20,9 @@ export default {
       publicEnvVar: "",
     };
   },
-  created() {},
+  created() {
+    console.log("env", import.meta.env.VITE_SOME_KEY);
+  },
 };
 </script>
 <style scoped lang="scss">

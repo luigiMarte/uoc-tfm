@@ -6,6 +6,10 @@ import router from "./router";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue-3/dist/bootstrap-vue-3.css";
 
+// Not working selector
+// import vSelect from "vue-select";
+// import "vue-select/dist/vue-select.css";
+
 import "./assets/main.css";
 
 // Multi language locale
@@ -21,6 +25,7 @@ const app = createApp(App);
 app.use(store);
 app.use(router);
 app.use(i18n);
+
 app.use(Vue3Geolocation);
 
 app.use(OpenLayersMap);
