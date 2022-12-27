@@ -1,112 +1,119 @@
 <template>
-  <b-container class="mt-4">
-    <b-row class="row-box mb-4">
-      <b-col cols="12" class="mb-4">
-        <b-row>
-          <b-col cols="6"
-            ><img
-              style="width: 150px"
-              class="avatar-img"
-              src="@/assets/img/avatars/user_4.png"
-              alt=""
-          /></b-col>
-          <b-col cols="6">
-            <p>
-              <strong>{{ $t("name") }}</strong>
-            </p>
-            <p>{{ "John Pérez" }}</p>
-          </b-col>
-        </b-row>
+  <h4>Perfil de {{ selectedPilot.userName }}</h4>
+  <b-container class="mt-4 profile-container">
+    <b-row class="card-box mb-3 mt-4">
+      <b-col class="mb-3 card-text">
+        <p>
+          <strong>{{ selectedPilot.alias }}</strong>
+        </p>
+        <ImageAvatar style="width: 100px" :imagePath="selectedPilot.avatar" />
       </b-col>
-      <b-col cols="12" class="mb-2 mt-4">
-        <b-row>
-          <b-col cols="12"
-            ><p>
-              <strong>{{ $t("drone") }}</strong>
-            </p></b-col
+      <b-col class="mb-3 card-text">
+        <p>
+          <strong>{{ $t("drone") }} : </strong>
+          <span>
+            {{ selectedPilot.droneBrand }} {{ selectedPilot.droneModel }}</span
           >
-          <b-col cols="12"
-            ><img
-              src="@/assets/img/drones/autel.png"
-              alt=""
-              style="max-width: 15rem"
-          /></b-col>
-        </b-row>
+        </p>
+        <ImageUrl style="width: 120px" :imagePath="selectedPilot.droneBrand" />
       </b-col>
-      <b-col cols="12" class="mb-2 mt-4">
-        <b-row>
-          <b-col cols="12"
-            ><p><strong>Descripción</strong></p></b-col
-          >
-          <b-col cols="12"
-            ><p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            </p></b-col
-          >
-        </b-row>
+    </b-row>
+
+    <b-row class="card-box mb-3">
+      <b-col md="12" class="mb-3 card-text">
+        <p>
+          <strong>{{ $t("about_me") }}</strong>
+        </p>
+        <p>{{ selectedPilot.aboutMe }}</p>
       </b-col>
-      <b-col cols="sm-6" class="mb-2">
-        <b-row>
-          <b-col cols="12"
-            ><p><strong>Localización</strong></p></b-col
-          >
-          <b-col cols="12"><p>Loren ipsum</p></b-col>
-        </b-row>
+    </b-row>
+
+    <!-- campos responsive -->
+    <b-row class="card-box mb-3">
+      <b-col md="6" class="mb-3 card-text">
+        <!-- Country -->
+        <p>
+          <strong>{{ $t("country") }}</strong>
+        </p>
+        <p>{{ selectedPilot.country }}</p>
       </b-col>
-      <b-col cols="sm-6" class="mb-2">
-        <b-row>
-          <b-col cols="12"
-            ><p><strong>Marca drone</strong></p></b-col
-          >
-          <b-col cols="12"><p>Loren ipsum</p></b-col>
-        </b-row>
+      <b-col md="6" class="mb-3 card-text">
+        <!-- City -->
+        <p>
+          <strong>{{ $t("city") }}</strong>
+        </p>
+        <p>{{ selectedPilot.city }}</p>
       </b-col>
-      <b-col cols="sm-6" class="mb-2">
-        <b-row>
-          <b-col cols="12"
-            ><p><strong>Modelo drone</strong></p></b-col
-          >
-          <b-col cols="12"><p>Loren ipsum</p></b-col>
-        </b-row>
+    </b-row>
+
+    <!-- campos responsive -->
+    <b-row class="card-box mb-3">
+      <b-col md="6" class="mb-3 card-text">
+        <!-- phone -->
+        <p>
+          <strong>{{ $t("contact") }}</strong>
+        </p>
+        <p>{{ selectedPilot.phone }}</p>
       </b-col>
-      <b-col cols="sm-6" class="mb-2">
-        <b-row>
-          <b-col cols="12"
-            ><p><strong>Tarifa</strong></p></b-col
-          >
-          <b-col cols="12"><p>00 €</p></b-col>
-        </b-row>
+      <b-col md="6" class="mb-3 card-text">
+        <!-- price -->
+        <p>
+          <strong>{{ $t("price_hour") }}</strong>
+        </p>
+        <p>{{ selectedPilot.price }} €</p>
       </b-col>
-      <b-col cols="sm-6" class="mb-2">
-        <b-row>
-          <b-col cols="12"
-            ><p><strong>Contacto</strong></p></b-col
-          >
-          <b-col cols="12"><p>656554565</p></b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="12">
-            <b-badge variant="success" class="whatapp-badge">
-              <a href="https://wa.me/34636330363">WathsApp</a>
-            </b-badge>
-          </b-col>
-        </b-row>
+    </b-row>
+
+    <b-row class="card-box mb-3">
+      <b-col md="6" class="mb-3 card-text">
+        <!-- phone -->
+        <p><strong>Mandar mensaje por whatsApp</strong></p>
+        <b-badge variant="success" class="whatapp-badge">
+          <a :href="'https://wa.me/' + selectedPilot.phone">WathsApp</a>
+        </b-badge>
+      </b-col>
+      <b-col md="6" class="mb-3 card-text">
+        <div v-if="selectedPilot.webpage">
+          <p>
+            <strong>{{ $t("visit my webpage") }}</strong>
+          </p>
+          <p>{{ selectedPilot.webpage }}</p>
+        </div>
+
+        <b-badge @click="favoritesAdd" variant="warning" class="">
+          Añadir a favoritos
+        </b-badge>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import ImageAvatar from "@/components/ImageAvatar.vue";
+import ImageUrl from "@/components/Image.vue";
 export default {
   name: "userContact",
+  components: {
+    ImageUrl,
+    ImageAvatar,
+  },
   data() {
     return {
       cardFields: [],
+      phone: "",
     };
   },
-  methods: {},
+  computed: {
+    ...mapState({
+      selectedPilot: "selectedPilot",
+    }),
+  },
+  methods: {
+    favoritesAdd() {
+      console.log("favoritesAdd");
+    },
+  },
 };
 </script>
 
@@ -122,7 +129,7 @@ export default {
   margin: 0 auto;
 }
 .card-box {
-  width: 50%;
+  width: 100%;
   ul {
     list-style-type: none;
     li:first-child {
@@ -144,5 +151,11 @@ export default {
   height: toRem(30);
   width: toRem(100);
   font-size: toRem(17);
+}
+.profile-container {
+  padding: toRem(55);
+  box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
+  -webkit-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
+  -moz-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
 }
 </style>

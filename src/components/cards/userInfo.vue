@@ -5,17 +5,7 @@
     <b-row class="card-box mb-3">
       <b-col class="mb-3 card-text">
         <!-- avatar -->
-        <!-- <img
-          class="avatar-img"
-          :src="`../../public/avatars/${userDetails.avatar}.png`"
-          alt="avatar"
-        /> -->
-        <p>{{ userDetails.avatar }}</p>
-        <img
-          class="avatar-img"
-          src="@/assets/img/avatars/user_1.png"
-          alt="avatar"
-        />
+        <ImageAvatar style="width: 120px" :imagePath="userDetails.avatar" />
         <p>{{ userDetails.alias }}</p>
       </b-col>
     </b-row>
@@ -100,8 +90,12 @@
 
 <script>
 import { mapState } from "vuex";
+import ImageAvatar from "@/components/ImageAvatar.vue";
 export default {
   name: "userInfoCard",
+  components: {
+    ImageAvatar,
+  },
   data() {
     return {};
   },

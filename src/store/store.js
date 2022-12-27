@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 import { createUser, userLogin, getUser } from "@/services/api/auth";
 import { createUserData } from "@/services/api/user";
 import { updateUserProfile } from "../services/api/user";
+import { getPilotsByCity } from "../services/api/user";
 //import axios from "axios";
 
 export default createStore({
@@ -14,6 +15,8 @@ export default createStore({
     userInfo: {},
     newUser: {},
     newUserComplete: {},
+    pilots: [],
+    selectedPilot: {},
   },
   getters: {},
   mutations: {
@@ -44,6 +47,12 @@ export default createStore({
     },
     SET_USER_INFO(state, data) {
       state.userInfo = data;
+    },
+    SET_PILOTS_CITY(state, data) {
+      state.pilots = data;
+    },
+    SET_SELECTED_PILOT(state, data) {
+      state.selectedPilot = data;
     },
   },
   actions: {
@@ -119,6 +128,15 @@ export default createStore({
         let stateToken = state.token;
         console.log("ACTION", payload, stateUserId, stateToken);
         const resp = await updateUserProfile(payload, stateUserId, stateToken);
+        return resp;
+      } catch (error) {
+        return error;
+      }
+    },
+    async searchByCity({ commit }, payload) {
+      try {
+        const resp = await getPilotsByCity(payload);
+        commit("SET_PILOTS_CITY", resp.data);
         return resp;
       } catch (error) {
         return error;

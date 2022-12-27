@@ -26,6 +26,18 @@ export function getUser(userId) {
 }
 
 /**
+ * GET: pilots by city
+ */
+export function getPilotsByCity(city) {
+  console.log(city.city);
+  let url = `http://localhost:3000/api/auth/city/${city.city}`;
+  console.log(url);
+  //return axios.get(`http://localhost:3000/api/auth/city/${city}`);
+  //`http://localhost:8081/product/${encodeURIComponent(state.product.id)}`, payload)
+  return axios.get(url);
+}
+
+/**
  * POST: new user sign up
  */
 export function createUserData(params, userId, token) {

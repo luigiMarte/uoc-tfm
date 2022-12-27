@@ -26,6 +26,7 @@
         <b-col md="3" class="mb-3">
           <label>Ciudad</label>
           <b-form-input
+            v-model="city"
             class="input-group-text"
             id="subject-id"
             placeholder=""
@@ -55,7 +56,7 @@
           v-if="selected === 'searchByCoords' || selected === 'searchByCity'"
           class="mt-3 mb-4"
           variant="primary"
-          @click="showResults = true"
+          @click="getPilots"
           >Buscar</b-button
         >
         <b-button
@@ -68,11 +69,11 @@
       >
     </b-row>
     <!-- resultados -->
-    <h2 v-if="showResults">Resultados</h2>
-    <b-row v-if="showResults">
+    <h2 v-if="pilots">Resultados</h2>
+    <b-row>
       <b-col>
         <div class="results">
-          <div v-for="result in results" :key="result.latitude">
+          <div v-for="result in pilots" :key="result.latitude">
             <b-card
               no-body
               class="overflow-hidden mb-3 mt-3"
@@ -81,9 +82,9 @@
               <b-row no-gutters>
                 <b-col md="6">
                   <div>
-                    <img
-                      style="max-width: 165px"
-                      src="@/assets/img/drones/autel.png"
+                    <ImageUrl
+                      style="width: 165px"
+                      :imagePath="result.droneBrand"
                     />
                   </div>
                   <div class="pl-3">
@@ -96,18 +97,36 @@
                   </div>
                 </b-col>
                 <b-col md="6">
-                  <b-card-body :title="result.name">
+                  <b-card-body :title="result.username">
                     <b-card-text>
                       <p class="mb-2">
-                        Madrid / <span> {{ result.price }}€</span>
+                        {{ result.city }} / <span> {{ result.price }}€</span>
                       </p>
 
-                      <p class="mb-2">Autel - Nano evo</p>
+                      <p class="mb-2">
+                        {{ result.droneBrand }} - {{ result.droneModel }}
+                      </p>
 
                       <b-badge
                         class="profile-badge"
                         variant="secondary"
-                        @click="goToProfile()"
+                        @click="
+                          goToProfile(
+                            result._id,
+                            result.username,
+                            result.alias,
+                            result.email,
+                            result.country,
+                            result.city,
+                            result.aboutMe,
+                            result.price,
+                            result.droneBrand,
+                            result.droneModel,
+                            result.phone,
+                            result.webpage,
+                            result.avatar
+                          )
+                        "
                         >Ir al perfil</b-badge
                       >
                     </b-card-text>
@@ -124,8 +143,8 @@
       <b-card tag="article" class="mb-2">
         <b-card-text class="d-flex justify-content-evenly">
           <div>
-            <!-- <img :src="iconsUrl + this.icon + '@2x.png'" /> -->
-            <img class="size-drone" src="@/assets/img/drones/mavic.png" />
+            <!-- <ImageUrl style="width: 165px" :imagePath="droneBrand" /> -->
+            <img style="max-width: 165px" src="@/assets/img/drones/autel.png" />
           </div>
           <div class="pt-3">
             <h4>Dji</h4>
@@ -167,65 +186,72 @@
 //import leafletMap from "../components/maps/leaflets.vue";
 //import geoMap from "../components/maps/index.vue";
 //import leaflet from "../components/leaflet.vue";
+import { mapState } from "vuex";
+import ImageUrl from "@/components/Image.vue";
 export default {
+  components: {
+    ImageUrl,
+  },
   data() {
     return {
       modalShow: false,
       showResults: false,
       selected: "searchByCity",
+      city: "",
       options: [
         { text: "Buscar por ciudad", value: "searchByCity" },
-        { text: "Buscar por coordenadas", value: "searchByCoords" },
         { text: "Buscar por mapa", value: "searchByMap" },
-      ],
-      results: [
-        {
-          name: "Lucas",
-          drone: "mavic mini",
-          city: "getafe",
-          latitude: "234234",
-          longitude: "234234",
-          price: "44",
-          img: "@/assets/img/drones/mavic.png",
-        },
-        {
-          name: "Lejo",
-          drone: "mavic mini",
-          city: "madrid",
-          latitude: "234234",
-          longitude: "234234",
-          price: "34",
-          img: "@/assets/img/drones/autel.png",
-        },
-        {
-          name: "Lucas",
-          drone: "mavic mini",
-          city: "alcorcon",
-          latitude: "234234",
-          longitude: "234234",
-          price: "24",
-          img: "@/assets/img/drones/mavic",
-        },
-        {
-          name: "Lucas",
-          drone: "mavic mini",
-          city: "alcorcon",
-          latitude: "234234",
-          longitude: "234234",
-          price: "24",
-          img: "@/assets/img/drones/mavic",
-        },
       ],
     };
   },
   watch: {},
+  computed: {
+    ...mapState({
+      pilots: "pilots",
+    }),
+  },
   methods: {
-    goToProfile() {
+    goToProfile(
+      id,
+      userName,
+      alias,
+      email,
+      country,
+      city,
+      aboutMe,
+      price,
+      droneBrand,
+      droneModel,
+      phone,
+      webpage,
+      avatar
+    ) {
+      let payload = {
+        id,
+        userName,
+        alias,
+        email,
+        country,
+        city,
+        aboutMe,
+        price,
+        droneBrand,
+        droneModel,
+        phone,
+        webpage,
+        avatar,
+      };
+      this.$store.commit("SET_SELECTED_PILOT", payload);
       this.$router.push({ path: "user-contact" });
     },
     showDroneInfo() {},
     getImageUrl(name) {
       return new URL(`@/${name}.png`, import.meta.url).href;
+    },
+    getPilots() {
+      this.$store.dispatch("searchByCity", {
+        city: this.city,
+      });
     },
   },
 };
