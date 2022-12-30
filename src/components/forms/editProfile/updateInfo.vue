@@ -65,10 +65,17 @@
                 ><b-dropdown-item href="#"
                   ><img
                     class="avatar-img"
+                    src="@/assets/img/avatars/user_5.png"
+                    alt=""
+                    @click="setAvatar('user_5')" /></b-dropdown-item
+                ><b-dropdown-item href="#"
+                  ><img
+                    class="avatar-img"
                     src="@/assets/img/avatars/user_6.png"
                     alt=""
-                    @click="setAvatar('user_4')" /></b-dropdown-item
-                ><b-dropdown-item href="#"
+                    @click="setAvatar('user_6')"
+                /></b-dropdown-item>
+                <b-dropdown-item href="#"
                   ><img
                     class="avatar-img"
                     src="@/assets/img/avatars/user_7.png"

@@ -1,21 +1,22 @@
 <template>
-  <h4>Perfil de {{ selectedPilot.userName }}</h4>
+  <h4>{{ $t("user_card_title") }} {{ selectedPilot.userName }}</h4>
   <b-container class="mt-4 profile-container">
     <b-row class="card-box mb-3 mt-4">
       <b-col class="mb-3 card-text">
         <p>
           <strong>{{ selectedPilot.alias }}</strong>
         </p>
-        <ImageAvatar style="width: 100px" :imagePath="selectedPilot.avatar" />
+        <ImageAvatar style="width: 120px" :imagePath="selectedPilot.avatar" />
       </b-col>
       <b-col class="mb-3 card-text">
         <p>
           <strong>{{ $t("drone") }} : </strong>
           <span>
-            {{ selectedPilot.droneBrand }} {{ selectedPilot.droneModel }}</span
+            {{ selectedPilot.droneBrand }}
+            {{ formatText(selectedPilot.droneModel) }}</span
           >
         </p>
-        <ImageUrl style="width: 120px" :imagePath="selectedPilot.droneBrand" />
+        <ImageUrl style="width: 150px" :imagePath="selectedPilot.droneModel" />
       </b-col>
     </b-row>
 
@@ -51,7 +52,7 @@
       <b-col md="6" class="mb-3 card-text">
         <!-- phone -->
         <p>
-          <strong>{{ $t("contact") }}</strong>
+          <strong>{{ $t("phone") }}</strong>
         </p>
         <p>{{ selectedPilot.phone }}</p>
       </b-col>
@@ -67,21 +68,29 @@
     <b-row class="card-box mb-3">
       <b-col md="6" class="mb-3 card-text">
         <!-- phone -->
-        <p><strong>Mandar mensaje por whatsApp</strong></p>
+        <p>
+          <strong>{{ $t("whatsApp_msg") }}</strong>
+        </p>
         <b-badge variant="success" class="whatapp-badge">
-          <a :href="'https://wa.me/' + selectedPilot.phone">WathsApp</a>
+          <a :href="'https://wa.me/' + selectedPilot.phone">{{
+            $t("whatsApp")
+          }}</a>
         </b-badge>
       </b-col>
       <b-col md="6" class="mb-3 card-text">
         <div v-if="selectedPilot.webpage">
           <p>
-            <strong>{{ $t("visit my webpage") }}</strong>
+            <strong>{{ $t("visit_webpage") }}</strong>
           </p>
-          <p>{{ selectedPilot.webpage }}</p>
+          <p>
+            <a :href="selectedPilot.webpage" target="_blank">{{
+              selectedPilot.webpage
+            }}</a>
+          </p>
         </div>
 
         <b-badge @click="favoritesAdd" variant="warning" class="">
-          Añadir a favoritos
+          {{ $t("favorites_add") }}
         </b-badge>
       </b-col>
     </b-row>
@@ -92,6 +101,7 @@
 import { mapState } from "vuex";
 import ImageAvatar from "@/components/ImageAvatar.vue";
 import ImageUrl from "@/components/Image.vue";
+import { removeDashes } from "@/utils/removeDashes.js";
 export default {
   name: "userContact",
   components: {
@@ -110,6 +120,9 @@ export default {
     }),
   },
   methods: {
+    formatText(text) {
+      return removeDashes(text);
+    },
     favoritesAdd() {
       console.log("favoritesAdd");
     },

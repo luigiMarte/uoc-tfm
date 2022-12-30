@@ -344,6 +344,10 @@ export default {
       options: [
         { value: "dji", text: "Dji" },
         { value: "autel", text: "Autel" },
+        { value: "hubsan", text: "Hubsan" },
+        { value: "parrot", text: "Parrot" },
+        { value: "potensic", text: "Potensic" },
+        { value: "eachine", text: "Eachine" },
       ],
       optionsModel: [],
     };
@@ -353,11 +357,39 @@ export default {
       console.log(newValue);
       if (newValue === "dji") {
         this.optionsModel = [
-          { value: "mini2", text: "Mini 2" },
-          { value: "mini3pro", text: "Mini 3 Pro" },
+          { value: "mini_2", text: "Mini 2" },
+          { value: "mini_3", text: "Mini 3" },
+          { value: "mini_3_pro", text: "Mini 3 Pro" },
+          { value: "avata", text: "Avata" },
+          { value: "mavic_2", text: "Mavic 2" },
+          { value: "mavic_3", text: "Mavic 3" },
+          { value: "air_2", text: "Air 2" },
+          { value: "phantom_3", text: "Phantom 3" },
         ];
       }
       if (newValue === "autel") {
+        this.optionsModel = [
+          { value: "evo_nano", text: "Evo Nano" },
+          { value: "evo_nano_plus", text: "Evo Nano +" },
+          { value: "evo_lite", text: "Evo Lite" },
+          { value: "evo_lite_plus", text: "Evo Lite +" },
+          { value: "evo_2", text: "Evo 2" },
+        ];
+      }
+      if (newValue === "hubsan") {
+        this.optionsModel = [
+          { value: "zino_mini", text: "Zino mini" },
+          { value: "zino_mini_pro", text: "Zino mini pro" },
+          { value: "ace_pro", text: "Ace pro" },
+        ];
+      }
+      if (newValue === "potensic") {
+        this.optionsModel = [
+          { value: "dreamer", text: "dreamer" },
+          { value: "dreamer_pro", text: "dreamer_pro" },
+        ];
+      }
+      if (newValue === "eachine") {
         this.optionsModel = [
           { value: "autel_nano", text: "Autel Nano" },
           { value: "autel_evo_nano", text: "Autel Evo Nano" },
@@ -430,8 +462,10 @@ export default {
             this.alertMessage = "notification.user_created_success";
             this.alertVariant = "success";
             this.showAlert = true;
-            this.showAlert = false;
-            this.$router.push({ name: "login" });
+            setTimeout(() => {
+              this.showAlert = false;
+              this.$router.push({ name: "login" });
+            }, 2000);
           } else {
             console.log(response.status);
             this.alertVariant = "danger";

@@ -2,11 +2,11 @@
   <b-container class="mt-4">
     <div class="locale-changer mb-4"></div>
     <b-row>
-      <h2 class="mt-5">Busqueda</h2>
+      <h2 class="mt-5">{{ $t("search") }}</h2>
       <b-row>
         <b-col md="6" class="mb-3 mt-5">
           <b-form-group
-            label="Selecciona la forma de búsqueda"
+            :label="this.$t('choose_search')"
             v-slot="{ ariaDescribedby }"
           >
             <b-form-radio-group
@@ -24,7 +24,7 @@
     <b-row class="card-box mb-3">
       <div v-if="selected === 'searchByCity'">
         <b-col md="3" class="mb-3">
-          <label>Ciudad</label>
+          <label>{{ $t("city") }}</label>
           <b-form-input
             v-model="city"
             class="input-group-text"
@@ -35,7 +35,7 @@
       </div>
       <div v-if="selected === 'searchByCoords'">
         <b-col md="3" class="mb-3">
-          <label>Latitude</label>
+          <label>{{ $t("latitude") }}</label>
           <b-form-input
             class="input-group-text"
             id="subject-id"
@@ -43,7 +43,7 @@
           ></b-form-input
         ></b-col>
         <b-col md="3" class="mb-3">
-          <label>Longitude</label>
+          <label>{{ $t("longitude") }}</label>
           <b-form-input
             class="input-group-text"
             id="subject-id"
@@ -57,19 +57,19 @@
           class="mt-3 mb-4"
           variant="primary"
           @click="getPilots"
-          >Buscar</b-button
+          >{{ $t("search") }}</b-button
         >
         <b-button
           v-else
           @click="showResults = true"
           class="mt-3 mb-4"
           variant="primary"
-          >Mapa</b-button
+          >{{ $t("map") }}</b-button
         ></b-col
       >
     </b-row>
     <!-- resultados -->
-    <h2 v-if="pilots">Resultados</h2>
+    <h2 v-if="pilots">{{ $t("results") }}</h2>
     <b-row>
       <b-col>
         <div class="results">
@@ -84,15 +84,17 @@
                   <div>
                     <ImageUrl
                       style="width: 165px"
-                      :imagePath="result.droneBrand"
+                      :imagePath="result.droneModel"
                     />
                   </div>
                   <div class="pl-3">
                     <b-badge
-                      @click="modalShow = !modalShow"
+                      @click="
+                        ShowDroneModal(result.droneBrand, result.droneModel)
+                      "
                       class="badge-position"
                       variant="success"
-                      >Drone info</b-badge
+                      >{{ $t("drone_info") }}</b-badge
                     >
                   </div>
                 </b-col>
@@ -104,7 +106,8 @@
                       </p>
 
                       <p class="mb-2">
-                        {{ result.droneBrand }} - {{ result.droneModel }}
+                        {{ result.droneBrand }} -
+                        {{ formatText(result.droneModel) }}
                       </p>
 
                       <b-badge
@@ -127,7 +130,7 @@
                             result.avatar
                           )
                         "
-                        >Ir al perfil</b-badge
+                        >{{ $t("go_to_profile") }}</b-badge
                       >
                     </b-card-text>
                   </b-card-body>
@@ -188,6 +191,7 @@
 //import leaflet from "../components/leaflet.vue";
 import { mapState } from "vuex";
 import ImageUrl from "@/components/Image.vue";
+import { removeDashes } from "@/utils/removeDashes.js";
 export default {
   components: {
     ImageUrl,
@@ -199,9 +203,10 @@ export default {
       selected: "searchByCity",
       city: "",
       options: [
-        { text: "Buscar por ciudad", value: "searchByCity" },
-        { text: "Buscar por mapa", value: "searchByMap" },
+        { text: this.$t("search_by_city"), value: "searchByCity" },
+        { text: this.$t("search_by_map"), value: "searchByMap" },
       ],
+      droneFeatures: {},
     };
   },
   watch: {},
@@ -211,6 +216,14 @@ export default {
     }),
   },
   methods: {
+    ShowDroneModal(brand, model) {
+      console.log(brand, model);
+      //this.modalShow = !modalShow;
+      this.modalShow = true;
+    },
+    formatText(text) {
+      return removeDashes(text);
+    },
     goToProfile(
       id,
       userName,
