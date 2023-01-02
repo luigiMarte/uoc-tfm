@@ -33,32 +33,23 @@
           >
         </b-card>
       </b-modal>
+      <!-- Modal -->
     </b-row>
-    <b-row>
-      <b-col v-if="showAvatar && avatarImg" md="6">
-        <img
-          class="avatar-img"
-          :src="require(`@/assets/img/avatars/${avatar}.png`)"
-          alt="avatar"
-        />
-        <!-- <img
-          class="avatar-img"
-          src="@/assets/img/avatars/user_1.png"
-          alt="avatar"
-        /> -->
+    <b-row class="mb-4 card-box">
+      <b-col>
+        <ImageAvatar style="width: 90px" :imagePath="avatarImg" />
       </b-col>
     </b-row>
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-4">
       <b-col md="6">
-        <div>
+        <div class="avatar-container">
           <ul>
             <!-- avatar -->
             <li>
               <b-dropdown
-                split
-                split-variant="outline-secondary"
-                variant="secondary"
-                text="Avatar"
+                toggle-class="customDropdown"
+                variant="none"
+                :text="this.$t('choose_avatar')"
                 class="m-2"
               >
                 <b-dropdown-item href="#"
@@ -92,7 +83,7 @@
                     class="avatar-img"
                     src="@/assets/img/avatars/user_6.png"
                     alt=""
-                    @click="setAvatar('user_4')" /></b-dropdown-item
+                    @click="setAvatar('user_6')" /></b-dropdown-item
                 ><b-dropdown-item href="#"
                   ><img
                     class="avatar-img"
@@ -181,7 +172,7 @@
       </b-col>
     </b-row>
 
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-3" v-if="formData.haveDrone">
       <b-col md="6" class="mb-3">
         <!-- Drone brand -->
         <label>{{ $t("drone_brand") }}</label>
@@ -192,15 +183,9 @@
           v-model="formData.droneBrand"
           size="sm"
         ></b-form-select>
-        <!-- <b-form-input
-          class="input-group-text"
-          id="subject-id"
-          :options="options"
-          v-model="formData.droneBrand"
-        ></b-form-input> -->
       </b-col>
 
-      <b-col md="6" class="mb-3">
+      <b-col md="6" class="mb-3" v-if="formData.haveDrone">
         <!-- Drone model -->
         <label>{{ $t("drone_model") }}</label>
         <b-form-select
@@ -210,15 +195,10 @@
           v-model="formData.droneModel"
           size="sm"
         ></b-form-select>
-        <!-- <b-form-input
-          class="input-group-text"
-          id="subject-id"
-          v-model="formData.droneModel"
-        ></b-form-input> -->
       </b-col>
     </b-row>
 
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-3" v-if="formData.haveDrone">
       <b-col md="6" class="mb-3">
         <!-- latitude -->
         <label
@@ -249,7 +229,7 @@
       ></b-col>
     </b-row>
 
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-3" v-if="formData.haveDrone">
       <b-col md="6" class="mb-3">
         <!-- Price -->
         <label>{{ $t("price") }}</label>
@@ -302,10 +282,12 @@
 
 <script>
 //import CustomSelect from "@/components/custom-select";
+import ImageAvatar from "@/components/ImageAvatar.vue";
 export default {
   name: "editProfile",
   components: {
     //CustomSelect,
+    ImageAvatar,
   },
   data() {
     return {
@@ -483,6 +465,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avatar-container {
+  ul {
+    padding: 0 !important;
+  }
+  :deep(button) {
+    padding: 0 !important;
+  }
+}
 .form-container {
   padding: toRem(55);
   box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
@@ -510,6 +500,10 @@ export default {
 .row-box {
   width: 90%;
   margin: 0 auto;
+}
+.customDropdown {
+  border: 3px dashed cyan;
+  background-color: purple;
 }
 .card-box {
   max-width: toRem(700);
