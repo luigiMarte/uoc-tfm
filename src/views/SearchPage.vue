@@ -142,42 +142,96 @@
       </b-col>
     </b-row>
     <!-- modal -->
-    <b-modal v-model="modalShow">
-      <b-card tag="article" class="mb-2">
-        <b-card-text class="d-flex justify-content-evenly">
-          <div>
-            <!-- <ImageUrl style="width: 165px" :imagePath="droneBrand" /> -->
-            <img style="max-width: 165px" src="@/assets/img/drones/autel.png" />
-          </div>
-          <div class="pt-3">
-            <h4>Dji</h4>
-            <span>Mini 3</span>
-          </div>
-        </b-card-text>
-        <b-card-text class="d-flex justify-content-between">
-          <span><b>Sensor :</b></span>
-          <span>1'3</span>
-        </b-card-text>
-        <b-card-text class="d-flex justify-content-between">
-          <span><b>Peso</b></span>
-          <span>250 gr</span>
-        </b-card-text>
-        <b-card-text class="d-flex justify-content-between">
-          <span><b>Tiempo de vuelo</b></span>
-          <span>28 min</span>
-        </b-card-text>
-        <b-card-text class="d-flex justify-content-between">
-          <span><b>Resistencia al viento</b></span>
-          <span>37.8 km/h</span>
-        </b-card-text>
-        <b-card-text class="d-flex justify-content-between">
-          <span><b>Fotografía</b></span>
-          <span>48 Mpx</span>
-        </b-card-text>
-        <b-card-text class="d-flex justify-content-between">
-          <span><b>Video</b></span>
-          <span>4K</span>
-        </b-card-text>
+    <b-modal v-model="modalShow" ok-only>
+      <b-card tag="article" class="mb-2" v-if="filteredModel">
+        <div v-for="data in filteredModel" :key="data.model">
+          <b-card-text class="d-flex justify-content-between">
+            <div>
+              <h4>
+                <b-badge variant="success"
+                  >{{ data.brand }} - {{ formatText(data.model) }}</b-badge
+                >
+              </h4>
+
+              <ImageUrl style="width: 140px" :imagePath="data.model" />
+            </div>
+          </b-card-text>
+          <h3 class="mt-3 mb-3">{{ this.$t("aircraf_info") }}</h3>
+          <b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("weight") }}</b></span
+            >
+            <span>{{ data.weight }}</span>
+          </b-card-text>
+          <b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("navigation_system") }}</b></span
+            >
+            <span>{{ data.navigationSystem }}</span>
+          </b-card-text>
+          <b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("max-speed") }}</b></span
+            >
+            <span>{{ data.maxSpeed }}</span>
+          </b-card-text>
+          <b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("flyingTime") }}</b></span
+            >
+            <span>{{ data.flyingTime }}</span>
+          </b-card-text>
+          <b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("wind_resistance") }}</b></span
+            >
+            <span>{{ data.windResistance }}</span>
+          </b-card-text>
+          <h3 class="mt-5 mb-4">{{ this.$t("video_photo") }} :</h3>
+          <b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("sensor") }}</b></span
+            >
+            <span>{{ data.sensor }}</span>
+          </b-card-text>
+          <b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("max_photo_res") }}</b></span
+            >
+            <span>{{ data.cameraRes }}</span>
+          </b-card-text>
+          <b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("iso_photo") }}</b></span
+            >
+            <span>{{ data.isoPhoto }}</span> </b-card-text
+          ><b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("iso_video") }}</b></span
+            >
+            <span>{{ data.isoVideo }}</span>
+          </b-card-text>
+          <b-card-text class="d-flex justify-content-between">
+            <span
+              ><b>{{ this.$t("photo_format") }}</b></span
+            >
+            <span>{{ data.photoFormat }}</span>
+          </b-card-text>
+          <span
+            ><b>{{ this.$t("video_format") }}</b></span
+          >
+          <b-card-text class="d-flex justify-content-between">
+            <span>{{ data.videoFormat }}</span>
+          </b-card-text>
+          <span
+            ><b>{{ this.$t("video_resolutions") }}</b></span
+          >
+          <b-card-text class="">
+            <p>{{ data.videoRes }}</p>
+            <p>{{ data.videoRes2 }}</p>
+            <p>{{ data.videoRes3 }}</p>
+          </b-card-text>
+        </div>
       </b-card>
     </b-modal>
     <!-- modal -->
@@ -192,12 +246,15 @@
 import { mapState } from "vuex";
 import ImageUrl from "@/components/Image.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
+import dronesInfo from "@/services/drones/technicalInfo.json";
 export default {
   components: {
     ImageUrl,
   },
   data() {
     return {
+      techInfo: dronesInfo,
+      filteredModel: [],
       modalShow: false,
       showResults: false,
       selected: "searchByCity",
@@ -220,6 +277,10 @@ export default {
       console.log(brand, model);
       //this.modalShow = !modalShow;
       this.modalShow = true;
+      const filtered = this.techInfo.filter((data) => {
+        return data.model === model;
+      });
+      this.filteredModel = filtered;
     },
     formatText(text) {
       return removeDashes(text);
