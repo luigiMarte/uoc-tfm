@@ -59,13 +59,9 @@
           @click="getPilots"
           >{{ $t("search") }}</b-button
         >
-        <b-button
-          v-else
-          @click="showResults = true"
-          class="mt-3 mb-4"
-          variant="primary"
-          >{{ $t("map") }}</b-button
-        ></b-col
+        <b-button v-else @click="loadMap" class="mt-3 mb-4" variant="primary">{{
+          $t("go_to_map")
+        }}</b-button></b-col
       >
     </b-row>
     <!-- resultados -->
@@ -326,6 +322,9 @@ export default {
       this.$store.dispatch("searchByCity", {
         city: this.city,
       });
+    },
+    loadMap() {
+      this.$router.push({ path: "searchMap" });
     },
   },
 };

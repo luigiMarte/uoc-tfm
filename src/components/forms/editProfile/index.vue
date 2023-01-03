@@ -91,6 +91,20 @@
                     alt=""
                     @click="setAvatar('user_7')"
                 /></b-dropdown-item>
+                <b-dropdown-item href="#"
+                  ><img
+                    class="avatar-img"
+                    src="@/assets/img/avatars/user_8.png"
+                    alt=""
+                    @click="setAvatar('user_8')"
+                /></b-dropdown-item>
+                <b-dropdown-item href="#"
+                  ><img
+                    class="avatar-img"
+                    src="@/assets/img/avatars/user_9.png"
+                    alt=""
+                    @click="setAvatar('user_9')"
+                /></b-dropdown-item>
               </b-dropdown>
             </li>
           </ul>
@@ -433,7 +447,7 @@ export default {
           latitude: this.formData.latitude,
           longitude: this.formData.longitude,
           price: this.formData.price,
-          website: this.formData.website,
+          webpage: this.formData.website,
           enabled: false,
           status: false,
         })

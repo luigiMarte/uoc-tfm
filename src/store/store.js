@@ -28,6 +28,7 @@ export default createStore({
       state.newUser = data;
     },
     SET_USER_COMPLETE(state, data) {
+      debugger;
       state.newUserComplete = data;
     },
     SET_LOGIN(state, data) {

@@ -41,6 +41,7 @@ export function getPilotsByCity(city) {
  * POST: new user sign up
  */
 export function createUserData(params, userId, token) {
+  debugger;
   console.log("api server", params, userId, token);
   //userId = "639dc0697f4bcfea89356276";
   //return axios.post(`"http://localhost:3000/api/userData/"${userId}`, params, {

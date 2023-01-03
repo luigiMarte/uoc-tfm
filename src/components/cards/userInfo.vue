@@ -47,7 +47,7 @@
         <b-col md="6" class="mb-3 card-text">
           <!-- DroneModel -->
           <label>{{ $t("drone_model") }}</label>
-          <p>{{ userDetails.droneModel }}</p>
+          <p>{{ formatText(userDetails.droneModel) }}</p>
         </b-col>
       </b-row>
       <b-row class="card-box mb-3">
@@ -69,14 +69,15 @@
           <p>{{ userDetails.price }} €</p>
         </b-col>
       </b-row>
-      <b-row class="card-box mb-3">
-        <b-col md="6" class="mb-3 card-text">
-          <!-- latitud -->
-          <label>{{ $t("description") }}</label>
-          <p>{{ userDetails.aboutMe }}</p>
-        </b-col>
-      </b-row>
     </div>
+
+    <b-row class="row-box mb-3">
+      <b-col class="mb-3 card-text">
+        <!-- description -->
+        <label>{{ $t("description") }}</label>
+        <p>{{ userDetails.aboutMe }}</p>
+      </b-col>
+    </b-row>
 
     <b-row class="row-box">
       <div cols="12" class="card-description">
@@ -91,6 +92,7 @@
 <script>
 import { mapState } from "vuex";
 import ImageAvatar from "@/components/ImageAvatar.vue";
+import { removeDashes } from "@/utils/removeDashes.js";
 export default {
   name: "userInfoCard",
   components: {
@@ -113,6 +115,9 @@ export default {
     // },
     goToEdit() {
       this.$router.push({ name: "edit" });
+    },
+    formatText(text) {
+      return removeDashes(text);
     },
   },
 };
