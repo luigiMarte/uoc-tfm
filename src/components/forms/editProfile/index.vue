@@ -47,8 +47,9 @@
             <!-- avatar -->
             <li>
               <b-dropdown
-                toggle-class="customDropdown"
-                variant="none"
+                split
+                split-variant="outline-secondary"
+                variant="secondary"
                 :text="this.$t('choose_avatar')"
                 class="m-2"
               >
@@ -173,14 +174,14 @@
             :aria-describedby="ariaDescribedby"
             name="some-radios"
             :value="true"
-            >Si</b-form-radio
+            >{{ $t("yes") }}</b-form-radio
           >
           <b-form-radio
             v-model="formData.haveDrone"
             :aria-describedby="ariaDescribedby"
             name="some-radios"
             :value="false"
-            >No</b-form-radio
+            >{{ $t("no") }}</b-form-radio
           >
         </b-form-group>
       </b-col>
@@ -341,9 +342,6 @@ export default {
         { value: "dji", text: "Dji" },
         { value: "autel", text: "Autel" },
         { value: "hubsan", text: "Hubsan" },
-        { value: "parrot", text: "Parrot" },
-        { value: "potensic", text: "Potensic" },
-        { value: "eachine", text: "Eachine" },
       ],
       optionsModel: [],
     };
@@ -377,18 +375,6 @@ export default {
           { value: "zino_mini", text: "Zino mini" },
           { value: "zino_mini_pro", text: "Zino mini pro" },
           { value: "ace_pro", text: "Ace pro" },
-        ];
-      }
-      if (newValue === "potensic") {
-        this.optionsModel = [
-          { value: "dreamer", text: "dreamer" },
-          { value: "dreamer_pro", text: "dreamer_pro" },
-        ];
-      }
-      if (newValue === "eachine") {
-        this.optionsModel = [
-          { value: "autel_nano", text: "Autel Nano" },
-          { value: "autel_evo_nano", text: "Autel Evo Nano" },
         ];
       }
     },

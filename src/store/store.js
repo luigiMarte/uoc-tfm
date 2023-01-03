@@ -124,11 +124,22 @@ export default createStore({
       }
     },
     async updateProfile({ state }, payload) {
+      debugger;
+      let filledData = Object.keys(payload).reduce((acc, curr) => {
+        if (payload[curr]) {
+          acc[curr] = payload[curr];
+        }
+        return acc;
+      }, {});
       try {
         let stateUserId = state.userId;
         let stateToken = state.token;
-        console.log("ACTION", payload, stateUserId, stateToken);
-        const resp = await updateUserProfile(payload, stateUserId, stateToken);
+        console.log("ACTION", filledData, stateUserId, stateToken);
+        const resp = await updateUserProfile(
+          filledData,
+          stateUserId,
+          stateToken
+        );
         return resp;
       } catch (error) {
         return error;

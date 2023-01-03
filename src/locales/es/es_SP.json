@@ -47,6 +47,7 @@
   "lang_english": "Inglés",
   "lang_sp": "es",
   "lang_spanish": "Español",
+  "latitude":"Latitud",
   "legislation": "Legislación",
   "legislation_short_exp": "Volar un drone ha de hacerse siempre de acuerdo con la legilación del lugar en que su vuela. Revisa siempre la legislación antes volar",
   "legislation_short_exp_2":"Accede a 'Global drone regulation' database para consultar la regulación de cualquier país del mundo.",
@@ -54,15 +55,18 @@
   "log_out": "cerrar sesión",
   "logout_message": "Hasta pronto",
   "login_title": "Inicio de sesión",
+  "longitude":"Longitud",
   "name": "Nombre",
   "max-speed":"Velocidad máxima",
   "my_profile": "Mi perfíl",
   "my_profile_tab_exp": "Desde esta sección puedes consultar la información de tu perfil de usuario. También puedes editar tu perfil y actualizar tu información.",
   "navigation_system": "Sistema de navegación",
+  "no":"no",
   "password" :"Contraseña",
   "phone":"Teléfono",
   "photo_format": "Photo format",
   "postal_code": "Código postal",
+  "price":"Price",
   "price_hour": "Tarifa por hora",
   "profile": "Perfil",
   "results":"Results",
@@ -95,6 +99,7 @@
   "max_photo_res":"Resolución máxima foto",
   "min-temp" : "Temperatura mínima",
   "feels_like" : "Sensación térmica",
+  "yes" : "si",
   "flying_conditions" : "Condiciones de vuelo",
   "optimum": "Óptimas",
   "moderate": "Precaución",
@@ -104,6 +109,7 @@
   "video_resolutions":"Resoluciones de vídeo",
   "weather_prediction": "Clima previsto",
   "weather_instructions": "Introduce una población para consultar la previsión del tiempo y las condiciones de vuelo ",
-"weight" : "Peso"
+  "website":"Página web",
+  "weight" : "Peso"
 }
 

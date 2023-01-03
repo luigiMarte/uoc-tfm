@@ -62,15 +62,10 @@ export function createUserData(params, userId, token) {
  * PUT: user profile update
  */
 export function updateUserProfile(params, userId, token) {
-  return axios.put(
-    `http://localhost:3000/api/auth/${userId}`,
-    {
-      params,
+  console.log("api server PUT", params, userId, token);
+  return axios.put(`http://localhost:3000/api/auth/${userId}`, params, {
+    headers: {
+      "x-access-token": token,
     },
-    {
-      headers: {
-        "x-access-token": token,
-      },
-    }
-  );
+  });
 }

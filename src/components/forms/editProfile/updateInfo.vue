@@ -9,18 +9,9 @@
       </b-col>
       <b-col cols="2"></b-col>
     </b-row>
-    <b-row>
-      <b-col v-if="showAvatar && avatarImg" md="6">
-        <img
-          class="avatar-img"
-          :src="require(`@/assets/img/avatars/${avatar}.png`)"
-          alt="avatar"
-        />
-        <!-- <img
-            class="avatar-img"
-            src="@/assets/img/avatars/user_1.png"
-            alt="avatar"
-          /> -->
+    <b-row v-if="selectedAvatar">
+      <b-col md="6" class="mb-5">
+        <ImageAvatar style="width: 90px" :imagePath="selectedAvatar" />
       </b-col>
     </b-row>
     <b-row class="card-box mb-3">
@@ -33,7 +24,7 @@
                 split
                 split-variant="outline-secondary"
                 variant="secondary"
-                text="Avatar"
+                :text="this.$t('choose_avatar')"
                 class="m-2"
               >
                 <b-dropdown-item href="#"
@@ -78,9 +69,16 @@
                 <b-dropdown-item href="#"
                   ><img
                     class="avatar-img"
-                    src="@/assets/img/avatars/user_7.png"
+                    src="@/assets/img/avatars/user_8.png"
                     alt=""
-                    @click="setAvatar('user_7')"
+                    @click="setAvatar('user_8')"
+                /></b-dropdown-item>
+                <b-dropdown-item href="#"
+                  ><img
+                    class="avatar-img"
+                    src="@/assets/img/avatars/user_9.png"
+                    alt=""
+                    @click="setAvatar('user_9')"
                 /></b-dropdown-item>
               </b-dropdown>
             </li>
@@ -135,7 +133,7 @@
         ></b-form-input
       ></b-col>
       <b-col md="6" class="mb-3">
-        <!-- Postal Code -->
+        <!-- Phone -->
         <label>{{ $t("phone") }}</label>
         <b-form-input
           class="input-group-text"
@@ -155,14 +153,14 @@
             :aria-describedby="ariaDescribedby"
             name="some-radios"
             :value="true"
-            >Si</b-form-radio
+            >{{ $t("yes") }}</b-form-radio
           >
           <b-form-radio
             v-model="formData.haveDrone"
             :aria-describedby="ariaDescribedby"
             name="some-radios"
             :value="false"
-            >No</b-form-radio
+            >{{ $t("no") }}</b-form-radio
           >
         </b-form-group>
       </b-col>
@@ -172,24 +170,38 @@
       <b-col md="6" class="mb-3">
         <!-- Drone brand -->
         <label>{{ $t("drone_brand") }}</label>
-        <b-form-input
+        <b-form-select
+          class="input-group-text"
+          id="subject-id"
+          :options="options"
+          v-model="formData.droneBrand"
+          size="sm"
+        ></b-form-select>
+        <!-- <b-form-input
           class="input-group-text"
           id="subject-id"
           v-model="formData.droneBrand"
           :placeholder="userDetails.droneBrand"
-        ></b-form-input
-      ></b-col>
+        ></b-form-input> -->
+      </b-col>
 
       <b-col md="6" class="mb-3">
         <!-- Drone model -->
         <label>{{ $t("drone_model") }}</label>
-        <b-form-input
+        <b-form-select
+          class="input-group-text"
+          id="subject-id"
+          :options="optionsModel"
+          v-model="formData.droneModel"
+          size="sm"
+        ></b-form-select>
+        <!-- <b-form-input
           class="input-group-text"
           id="subject-id"
           v-model="formData.droneModel"
           :placeholder="userDetails.droneModel"
-        ></b-form-input
-      ></b-col>
+        ></b-form-input> -->
+      </b-col>
     </b-row>
 
     <b-row class="card-box mb-3">
@@ -235,14 +247,14 @@
           class="input-group-text"
           id="subject-id"
           v-model="formData.website"
-          :placeholder="userDetails.website"
+          :placeholder="userDetails.webpage"
         ></b-form-input
       ></b-col>
     </b-row>
 
     <b-row class="card-box mt-5 mb-4">
       <b-col>
-        <!-- Price -->
+        <!-- Description -->
         <label class="mb-3">{{ $t("tell_about_you") }}</label>
         <b-form-textarea
           id="textarea"
@@ -271,8 +283,12 @@
 
 <script>
 import { mapState } from "vuex";
+import ImageAvatar from "@/components/ImageAvatar.vue";
 export default {
   name: "editProfile",
+  components: {
+    ImageAvatar,
+  },
   data() {
     return {
       cardFields: [],
@@ -302,7 +318,46 @@ export default {
       alertMessage: "",
       show: true,
       showAlert: false,
+      options: [
+        { value: "dji", text: "Dji" },
+        { value: "autel", text: "Autel" },
+        { value: "hubsan", text: "Hubsan" },
+      ],
+      optionsModel: [],
     };
+  },
+  watch: {
+    "formData.droneBrand"(newValue) {
+      console.log(newValue);
+      if (newValue === "dji") {
+        this.optionsModel = [
+          { value: "mini_2", text: "Mini 2" },
+          { value: "mini_3", text: "Mini 3" },
+          { value: "mini_3_pro", text: "Mini 3 Pro" },
+          { value: "avata", text: "Avata" },
+          { value: "mavic_2", text: "Mavic 2" },
+          { value: "mavic_3", text: "Mavic 3" },
+          { value: "air_2", text: "Air 2" },
+          { value: "phantom_3", text: "Phantom 3" },
+        ];
+      }
+      if (newValue === "autel") {
+        this.optionsModel = [
+          { value: "evo_nano", text: "Evo Nano" },
+          { value: "evo_nano_plus", text: "Evo Nano +" },
+          { value: "evo_lite", text: "Evo Lite" },
+          { value: "evo_lite_plus", text: "Evo Lite +" },
+          { value: "evo_2", text: "Evo 2" },
+        ];
+      }
+      if (newValue === "hubsan") {
+        this.optionsModel = [
+          { value: "zino_mini", text: "Zino mini" },
+          { value: "zino_mini_pro", text: "Zino mini pro" },
+          { value: "ace_pro", text: "Ace pro" },
+        ];
+      }
+    },
   },
   computed: {
     ...mapState({
@@ -314,8 +369,8 @@ export default {
       console.log("avatar", value);
       this.formData.avatar = value;
       this.avatarImg = value;
-      let avatarUrl = "@/assets/img/avatars/user_1.png";
-      this.selectedAvatar = avatarUrl + value + ".png";
+      //let avatarUrl = "@/assets/img/avatars/user_1.png";
+      this.selectedAvatar = value;
       this.showAvatar = true;
     },
 
@@ -336,10 +391,10 @@ export default {
           latitude: this.formData.latitude,
           longitude: this.formData.longitude,
           price: this.formData.price,
-          website: this.formData.website,
+          webpage: this.formData.website,
         })
         .then((response) => {
-          console.log("Resp desde FORM", response);
+          console.log("Resp desde update form", response);
           if (response.status === 200) {
             this.alertMessage = "notification.user_created_success";
             this.alertVariant = "success";
