@@ -1,7 +1,10 @@
 <template>
   <header class="header">
     <nav class="navbar">
-      <RouterLink to="/">
+      <RouterLink v-if="$store.state.isLogin" to="/dashboard">
+        <img src="@/assets/logo.png" alt="Logo" class="logo" />
+      </RouterLink>
+      <RouterLink v-else to="/">
         <img src="@/assets/logo.png" alt="Logo" class="logo" />
       </RouterLink>
       <ul class="nav-menu" v-on:click="closeMobileMenu">

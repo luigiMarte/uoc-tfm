@@ -11,7 +11,7 @@ export default createStore({
     userToken: "",
     token: "",
     userId: "",
-    isLogin: {},
+    isLogin: false,
     userInfo: {},
     newUser: {},
     newUserComplete: {},
@@ -123,6 +123,16 @@ export default createStore({
         return error;
       }
     },
+    // async getFavorite({ commit, state }) {
+    //   try {
+    //     let stateUserId = state.userId;
+    //     const resp = await getUser(stateUserId);
+    //     commit("SET_USER_INFO2", resp.data);
+    //     return resp;
+    //   } catch (error) {
+    //     return error;
+    //   }
+    // },
     async updateProfile({ state }, payload) {
       debugger;
       let filledData = Object.keys(payload).reduce((acc, curr) => {
@@ -145,10 +155,17 @@ export default createStore({
         return error;
       }
     },
-    async searchByCity({ commit }, payload) {
+    async searchByCity({ commit, state }, payload) {
       try {
         const resp = await getPilotsByCity(payload);
-        commit("SET_PILOTS_CITY", resp.data);
+        if (state.isLogin === false) {
+          let total = 3; // total documents you want
+          let limitedData = resp.data.filter((e) => e.enabled).slice(0, total);
+          commit("SET_PILOTS_CITY", limitedData);
+        } else {
+          commit("SET_PILOTS_CITY", resp.data);
+        }
+
         return resp;
       } catch (error) {
         return error;

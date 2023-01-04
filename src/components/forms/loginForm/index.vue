@@ -82,6 +82,7 @@ export default {
             this.alertMessage = "notification.user_login_success";
             this.alertVariant = "success";
             this.showAlert = true;
+            this.$store.dispatch("getUserbyId");
             setTimeout(() => {
               this.showAlert = false;
               this.$router.push({ name: "HomeView" });

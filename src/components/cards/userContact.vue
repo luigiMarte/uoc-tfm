@@ -89,7 +89,11 @@
           </p>
         </div>
 
-        <b-badge @click="favoritesAdd" variant="warning" class="">
+        <b-badge
+          @click="favoritesAdd"
+          variant="warning"
+          class="favorites-badge"
+        >
           {{ $t("favorites_add") }}
         </b-badge>
       </b-col>
@@ -102,6 +106,7 @@ import { mapState } from "vuex";
 import ImageAvatar from "@/components/ImageAvatar.vue";
 import ImageUrl from "@/components/Image.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
+import { addFavorite } from "@/services/api/user";
 export default {
   name: "userContact",
   components: {
@@ -117,14 +122,35 @@ export default {
   computed: {
     ...mapState({
       selectedPilot: "selectedPilot",
+      userInfo: "userInfo",
     }),
   },
   methods: {
     formatText(text) {
       return removeDashes(text);
     },
-    favoritesAdd() {
-      console.log("favoritesAdd");
+    async favoritesAdd() {
+      try {
+        let stateUserId = this.$store.state.userId;
+        let stateToken = this.$store.state.token;
+        console.log("ACTION", this.selectedPilot.id, stateUserId, stateToken);
+        //const favoritesArray = [...this.userInfo.favorites];
+        //console.log("favoritesArray", favoritesArray);
+        //favoritesArray.push(this.selectedPilot.id);
+        //console.log("favoritesArray after push", favoritesArray);
+        const pilotData = {
+          id: this.selectedPilot.id,
+          droneBrand: this.selectedPilot.droneBrand,
+          droneModel: this.selectedPilot.droneModel,
+          alias: this.selectedPilot.alias,
+          price: this.selectedPilot.price,
+        };
+        const resp = await addFavorite(pilotData, stateUserId, stateToken);
+        console.log("resp favorites", resp);
+        return resp;
+      } catch (error) {
+        return error;
+      }
     },
   },
 };
@@ -164,6 +190,9 @@ export default {
   height: toRem(30);
   width: toRem(100);
   font-size: toRem(17);
+}
+.favorites-badge {
+  cursor: pointer;
 }
 .profile-container {
   padding: toRem(55);

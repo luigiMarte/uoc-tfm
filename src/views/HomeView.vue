@@ -40,9 +40,9 @@
                   <b-card-text>
                     <p class="mt-5">{{ $t("weather_short_exp") }}</p>
                     <RouterLink to="weather">
-                      <b-button class="mt-4" variant="primary"
-                        >{{ $t("go_to") }} {{ $t("weather") }}</b-button
-                      >
+                      <b-button class="mt-4" variant="primary">{{
+                        $t("weather_info")
+                      }}</b-button>
                     </RouterLink>
                   </b-card-text></b-card-text
                 >
@@ -60,6 +60,43 @@
                   </b-card-text></b-card-text
                 >
               </b-tab>
+              <b-tab :title="tab5Title">
+                <div v-for="favorite in userInfo.favorites" :key="favorite.id">
+                  <b-card
+                    no-body
+                    class="overflow-hidden mt-3 mb-3"
+                    style="max-width: 300px"
+                  >
+                    <b-row no-gutters>
+                      <b-col md="6">
+                        <ImageUrl
+                          style="width: 140px"
+                          :imagePath="favorite.droneModel"
+                        />
+                      </b-col>
+                      <b-col md="6">
+                        <b-card-body :title="favorite.alias">
+                          <b-card-text>
+                            <p>
+                              {{ favorite.droneBrand }}
+                              {{ formatText(favorite.droneModel) }}
+                            </p>
+                            <b-badge variant="light">
+                              {{ favorite.phone }}</b-badge
+                            >
+                            <b-badge
+                              variant="success"
+                              @click="goToPilotProfile(favorite.id)"
+                            >
+                              {{ $t("go_to_profile") }}</b-badge
+                            >
+                          </b-card-text>
+                        </b-card-body>
+                      </b-col>
+                    </b-row>
+                  </b-card>
+                </div>
+              </b-tab>
             </b-tabs>
           </b-card>
         </div>
@@ -69,18 +106,61 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { getUser } from "@/services/api/auth";
+import ImageUrl from "@/components/Image.vue";
+import { removeDashes } from "@/utils/removeDashes.js";
 export default {
   name: "searchForm",
+  components: {
+    ImageUrl,
+  },
   data() {
     return {
       tab1Title: this.$t("my_profile"),
       tab2Title: this.$t("search"),
       tab3Title: this.$t("weather"),
       tab4Title: this.$t("legislation"),
+      tab5Title: this.$t("favorites"),
+      favorites: {},
     };
   },
-  watch: {},
-  methods: {},
+  watch: {
+    userInfo(value) {
+      if (value) {
+        console.log("watch if", value);
+        this.getFavorites();
+      } else {
+        console.log("watch else", value);
+      }
+    },
+  },
+  computed: {
+    ...mapState({
+      userInfo: "userInfo",
+    }),
+  },
+  created() {
+    //this.$store.dispatch("getUserbyId");
+  },
+  // mounted() {
+  //   if(user)
+  //   this.getFavorites();
+  // },
+  methods: {
+    async getFavorites() {
+      let favorites = this.userInfo.favorites;
+      const resp = await getUser(favorites);
+      console.log("favorites", resp.data);
+      this.favorites = resp.data;
+    },
+    formatText(text) {
+      return removeDashes(text);
+    },
+    goToPilotProfile(id) {
+      console.log(id);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped></style>

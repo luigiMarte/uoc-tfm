@@ -69,3 +69,24 @@ export function updateUserProfile(params, userId, token) {
     },
   });
 }
+
+/**
+ * POST: user profile update
+ */
+export function addFavorite(params, userId, token) {
+  return axios.post(
+    `http://localhost:3000/api/auth/favorites/${userId}`,
+    {
+      id: params.id,
+      droneBrand: params.droneBrand,
+      droneModel: params.droneModel,
+      alias: params.alias,
+      price: params.price,
+    },
+    {
+      headers: {
+        "x-access-token": token,
+      },
+    }
+  );
+}

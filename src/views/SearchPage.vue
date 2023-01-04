@@ -65,7 +65,17 @@
       >
     </b-row>
     <!-- resultados -->
-    <h2 v-if="pilots">{{ $t("results") }}</h2>
+    <div v-if="pilots.length">
+      <h2 class="mb-4">{{ $t("results") }}:</h2>
+
+      <b-alert
+        v-if="this.$store.state.isLogin === false"
+        show
+        variant="warning"
+        >{{ $t("limited_results") }}</b-alert
+      >
+    </div>
+
     <b-row>
       <b-col>
         <div class="results">
