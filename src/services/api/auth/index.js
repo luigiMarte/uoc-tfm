@@ -30,6 +30,20 @@ export function userLogin(params) {
  * GET: user data by ID
  */
 export function getUser(userId) {
+  console.log("getUser 2", userId);
+  if (userId) {
+    return axios.get(`http://localhost:3000/api/auth/${userId}`);
+  } else {
+    console.log("User not found");
+  }
+  //return axios.get(`http://localhost:3000/api/auth/${userId}`);
+}
+
+/**
+ * GET: pilot data by ID
+ */
+export function getPilot(userId) {
+  console.log("getPilot 2", userId);
   if (userId) {
     return axios.get(`http://localhost:3000/api/auth/${userId}`);
   } else {

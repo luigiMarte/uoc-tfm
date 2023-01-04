@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import { createUser, userLogin, getUser } from "@/services/api/auth";
+import { createUser, userLogin, getUser, getPilot } from "@/services/api/auth";
 import { createUserData } from "@/services/api/user";
 import { updateUserProfile } from "../services/api/user";
 import { getPilotsByCity } from "../services/api/user";
@@ -13,6 +13,7 @@ export default createStore({
     userId: "",
     isLogin: false,
     userInfo: {},
+    pilotInfo: {},
     newUser: {},
     newUserComplete: {},
     pilots: [],
@@ -48,6 +49,9 @@ export default createStore({
     },
     SET_USER_INFO(state, data) {
       state.userInfo = data;
+    },
+    SET_PILOT_INFO(state, data) {
+      state.pilotInfo = data;
     },
     SET_PILOTS_CITY(state, data) {
       state.pilots = data;
@@ -113,11 +117,23 @@ export default createStore({
         return error;
       }
     },
+    // When get id from state - for user that is logged
     async getUserbyId({ commit, state }) {
       try {
         let stateUserId = state.userId;
         const resp = await getUser(stateUserId);
         commit("SET_USER_INFO", resp.data);
+        return resp;
+      } catch (error) {
+        return error;
+      }
+    },
+    // When we send id from user card
+    async getPilotById({ commit }, userId) {
+      console.log("actin getPilotById", userId);
+      try {
+        const resp = await getPilot(userId);
+        commit("SET_PILOT_INFO", resp.data);
         return resp;
       } catch (error) {
         return error;

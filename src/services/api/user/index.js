@@ -21,7 +21,7 @@ export function getUserData(userId) {
  * GET: user data by ID
  */
 export function getUser(userId) {
-  console.log(userId);
+  console.log("userId 1", userId);
   return axios.post(`"http://localhost:3000/api/auth/${userId}"`);
 }
 

@@ -89,13 +89,13 @@
           </p>
         </div>
 
-        <b-badge
+        <!-- <b-badge
           @click="favoritesAdd"
           variant="warning"
           class="favorites-badge"
         >
           {{ $t("favorites_add") }}
-        </b-badge>
+        </b-badge> -->
       </b-col>
     </b-row>
   </b-container>
@@ -122,9 +122,8 @@ export default {
 
   computed: {
     ...mapState({
-      selectedPilot: "selectedPilot",
-      userInfo: "userInfo",
-      pilotInfo: "pilotInfo",
+      selectedPilot: "pilotInfo",
+      userInfo: "pilotInfo",
     }),
   },
   methods: {

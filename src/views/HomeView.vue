@@ -158,7 +158,11 @@ export default {
       return removeDashes(text);
     },
     goToPilotProfile(id) {
-      console.log(id);
+      console.log("gotopilotprofile");
+      this.$store.dispatch("getPilotById", id).then((response) => {
+        console.log("response pilot", response.data);
+        this.$router.push({ name: "pilotContact" });
+      });
     },
   },
 };
