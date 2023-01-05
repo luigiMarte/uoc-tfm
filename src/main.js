@@ -20,6 +20,8 @@ import "vue3-openlayers/dist/vue3-openlayers.css";
 
 import Vue3Geolocation from "vue3-geolocation";
 
+import Toaster from "@meforma/vue-toaster";
+
 const app = createApp(App);
 
 app.use(store);
@@ -27,6 +29,10 @@ app.use(router);
 app.use(i18n);
 
 app.use(Vue3Geolocation);
+
+app.use(Toaster, {
+  position: "top-right",
+});
 
 app.use(OpenLayersMap);
 

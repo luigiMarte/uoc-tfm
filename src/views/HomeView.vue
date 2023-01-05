@@ -110,6 +110,7 @@ import { mapState } from "vuex";
 import { getUser } from "@/services/api/auth";
 import ImageUrl from "@/components/Image.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
+
 export default {
   name: "searchForm",
   components: {
@@ -140,13 +141,8 @@ export default {
       userInfo: "userInfo",
     }),
   },
-  created() {
-    //this.$store.dispatch("getUserbyId");
-  },
-  // mounted() {
-  //   if(user)
-  //   this.getFavorites();
-  // },
+  created() {},
+
   methods: {
     async getFavorites() {
       let favorites = this.userInfo.favorites;
@@ -158,7 +154,6 @@ export default {
       return removeDashes(text);
     },
     goToPilotProfile(id) {
-      console.log("gotopilotprofile");
       this.$store.dispatch("getPilotById", id).then((response) => {
         console.log("response pilot", response.data);
         this.$router.push({ name: "pilotContact" });
@@ -167,4 +162,11 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped></style>
+
+<style lang="scss" scoped>
+.toasting {
+  background-color: aqua !important;
+  color: rgb(208, 9, 9);
+  padding: 20px;
+}
+</style>

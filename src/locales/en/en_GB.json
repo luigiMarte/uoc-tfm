@@ -1,6 +1,6 @@
 {
   "buttons": {
-    "clear": "clear",
+    "clear": "Clear",
     "editProfile":"Edit profile",
     "deleteProfile":"Delete profile",
     "save":"Save",
@@ -8,12 +8,21 @@
     "send": "Send",
     "update_profile":"Update profile"
   } ,
+  "hint": {
+    "email": "Please enter your email",
+    "password": "Please enter your password"
+  },
   "notification": {
     "user_created_success": "User created successfully",
-    "user_login_success" : "Sign-in confirmed"
+    "user_login_success" : "Sign-in confirmed",
+    "user_updated_success" : "User updated successfully"
   },
-  "errors":{
-    "error_ocurred" : "Unexpected error occurred"
+  "error":{
+    "error_ocurred" : "Unexpected error occurred",
+    "error_login_user": "Introduce a valid user",
+    "error_login_password": "Introduce a valid password",
+    "user_not_found": "User not found",
+    "invalid_password": "Invalid password"
   },
   "locationModal":{
     "title": "You don't know your coordinates ?",
@@ -29,6 +38,7 @@
   "aircraf_info": "Aircraft",
   "email":"Email",
   "cell_phone": "Cell phone",
+  "change_avatar": "Change avatar",
   "city": "City",
   "country": "Country",
   "choose_avatar":"Choose avatar image",
@@ -88,6 +98,7 @@
   "terms_of_use":" I accept the terms of use",
   "title":"Drones app",
   "user": "User",
+  "update_profile": "Update Profile",
   "user_card_title": "Profile details : ",
   "visit_webpage": "Visit my webpage",
   "whatsApp":"Whats App",

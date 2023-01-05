@@ -1,6 +1,6 @@
  {
   "buttons": {
-    "clear": "borrar",
+    "clear": "Borrar",
     "editProfile":"Editar perfíl",
     "deleteProfile":"Eliminar perfíl",
     "save":"Guardar",
@@ -8,12 +8,21 @@
     "send": "Enviar",
     "update_profile":"Actualizar perfíl"
   },
+  "hint": {
+    "email": "Introduce tu email",
+    "password": "Introduce tu contraseña"
+  },
   "notification": {
     "user_created_success": "Usuario creado correctamente",
-    "user_login_success" : "Autenticación correcta"
+    "user_login_success" : "Autenticación correcta",
+    "user_updated_success" : "Usuario actualizado correctamente"
   },
-  "errors":{
-    "error_ocurred" : "Se ha producido un error"
+  "error":{
+    "error_ocurred" : "Se ha producido un error",
+    "error_login_user": "Introduce un usuario válido",
+    "error_login_password": "Introduce una contraseña válida",
+    "user_not_found": "Usuario incorrecto",
+    "invalid_password": "Contraseña incorrecta"
   },
   "locationModal":{
     "title": "No sabes tus coordenadas?",
@@ -30,6 +39,7 @@
   "email":"Email",
   "cell_phone": "Móvil",
   "city": "Ciudad",
+  "change_avatar": "Cambiar avatar",
   "country": "País",
   "choose_avatar":"Elige un avatar",
   "drone":"Drone",
@@ -88,6 +98,7 @@
   "title":"Drones app",
   "user": "Usuario",
   "user_card_title": "Perfíl de ",
+  "update_profile": "Actualizar perfíl",
   "visit_webpage": "Visita mi web",
   "whatsApp":"Whats App",
   "whatsApp_msg": "Contactar por WhatsApp",

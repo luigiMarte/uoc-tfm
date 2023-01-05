@@ -1,22 +1,24 @@
 <template>
+  <h3>{{ $t("update_profile") }}</h3>
   <b-container class="mt-4 form-container">
-    <b-row>
-      <b-col cols="2"></b-col>
-      <b-col cols="8">
-        <b-alert v-model="showAlert" :variant="alertVariant">{{
-          $t(alertMessage)
-        }}</b-alert>
-      </b-col>
-      <b-col cols="2"></b-col>
-    </b-row>
-    <b-row v-if="selectedAvatar">
-      <b-col md="6" class="mb-5">
-        <ImageAvatar style="width: 90px" :imagePath="selectedAvatar" />
-      </b-col>
-    </b-row>
     <b-row class="card-box mb-3">
+      <b-row v-if="selectedAvatar">
+        <b-col md="6" class="mb-4">
+          <ImageAvatar style="width: 90px" :imagePath="selectedAvatar" />
+        </b-col>
+      </b-row>
+      <b-row v-else>
+        <b-col md="6" class="mb-4">
+          <!-- avatar -->
+          <ImageAvatar
+            style="width: 90px"
+            :imagePath="userDetails.avatar"
+          /> </b-col
+      ></b-row>
+    </b-row>
+    <b-row class="card-box mb-4">
       <b-col md="6">
-        <div>
+        <div class="avatar-dropdown">
           <ul>
             <!-- avatar -->
             <li>
@@ -24,7 +26,7 @@
                 split
                 split-variant="outline-secondary"
                 variant="secondary"
-                :text="this.$t('choose_avatar')"
+                :text="this.$t('change_avatar')"
                 class="m-2"
               >
                 <b-dropdown-item href="#"
@@ -98,7 +100,7 @@
     </b-row>
 
     <!-- campos responsive formulario -->
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-4">
       <b-col md="6" class="mb-3">
         <!-- Country -->
         <label>{{ $t("country") }}</label>
@@ -121,7 +123,7 @@
       ></b-col>
     </b-row>
 
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-4">
       <b-col md="6" class="mb-3">
         <!-- Postal Code -->
         <label>{{ $t("postal_code") }}</label>
@@ -144,20 +146,18 @@
       ></b-col>
     </b-row>
 
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-4">
       <b-col class="mb-3 mt-3">
         <!-- Drone question -->
         <b-form-group label="Do you have a drone">
           <b-form-radio
             v-model="formData.haveDrone"
-            :aria-describedby="ariaDescribedby"
             name="some-radios"
             :value="true"
             >{{ $t("yes") }}</b-form-radio
           >
           <b-form-radio
             v-model="formData.haveDrone"
-            :aria-describedby="ariaDescribedby"
             name="some-radios"
             :value="false"
             >{{ $t("no") }}</b-form-radio
@@ -166,7 +166,7 @@
       </b-col>
     </b-row>
 
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-4">
       <b-col md="6" class="mb-3">
         <!-- Drone brand -->
         <label>{{ $t("drone_brand") }}</label>
@@ -177,12 +177,6 @@
           v-model="formData.droneBrand"
           size="sm"
         ></b-form-select>
-        <!-- <b-form-input
-          class="input-group-text"
-          id="subject-id"
-          v-model="formData.droneBrand"
-          :placeholder="userDetails.droneBrand"
-        ></b-form-input> -->
       </b-col>
 
       <b-col md="6" class="mb-3">
@@ -195,16 +189,10 @@
           v-model="formData.droneModel"
           size="sm"
         ></b-form-select>
-        <!-- <b-form-input
-          class="input-group-text"
-          id="subject-id"
-          v-model="formData.droneModel"
-          :placeholder="userDetails.droneModel"
-        ></b-form-input> -->
       </b-col>
     </b-row>
 
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-4">
       <b-col md="6" class="mb-3">
         <!-- latitude -->
         <label>{{ $t("latitude") }}</label>
@@ -228,7 +216,7 @@
       ></b-col>
     </b-row>
 
-    <b-row class="card-box mb-3">
+    <b-row class="card-box mb-4">
       <b-col md="6" class="mb-3">
         <!-- Price -->
         <label>{{ $t("price") }}</label>
@@ -273,7 +261,7 @@
           class="col-12 mt-4"
           type="submit"
           @click="sendForm()"
-          variant="secondary"
+          variant="primary"
           >{{ $t("buttons.update_profile") }}</b-button
         >
       </div>
@@ -314,10 +302,7 @@ export default {
       avatarImg: "",
       selectedAvatar: "",
       avatarsUrl: "@/assets/img/avatars/",
-      alertVariant: "",
-      alertMessage: "",
       show: true,
-      showAlert: false,
       options: [
         { value: "dji", text: "Dji" },
         { value: "autel", text: "Autel" },
@@ -396,16 +381,13 @@ export default {
         .then((response) => {
           console.log("Resp desde update form", response);
           if (response.status === 200) {
-            this.alertMessage = "notification.user_created_success";
-            this.alertVariant = "success";
-            this.showAlert = true;
-            this.showAlert = false;
-            this.$router.push({ path: "dashboard" });
+            this.$toast.success(this.$t("notification.user_updated_success"));
+            setTimeout(() => {
+              this.$router.push({ path: "user" });
+            }, 1000);
           } else {
             console.log(response.status);
-            this.alertVariant = "danger";
-            this.alertMessage = "errors.error_ocurred";
-            this.showAlert = true;
+            this.$toast.error(this.$t("error.error.ocurred"));
             setTimeout(() => {
               this.showAlert = false;
               this.$router.push({ name: "landing" });
@@ -418,6 +400,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avatar-dropdown {
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  :deep(button) {
+    min-width: 70px;
+  }
+}
+// :deep(#dropdownMenuButton) {
+//   button {
+//     width: 500px !important;
+//   }
+// }
+
+// :deep(#dropdownMenuButton__BV_toggle_) {
+//   width: 500px;
+// }
 .form-container {
   padding: toRem(55);
   box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
@@ -446,13 +446,16 @@ export default {
   width: 90%;
   margin: 0 auto;
 }
+
 .card-box {
-  max-width: toRem(700);
-  ul {
-    list-style-type: none;
-    li:first-child {
-      font-weight: bold;
-    }
+  //max-width: toRem(700);
+  // div:nth-child(1),
+  // div:nth-child(2) {
+  //   padding-left: toRem(30);
+  //   padding-right: toRem(30);
+  // }
+  label {
+    font-weight: bold;
   }
 }
 .card-description {

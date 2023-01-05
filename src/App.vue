@@ -33,4 +33,7 @@ import AppFooter from "./components/footer/index.vue";
 .cursor-pointer {
   cursor: pointer;
 }
+.font-size20 {
+  font-size: toRem(20px) !important;
+}
 </style>
