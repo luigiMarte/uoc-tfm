@@ -68,22 +68,36 @@
           <label>{{ $t("price") }}</label>
           <p>{{ userDetails.price }} €</p>
         </b-col>
+        <b-col md="6" class="mb-3 card-text">
+          <!-- latitud -->
+          <label>{{ $t("website") }}</label>
+          <p>{{ userDetails.webpage }}</p>
+        </b-col>
       </b-row>
     </div>
 
     <b-row class="row-box mb-3">
-      <b-col class="mb-3 card-text">
+      <b-col md="8" class="mb-3 card-text card-description">
         <!-- description -->
-        <label>{{ $t("description") }}</label>
+        <label>{{ $t("about_me") }}</label>
         <p>{{ userDetails.aboutMe }}</p>
       </b-col>
     </b-row>
 
     <b-row class="row-box">
-      <div cols="12" class="card-description">
-        <b-button class="col-12 mt-4" @click="goToEdit()" variant="secondary">{{
-          $t("buttons.editProfile")
-        }}</b-button>
+      <div cols="12" class="card-description d-flex justify-content-evenly">
+        <b-button
+          class="col-4 mt-2 mb-5"
+          @click="goToEdit()"
+          variant="secondary"
+          >{{ $t("buttons.editProfile") }}</b-button
+        >
+        <b-button
+          class="col-4 mt-2 mb-5"
+          @click="deleteProfile()"
+          variant="danger"
+          >{{ $t("buttons.deleteProfile") }}</b-button
+        >
       </div>
     </b-row>
   </b-container>
@@ -118,6 +132,9 @@ export default {
     },
     formatText(text) {
       return removeDashes(text);
+    },
+    deleteProfile() {
+      this.$store.dispatch("deleteUser");
     },
   },
 };

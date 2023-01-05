@@ -2,6 +2,7 @@
   "buttons": {
     "clear": "borrar",
     "editProfile":"Editar perfíl",
+    "deleteProfile":"Eliminar perfíl",
     "save":"Guardar",
     "search": "Buscar",
     "send": "Enviar",
@@ -68,7 +69,7 @@
   "phone":"Teléfono",
   "photo_format": "Photo format",
   "postal_code": "Código postal",
-  "price":"Price",
+  "price":"Precio",
   "price_hour": "Tarifa por hora",
   "profile": "Perfil",
   "results":"Results",

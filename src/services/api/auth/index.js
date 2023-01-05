@@ -13,7 +13,6 @@ export function getUsers() {
  * POST: new user sign up
  */
 export function createUser(params) {
-  debugger;
   console.log(params);
   //const baseUrl = import.meta.env.VITE_ROOT_API;
   return axios.post("http://localhost:3000/api/auth/sign_up", params);
@@ -49,5 +48,4 @@ export function getPilot(userId) {
   } else {
     console.log("User not found");
   }
-  //return axios.get(`http://localhost:3000/api/auth/${userId}`);
 }

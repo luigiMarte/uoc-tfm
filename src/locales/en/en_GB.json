@@ -2,6 +2,7 @@
   "buttons": {
     "clear": "clear",
     "editProfile":"Edit profile",
+    "deleteProfile":"Delete profile",
     "save":"Save",
     "search": "Search",
     "send": "Send",

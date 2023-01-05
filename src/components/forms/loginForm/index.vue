@@ -98,6 +98,10 @@ export default {
           }
         });
     },
+    clearForm() {
+      this.form.email = "";
+      this.form.password = "";
+    },
   },
 };
 </script>

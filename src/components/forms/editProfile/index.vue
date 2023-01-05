@@ -439,7 +439,6 @@ export default {
         })
         .then((response) => {
           console.log("Resp desde FORM", response);
-          debugger;
           if (response.status === 200) {
             this.alertMessage = "notification.user_created_success";
             this.alertVariant = "success";

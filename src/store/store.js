@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import { createUser, userLogin, getUser, getPilot } from "@/services/api/auth";
-import { createUserData } from "@/services/api/user";
+import { createUserData, removeUser } from "@/services/api/user";
 import { updateUserProfile } from "../services/api/user";
 import { getPilotsByCity } from "../services/api/user";
 //import axios from "axios";
@@ -21,15 +21,10 @@ export default createStore({
   },
   getters: {},
   mutations: {
-    // SET_USER(state, data) {
-    //   debugger;
-    //   state.userToken = data;
-    // },
     SET_USER(state, data) {
       state.newUser = data;
     },
     SET_USER_COMPLETE(state, data) {
-      debugger;
       state.newUserComplete = data;
     },
     SET_LOGIN(state, data) {
@@ -64,7 +59,6 @@ export default createStore({
     //async completeNewUser({ commit }, payload)
     async createNewUser({ commit }, payload) {
       try {
-        debugger;
         console.log("ACTION");
         //const resp = await createUser(payload);
         //commit("SET_USER", resp.data);
@@ -77,7 +71,6 @@ export default createStore({
     },
     async completeNewUser({ commit }, payload) {
       try {
-        debugger;
         console.log("ACTION", payload);
         const resp = await createUser(payload);
         commit("SET_USER_COMPLETE", resp.data);
@@ -86,13 +79,6 @@ export default createStore({
         return error;
       }
     },
-    // async createNewUser({ commit }, payload) {
-    //   try {
-    //     commit("SET_USER", await createUser(payload));
-    //   } catch (error) {
-    //     console.log("ACTIÇON", error);
-    //   }
-    // },
 
     async userLogin({ commit }, payload) {
       try {
@@ -139,18 +125,20 @@ export default createStore({
         return error;
       }
     },
-    // async getFavorite({ commit, state }) {
-    //   try {
-    //     let stateUserId = state.userId;
-    //     const resp = await getUser(stateUserId);
-    //     commit("SET_USER_INFO2", resp.data);
-    //     return resp;
-    //   } catch (error) {
-    //     return error;
-    //   }
-    // },
+
+    async deleteUser({ state }) {
+      let stateUserId = state.userId;
+      let userToken = state.token;
+      console.log("delete user action", stateUserId, userToken);
+      try {
+        const resp = await removeUser(stateUserId, userToken);
+        return resp;
+      } catch (error) {
+        return error;
+      }
+    },
+
     async updateProfile({ state }, payload) {
-      debugger;
       let filledData = Object.keys(payload).reduce((acc, curr) => {
         if (payload[curr]) {
           acc[curr] = payload[curr];
