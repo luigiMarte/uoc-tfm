@@ -49,14 +49,12 @@
               </b-tab>
               <b-tab :title="tab4Title">
                 <b-card-text>
-                  <b-card-text>
-                    <p class="mt-5">{{ $t("legislation_short_exp") }}.</p>
-                    <p class="mt-3 mb-3">{{ $t("legislation_short_exp_2") }}</p>
-                    <b-button
-                      ><a href="https://www.droneregulations.info/" class="mt-3"
-                        >Global Drone Regulations</a
-                      ></b-button
-                    >
+                  <b-card-text class="mt-3 mb-3">
+                    <p class="mt-5 mb-3">{{ $t("legislation_short_exp") }}.</p>
+                    <p class="mb-3">{{ $t("legislation_short_exp_2") }}</p>
+                    <b-button variant="warning" @click="gotoGlobalReg()"
+                      >Global Drone Regulations
+                    </b-button>
                   </b-card-text></b-card-text
                 >
               </b-tab>
@@ -158,6 +156,12 @@ export default {
         console.log("response pilot", response.data);
         this.$router.push({ name: "pilotContact" });
       });
+    },
+    gotoGlobalReg() {
+      this.$toast.info(this.$t("notification.external_redirection"));
+      setTimeout(() => {
+        window.open("https://www.droneregulations.info/", "_blank");
+      }, 2000);
     },
   },
 };

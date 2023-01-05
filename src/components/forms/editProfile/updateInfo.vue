@@ -454,6 +454,9 @@ export default {
   //   padding-left: toRem(30);
   //   padding-right: toRem(30);
   // }
+  input {
+    color: $text-blue;
+  }
   label {
     font-weight: bold;
   }

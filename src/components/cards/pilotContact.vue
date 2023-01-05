@@ -71,8 +71,8 @@
         <p>
           <strong>{{ $t("whatsApp_msg") }}</strong>
         </p>
-        <b-badge variant="success" class="whatapp-badge">
-          <a :href="'https://wa.me/' + selectedPilot.phone">{{
+        <b-badge variant="success" class="whatapp-badge cursor-pointer">
+          <a :href="'https://wa.me/' + selectedPilot.phone" target="blank_">{{
             $t("whatsApp")
           }}</a>
         </b-badge>

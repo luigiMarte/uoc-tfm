@@ -6,7 +6,8 @@
     "save":"Save",
     "search": "Search",
     "send": "Send",
-    "update_profile":"Update profile"
+    "update_profile":"Update profile",
+    "cancel" : "Cancel"
   } ,
   "hint": {
     "email": "Please enter your email",
@@ -15,14 +16,18 @@
   "notification": {
     "user_created_success": "User created successfully",
     "user_login_success" : "Sign-in confirmed",
-    "user_updated_success" : "User updated successfully"
+    "user_updated_success" : "User updated successfully",
+    "user_deleted_success" : "User deleted successfully",
+    "external_redirection" : "You are going to be redirected to an external page",
+    "favorite_added": "Pilot added to favorites"
   },
   "error":{
     "error_ocurred" : "Unexpected error occurred",
     "error_login_user": "Introduce a valid user",
     "error_login_password": "Introduce a valid password",
     "user_not_found": "User not found",
-    "invalid_password": "Invalid password"
+    "invalid_password": "Invalid password",
+    "unable_delete_user": "Unable to delete user. Try again later"
   },
   "locationModal":{
     "title": "You don't know your coordinates ?",
@@ -42,6 +47,8 @@
   "city": "City",
   "country": "Country",
   "choose_avatar":"Choose avatar image",
+  "delete_account": "Delete user account",
+  "delete_account_text": "Are you sure you want to delete your user account ?",
   "drone":"Drone",
   "drone_brand": "Drone brand",
   "drone_info": "Drone info",
@@ -114,6 +121,7 @@
   "min-temp" : "Min temperature",
   "feels_like" : "Feels like",
   "yes" : "yes",
+  "yes_delete" : "Yes, delete account",
   "flying_conditions" : "Flying conditions",
   "optimum": "Optimum",
   "moderate": "Warning",

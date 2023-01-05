@@ -100,6 +100,20 @@
         >
       </div>
     </b-row>
+    <!-- modal -->
+    <b-modal id="modal-1" v-model="modalShow" hide-footer :title="modalTitle">
+      <p class="my-4">{{ $t("delete_account_text") }}</p>
+      <div class="d-flex justify-content-evenly mb-4">
+        <b-button variant="secondary" @click="hideModal()">{{
+          $t("buttons.cancel")
+        }}</b-button>
+        <b-button variant="danger" @click="killUser()">{{
+          $t("yes_delete")
+        }}</b-button>
+      </div>
+    </b-modal>
+
+    <!-- modal -->
   </b-container>
 </template>
 
@@ -113,7 +127,10 @@ export default {
     ImageAvatar,
   },
   data() {
-    return {};
+    return {
+      modalShow: false,
+      modalTitle: this.$t("delete_account"),
+    };
   },
   created() {
     this.$store.dispatch("getUserbyId");
@@ -134,7 +151,26 @@ export default {
       return removeDashes(text);
     },
     deleteProfile() {
-      this.$store.dispatch("deleteUser");
+      this.modalShow = true;
+    },
+    hideModal() {
+      this.modalShow = false;
+    },
+    killUser() {
+      this.$store.dispatch("deleteUser").then((resp) => {
+        console.log(resp);
+        if (resp.status === 204) {
+          this.$toast.error(this.$t("notification.user_deleted_success"));
+          setTimeout(() => {
+            this.$router.push({ path: "/" });
+          }, 1000);
+        } else {
+          this.$toast.error(this.$t("error.unable_delete_user"));
+          setTimeout(() => {
+            this.$router.push({ path: "/" });
+          }, 1000);
+        }
+      });
     },
   },
 };

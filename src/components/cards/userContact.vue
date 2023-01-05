@@ -72,7 +72,7 @@
           <strong>{{ $t("whatsApp_msg") }}</strong>
         </p>
         <b-badge variant="success" class="whatapp-badge">
-          <a :href="'https://wa.me/' + selectedPilot.phone">{{
+          <a :href="'https://wa.me/' + selectedPilot.phone" target="blank_">{{
             $t("whatsApp")
           }}</a>
         </b-badge>
@@ -145,6 +145,7 @@ export default {
         };
         const resp = await addFavorite(pilotData, stateUserId, stateToken);
         console.log("resp favorites", resp);
+        this.$toast.info(this.$t("notification.favorite_added"));
         return resp;
       } catch (error) {
         return error;

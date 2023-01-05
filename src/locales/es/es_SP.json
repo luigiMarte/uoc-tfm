@@ -6,7 +6,8 @@
     "save":"Guardar",
     "search": "Buscar",
     "send": "Enviar",
-    "update_profile":"Actualizar perfíl"
+    "update_profile":"Actualizar perfíl",
+    "cancel" : "Cancelar"
   },
   "hint": {
     "email": "Introduce tu email",
@@ -15,14 +16,18 @@
   "notification": {
     "user_created_success": "Usuario creado correctamente",
     "user_login_success" : "Autenticación correcta",
-    "user_updated_success" : "Usuario actualizado correctamente"
+    "user_updated_success" : "Usuario actualizado correctamente",
+    "user_deleted_success" : "Usuario eliminado correctamente",
+    "external_redirection" : "Vas a ser redireccionado a una página externa",
+    "favorite_added": "Piloto añadido a favoritos"
   },
   "error":{
     "error_ocurred" : "Se ha producido un error",
     "error_login_user": "Introduce un usuario válido",
     "error_login_password": "Introduce una contraseña válida",
     "user_not_found": "Usuario incorrecto",
-    "invalid_password": "Contraseña incorrecta"
+    "invalid_password": "Contraseña incorrecta",
+    "unable_delete_user": "Error al eliminar usuario. Inténtalo mas tarde"
   },
   "locationModal":{
     "title": "No sabes tus coordenadas?",
@@ -42,6 +47,8 @@
   "change_avatar": "Cambiar avatar",
   "country": "País",
   "choose_avatar":"Elige un avatar",
+  "delete_account": "Eliminar cuenta de usuario",
+  "delete_account_text": "¿Estas seguro de que quieres eliminar tu cuenta?",
   "drone":"Drone",
   "drone_brand": "Marca de drone",
   "drone_info": "Drone info",
@@ -115,6 +122,7 @@
   "min-temp" : "Temperatura mínima",
   "feels_like" : "Sensación térmica",
   "yes" : "si",
+  "yes_delete" : "Sí, eliminar cuenta",
   "flying_conditions" : "Condiciones de vuelo",
   "optimum": "Óptimas",
   "moderate": "Precaución",
