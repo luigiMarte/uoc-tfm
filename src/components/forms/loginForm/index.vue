@@ -70,7 +70,7 @@ export default {
             this.$toast.success(this.$t("notification.user_login_success"));
             this.$store.dispatch("getUserbyId");
             setTimeout(() => {
-              this.$router.push({ name: "HomeView" });
+              this.$router.push({ name: "search" });
             }, 1500);
           } else {
             let message = response.response.data.message;

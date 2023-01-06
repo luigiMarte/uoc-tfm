@@ -55,6 +55,7 @@
   "drone_model": "Drone model",
   "favorites": "Favorites",
   "favorites_add": "Add to favorites",
+  "fly": "Fly", 
   "flyingTime": "Flying time",
   "go_to" :"Go to",
   "go_to_map": "Go to map",

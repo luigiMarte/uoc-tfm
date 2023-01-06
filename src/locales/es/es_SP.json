@@ -15,7 +15,7 @@
   },
   "notification": {
     "user_created_success": "Usuario creado correctamente",
-    "user_login_success" : "Autenticación correcta",
+    "user_login_success" : "Usuario y Contraseña correctos",
     "user_updated_success" : "Usuario actualizado correctamente",
     "user_deleted_success" : "Usuario eliminado correctamente",
     "external_redirection" : "Vas a ser redireccionado a una página externa",
@@ -55,6 +55,7 @@
   "drone_model": "Modelo de drone",
   "favorites": "Favoritos",
   "favorites_add": "Añadir a favoritos",
+  "fly": "Volar", 
   "flyingTime": "Tiempo de vuelo",
   "go_to" :"Ir a",
   "go_to_map": "Mostrar mapa",

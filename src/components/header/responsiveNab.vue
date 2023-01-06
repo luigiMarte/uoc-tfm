@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <nav class="navbar">
-      <RouterLink v-if="$store.state.isLogin" to="/dashboard">
+      <RouterLink v-if="$store.state.isLogin" to="/search">
         <img src="@/assets/logo.png" alt="Logo" class="logo" />
       </RouterLink>
       <RouterLink v-else to="/">
@@ -16,6 +16,16 @@
         <li v-if="$store.state.isLogin" class="nav-item">
           <RouterLink to="profile">
             {{ $t("profile") }}
+          </RouterLink>
+        </li>
+        <li v-if="$store.state.isLogin" class="nav-item">
+          <RouterLink to="favorites">
+            {{ $t("favorites") }}
+          </RouterLink>
+        </li>
+        <li v-if="$store.state.isLogin" class="nav-item">
+          <RouterLink to="fly">
+            {{ $t("fly") }}
           </RouterLink>
         </li>
         <li class="nav-item">

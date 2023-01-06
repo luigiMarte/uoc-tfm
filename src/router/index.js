@@ -50,6 +50,22 @@ const router = createRouter({
       component: () => import("../views/UserProfile.vue"),
     },
     {
+      path: "/favorites",
+      name: "favorites",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/FavoritesView.vue"),
+    },
+    {
+      path: "/fly",
+      name: "fly",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/FlyView.vue"),
+    },
+    {
       path: "/completeProfile",
       name: "completeProfile",
       // route level code-splitting

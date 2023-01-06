@@ -6,7 +6,7 @@
       <div class="brand">
         <RouterLink to="/"
           ><img
-            alt="Vue logo"
+            alt="logo"
             class="logo"
             src="@/assets/logo.svg"
             width="30"

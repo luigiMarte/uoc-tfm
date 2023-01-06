@@ -29,3 +29,13 @@ li {
 @media (min-width: 1024px) {
 
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.box-shadow {
+  box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
+  -webkit-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
+  -moz-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
+}
