@@ -57,7 +57,7 @@
           class="mt-3 mb-4"
           variant="primary"
           @click="getPilots"
-          >{{ $t("search") }}</b-button
+          >{{ $t("buttons.search") }}</b-button
         >
         <b-button v-else @click="loadMap" class="mt-3 mb-4" variant="primary">{{
           $t("go_to_map")
