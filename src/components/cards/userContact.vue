@@ -112,11 +112,11 @@
     </b-row>
     <b-row class="mb-5 crystal-card">
       <b-col md="6"
-        ><label>
+        ><label class="mb-3">
           <strong>{{ this.$t("phone") }}: </strong>
         </label>
         <p>{{ selectedPilot.phone }}</p>
-        <label>
+        <label class="mb-3">
           <strong>{{ this.$t("website") }}: </strong>
         </label>
         <p>
@@ -126,7 +126,7 @@
         </p>
       </b-col>
       <b-col md="6"
-        ><label>
+        ><label class="mb-3">
           <strong>{{ this.$t("whatsApp_msg") }}: </strong>
         </label>
         <p>
@@ -136,10 +136,46 @@
             }}</a>
           </b-badge>
         </p>
-        <label>
+        <label class="mb-3">
           <strong>{{ this.$t("social_media") }}: </strong>
         </label>
-        <p>redes</p>
+        <p>
+          <a
+            v-if="selectedPilot.instagram"
+            :href="selectedPilot.instagram"
+            target="blank_"
+          >
+            <IconInstagram class="width30 mr-2" />
+          </a>
+          <a
+            v-if="selectedPilot.facebook"
+            :href="selectedPilot.facebook"
+            target="blank_"
+          >
+            <IconFacebook class="width30 mr-2" />
+          </a>
+          <a
+            v-if="selectedPilot.tiktok"
+            :href="selectedPilot.tiktok"
+            target="blank_"
+          >
+            <IconTiktok class="width30 mr-2" />
+          </a>
+          <a
+            v-if="selectedPilot.twitter"
+            :href="selectedPilot.twitter"
+            target="blank_"
+          >
+            <IconTwitterColor class="width30 mr-2" />
+          </a>
+          <a
+            v-if="selectedPilot.youtube"
+            :href="selectedPilot.youtube"
+            target="blank_"
+          >
+            <IconYoutube class="width30 mr-2" />
+          </a>
+        </p>
       </b-col>
     </b-row>
   </b-container>
@@ -262,6 +298,10 @@ a:hover {
 }
 .favorites-badge {
   cursor: pointer;
+}
+.width30 {
+  width: toRem(30);
+  margin-left: toRem(15);
 }
 .profile-container {
   background-color: #ffffff;

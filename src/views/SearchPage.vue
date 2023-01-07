@@ -134,6 +134,11 @@
                             result.phone,
                             result.webpage,
                             result.video,
+                            result.youtube,
+                            result.instagram,
+                            result.tiktok,
+                            result.twitter,
+                            result.facebook,
                             result.avatar
                           )
                         "
@@ -306,6 +311,11 @@ export default {
       phone,
       webpage,
       video,
+      youtube,
+      instagram,
+      tiktok,
+      twitter,
+      facebook,
       avatar
     ) {
       let payload = {
@@ -322,6 +332,11 @@ export default {
         phone,
         webpage,
         video,
+        youtube,
+        instagram,
+        tiktok,
+        twitter,
+        facebook,
         avatar,
       };
       this.$store.commit("SET_SELECTED_PILOT", payload);

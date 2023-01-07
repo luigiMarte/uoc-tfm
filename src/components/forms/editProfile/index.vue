@@ -1,14 +1,8 @@
 <template>
+  <h4>
+    {{ $t("register_form_text") }}
+  </h4>
   <b-container class="mt-4 form-container">
-    <b-row>
-      <b-col cols="2"></b-col>
-      <b-col cols="8">
-        <b-alert v-model="showAlert" :variant="alertVariant">{{
-          $t(alertMessage)
-        }}</b-alert>
-      </b-col>
-      <b-col cols="2"></b-col>
-    </b-row>
     <!-- modal -->
     <b-row>
       <b-modal v-model="modalShow">
@@ -34,6 +28,9 @@
         </b-card>
       </b-modal>
       <!-- Modal -->
+      <!-- new-->
+
+      <!-- new-->
     </b-row>
     <b-row class="mb-4 card-box">
       <b-col>
@@ -269,7 +266,16 @@
     <b-row class="card-box mb-3" v-if="formData.haveDrone">
       <b-col md="6" class="mb-3">
         <!-- Price -->
-        <label>{{ $t("video_demo") }}</label>
+        <label
+          >{{ $t("video_xample") }}
+          <b-badge
+            class="show-pointer"
+            @click="showToast"
+            pill
+            variant="secondary"
+            >?</b-badge
+          ></label
+        >
         <b-form-input
           class="input-group-text"
           id="subject-id"
@@ -279,11 +285,53 @@
 
       <b-col md="6" class="mb-3">
         <!-- User URL -->
-        <label>{{ $t("website") }}</label>
+        <label>{{ $t("photo") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
           v-model="formData.website"
+        ></b-form-input
+      ></b-col>
+    </b-row>
+
+    <b-row class="card-box mb-3">
+      <b-col md="6" class="mb-3">
+        <!-- RRSS -->
+        <label>{{ $t("social_media") }} </label>
+        <b-form-input
+          class="input-group-text"
+          id="subject-id"
+          v-model="formData.youtube"
+          placeholder="YouTube"
+        ></b-form-input>
+        <b-form-input
+          class="input-group-text"
+          id="subject-id"
+          v-model="formData.instagram"
+          placeholder="Instagram"
+        ></b-form-input>
+        <b-form-input
+          class="input-group-text"
+          id="subject-id"
+          v-model="formData.tiktok"
+          placeholder="Tiktok"
+        ></b-form-input>
+      </b-col>
+
+      <b-col md="6" class="mb-3">
+        <!-- RRSS -->
+        <label></label>
+        <b-form-input
+          class="input-group-text"
+          id="subject-id"
+          v-model="formData.facebook"
+          placeholder="Facebook"
+        ></b-form-input>
+        <b-form-input
+          class="input-group-text"
+          id="subject-id"
+          v-model="formData.twitter"
+          placeholder="Twitter"
         ></b-form-input
       ></b-col>
     </b-row>
@@ -345,6 +393,11 @@ export default {
         price: "",
         website: "",
         video: "",
+        youtube: "",
+        instagram: "",
+        tiktok: "",
+        twitter: "",
+        facebook: "",
         enabled: false,
         status: false,
       },
@@ -433,6 +486,9 @@ export default {
       console.log("save");
       //this.$router.push({ name: "user" });
     },
+    showToast() {
+      this.$toast.info(this.$t("notification.favorite_added"));
+    },
     sendForm() {
       console.log("test-send user");
       //let userLoginInfo = this.$store.state.newUser;
@@ -458,6 +514,11 @@ export default {
           price: this.formData.price,
           webpage: this.formData.website,
           video: this.formData.video,
+          youtube: this.formData.youtube,
+          instagram: this.formData.instagram,
+          tiktok: this.formData.tiktok,
+          twitter: this.formData.twitter,
+          facebook: this.formData.facebook,
           enabled: false,
           status: false,
         })
@@ -488,16 +549,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.avatar-container {
+.avatar-dropdown {
   ul {
-    padding: 0 !important;
+    margin-left: 0;
+    padding-left: 0 !important;
   }
   :deep(button) {
-    padding: 0 !important;
+    min-width: 70px;
   }
 }
+// .avatar-container {
+//   ul {
+//     padding: 0 !important;
+//   }
+//   :deep(button) {
+//     padding: 0 !important;
+//   }
+// }
 .form-container {
-  padding: toRem(55);
+  padding: toRem(25);
+  @include phone-up {
+    padding: toRem(45);
+  }
   box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
   -webkit-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
   -moz-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
@@ -529,7 +602,10 @@ export default {
   background-color: purple;
 }
 .card-box {
-  max-width: toRem(700);
+  //max-width: toRem(700);
+  input {
+    max-width: 75%;
+  }
   ul {
     list-style-type: none;
     li:first-child {

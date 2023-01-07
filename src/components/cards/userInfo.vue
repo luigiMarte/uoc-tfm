@@ -73,7 +73,58 @@
           <p>{{ userDetails.webpage }}</p>
         </b-col>
       </b-row>
+      <b-row class="card-box mb-3">
+        <b-col md="6" class="mb-3 card-text">
+          <!-- video -->
+          <label>{{ $t("video_xample") }}</label>
+          <p>{{ userDetails.video }}</p>
+        </b-col>
+        <b-col md="6" class="mb-3 card-text">
+          <!-- foto -->
+        </b-col>
+      </b-row>
     </div>
+
+    <b-row class="card-box mb-3">
+      <b-col class="mb-3 card-text">
+        <label>{{ $t("social_media") }}</label></b-col
+      >
+    </b-row>
+
+    <b-row class="card-box mb-3">
+      <b-col class="mb-3 card-text">
+        <label>{{ $t("YouTube") }}</label>
+        <p>{{ userDetails.youtube }}</p>
+      </b-col>
+    </b-row>
+
+    <b-row class="card-box mb-3">
+      <b-col class="mb-3 card-text">
+        <label>{{ $t("Instagram") }}</label>
+        <p>{{ userDetails.instagram }}</p>
+      </b-col>
+    </b-row>
+
+    <b-row class="card-box mb-3">
+      <b-col class="mb-3 card-text">
+        <label>{{ $t("TikTok") }}</label>
+        <p>{{ userDetails.tiktok }}</p>
+      </b-col>
+    </b-row>
+
+    <b-row class="card-box mb-3">
+      <b-col class="mb-3 card-text">
+        <label>{{ $t("Facebook") }}</label>
+        <p>{{ userDetails.facebook }}</p>
+      </b-col>
+    </b-row>
+
+    <b-row class="card-box mb-3">
+      <b-col class="mb-3 card-text">
+        <label>{{ $t("Twitter") }}</label>
+        <p>{{ userDetails.twitter }}</p>
+      </b-col>
+    </b-row>
 
     <b-row class="row-box mb-3">
       <b-col md="8" class="mb-3 card-text card-description">
@@ -100,24 +151,6 @@
           >{{ $t("buttons.deleteProfile") }}</b-button
         ></b-col
       >
-      <!-- <div class="card-description d-flex justify-content-evenly">
-        <b-button
-          cols="12"
-          md="6"
-          class="col-4 mt-2 mb-5"
-          @click="goToEdit()"
-          variant="secondary"
-          >{{ $t("buttons.editProfile") }}</b-button
-        >
-        <b-button
-          cols="12"
-          md="6"
-          class="col-4 mt-2 mb-5"
-          @click="deleteProfile()"
-          variant="danger"
-          >{{ $t("buttons.deleteProfile") }}</b-button
-        >
-      </div> -->
     </b-row>
     <!-- modal -->
     <b-modal id="modal-1" v-model="modalShow" hide-footer :title="modalTitle">
