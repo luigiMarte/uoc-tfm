@@ -1,101 +1,145 @@
 <template>
-  <h4>{{ $t("user_card_title") }} {{ selectedPilot.userName }}</h4>
+  <h4>
+    {{ $t("welcome_user_prof") }}
+    <span class="capitalize alias">{{ selectedPilot.alias }}</span>
+  </h4>
   <b-container class="mt-4 profile-container">
-    <b-row class="card-box mb-3 mt-4">
-      <b-col class="mb-3 card-text">
-        <p>
-          <strong>{{ selectedPilot.alias }}</strong>
-        </p>
-        <ImageAvatar style="width: 120px" :imagePath="selectedPilot.avatar" />
-      </b-col>
-      <b-col class="mb-3 card-text">
-        <p>
-          <strong>{{ $t("drone") }} : </strong>
-          <span>
-            {{ selectedPilot.droneBrand }}
-            {{ formatText(selectedPilot.droneModel) }}</span
-          >
-        </p>
-        <ImageUrl style="width: 150px" :imagePath="selectedPilot.droneModel" />
-      </b-col>
+    <b-row class="mb-4">
+      <b-col
+        ><h4>{{ $t("personal_info") }}</h4></b-col
+      >
     </b-row>
 
-    <b-row class="card-box mb-3">
-      <b-col md="12" class="mb-3 card-text">
-        <p>
-          <strong>{{ $t("about_me") }}</strong>
-        </p>
+    <b-row class="mb-5 crystal-card">
+      <b-col md="6" class="first-col">
+        <b-row class="inner-row">
+          <b-col>
+            <ImageAvatar style="width: 120px" :imagePath="selectedPilot.avatar"
+          /></b-col>
+          <b-col class="personal-data">
+            <span class="capitalize"
+              >{{ selectedPilot.city }}, {{ selectedPilot.country }}</span
+            >
+            <span>
+              <b-badge class="mr-3">{{ selectedPilot.price }} €</b-badge>
+              <b-badge
+                @click="favoritesAdd"
+                variant="warning"
+                class="favorites-badge"
+              >
+                {{ this.$t("favorites_add") }}
+              </b-badge></span
+            >
+            <span
+              ><a :href="selectedPilot.webpage" target="_blank">{{
+                selectedPilot.webpage
+              }}</a></span
+            >
+          </b-col>
+        </b-row>
+      </b-col>
+      <b-col md="6">
+        <h5>{{ this.$t("about_me") }}</h5>
         <p>{{ selectedPilot.aboutMe }}</p>
       </b-col>
     </b-row>
 
-    <!-- campos responsive -->
-    <b-row class="card-box mb-3">
-      <b-col md="6" class="mb-3 card-text">
-        <!-- Country -->
-        <p>
-          <strong>{{ $t("country") }}</strong>
-        </p>
-        <p>{{ selectedPilot.country }}</p>
-      </b-col>
-      <b-col md="6" class="mb-3 card-text">
-        <!-- City -->
-        <p>
-          <strong>{{ $t("city") }}</strong>
-        </p>
-        <p>{{ selectedPilot.city }}</p>
-      </b-col>
+    <b-row>
+      <b-col
+        ><h4 class="capitalize mb-4">
+          {{ this.$t("main_specs") }}
+          {{ selectedPilot.droneBrand }}
+          {{ formatText(selectedPilot.droneModel) }}
+        </h4></b-col
+      >
     </b-row>
-
-    <!-- campos responsive -->
-    <b-row class="card-box mb-3">
-      <b-col md="6" class="mb-3 card-text">
-        <!-- phone -->
-        <p>
-          <strong>{{ $t("phone") }}</strong>
-        </p>
-        <p>{{ selectedPilot.phone }}</p>
+    <b-row class="mb-5 crystal-card">
+      <b-col md="6" class="first-col">
+        <b-row class="inner-row">
+          <b-col>
+            <ImageUrl
+              class="circular--square"
+              style="width: 180px"
+              :imagePath="selectedPilot.droneModel"
+          /></b-col>
+          <!-- <b-col class="personal-data">
+            <p>{{ selectedPilot.droneBrand }}</p>
+            <p>{{ selectedPilot.droneModel }}</p>
+          </b-col> -->
+        </b-row>
       </b-col>
-      <b-col md="6" class="mb-3 card-text">
-        <!-- price -->
-        <p>
-          <strong>{{ $t("price_hour") }}</strong>
-        </p>
-        <p>{{ selectedPilot.price }} €</p>
-      </b-col>
-    </b-row>
-
-    <b-row class="card-box mb-3">
-      <b-col md="6" class="mb-3 card-text">
-        <!-- phone -->
-        <p>
-          <strong>{{ $t("whatsApp_msg") }}</strong>
-        </p>
-        <b-badge variant="success" class="whatapp-badge">
-          <a :href="'https://wa.me/' + selectedPilot.phone" target="blank_">{{
-            $t("whatsApp")
-          }}</a>
-        </b-badge>
-      </b-col>
-      <b-col md="6" class="mb-3 card-text">
-        <div v-if="selectedPilot.webpage">
+      <b-col md="6">
+        <div v-for="data in droneSpecs" :key="data.cameraRes">
           <p>
-            <strong>{{ $t("visit_webpage") }}</strong>
+            <strong>{{ this.$t("max_photo_res") }}:</strong>
+            {{ data.cameraRes }}
           </p>
           <p>
-            <a :href="selectedPilot.webpage" target="_blank">{{
-              selectedPilot.webpage
-            }}</a>
+            <strong>{{ this.$t("video_resolutions") }} :</strong>
+            {{ data.videoRes }}
+          </p>
+          <p>
+            <strong>{{ this.$t("video_format") }} :</strong>
+            {{ data.videoFormat }}
+          </p>
+          <p>
+            <strong>{{ this.$t("flyingTime") }} :</strong> {{ data.flyingTime }}
           </p>
         </div>
+      </b-col>
+    </b-row>
 
-        <b-badge
-          @click="favoritesAdd"
-          variant="warning"
-          class="favorites-badge"
-        >
-          {{ $t("favorites_add") }}
-        </b-badge>
+    <b-row>
+      <b-col
+        ><h4 class="mb-4">{{ this.$t("video_xample") }}</h4></b-col
+      >
+    </b-row>
+
+    <b-row class="mb-5 crystal-card">
+      <!-- <b-col><VideoPlayer videoId="9PYwPBihRAE"></VideoPlayer></b-col> -->
+      <b-col><VideoPlayer :videoId="selectedPilot.video"></VideoPlayer></b-col>
+    </b-row>
+
+    <!-- <b-row class="testing mb-5">
+      <b-col md="6"><p>photo gallery</p></b-col>
+      <b-col md="6"><p>hola</p></b-col>
+    </b-row> -->
+
+    <b-row>
+      <b-col
+        ><h4 class="mb-4">{{ this.$t("contact") }}</h4></b-col
+      >
+    </b-row>
+    <b-row class="mb-5 crystal-card">
+      <b-col md="6"
+        ><label>
+          <strong>{{ this.$t("phone") }}: </strong>
+        </label>
+        <p>{{ selectedPilot.phone }}</p>
+        <label>
+          <strong>{{ this.$t("website") }}: </strong>
+        </label>
+        <p>
+          <a :href="selectedPilot.webpage" target="_blank">{{
+            selectedPilot.webpage
+          }}</a>
+        </p>
+      </b-col>
+      <b-col md="6"
+        ><label>
+          <strong>{{ this.$t("whatsApp_msg") }}: </strong>
+        </label>
+        <p>
+          <b-badge variant="success" class="whatapp-badge">
+            <a :href="'https://wa.me/' + selectedPilot.phone" target="blank_">{{
+              this.$t("whatsApp")
+            }}</a>
+          </b-badge>
+        </p>
+        <label>
+          <strong>{{ this.$t("social_media") }}: </strong>
+        </label>
+        <p>redes</p>
       </b-col>
     </b-row>
   </b-container>
@@ -107,6 +151,7 @@ import ImageAvatar from "@/components/ImageAvatar.vue";
 import ImageUrl from "@/components/Image.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
 import { addFavorite } from "@/services/api/user";
+import dronesInfo from "@/services/drones/technicalInfo.json";
 export default {
   name: "userContact",
   components: {
@@ -115,9 +160,15 @@ export default {
   },
   data() {
     return {
+      techInfo: dronesInfo,
+      droneSpecs: [],
       cardFields: [],
       phone: "",
     };
+  },
+
+  created() {
+    this.droneData(this.selectedPilot.droneModel);
   },
 
   computed: {
@@ -128,6 +179,12 @@ export default {
     }),
   },
   methods: {
+    droneData(model) {
+      const filtered = this.techInfo.filter((data) => {
+        return data.model === model;
+      });
+      this.droneSpecs = filtered;
+    },
     formatText(text) {
       return removeDashes(text);
     },
@@ -156,6 +213,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a:link,
+a:visited,
+a:active {
+  color: $text-blue;
+}
+
+a:hover {
+  color: rgb(34, 34, 82);
+}
+
 .row-card {
   display: "flex";
 }
@@ -187,16 +254,65 @@ export default {
 .whatapp-badge {
   cursor: pointer;
   height: toRem(30);
-  width: toRem(100);
+  //width: toRem(100);
   font-size: toRem(17);
+  a {
+    color: white !important;
+  }
 }
 .favorites-badge {
   cursor: pointer;
 }
 .profile-container {
-  padding: toRem(55);
+  background-color: #ffffff;
+  //background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  padding: toRem(25);
+  @include phone-up {
+    padding: toRem(45);
+  }
   box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
   -webkit-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
   -moz-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
+}
+
+.crystal-card {
+  padding: toRem(20);
+  /* From https://css.glass */
+  background: rgba(253, 252, 252, 0.11);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+  border: 1px solid rgba(253, 252, 252, 0.16);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.alias {
+  color: $text-blue;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.circular--square {
+  border-radius: 50%;
+}
+
+.first-col {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.inner-row {
+  align-items: center;
+  .personal-data {
+    display: grid;
+  }
+}
+
+.contact-label {
+  margin-bottom: toRem(5px) !important;
 }
 </style>

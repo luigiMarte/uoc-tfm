@@ -133,6 +133,7 @@
                             result.droneModel,
                             result.phone,
                             result.webpage,
+                            result.video,
                             result.avatar
                           )
                         "
@@ -304,6 +305,7 @@ export default {
       droneModel,
       phone,
       webpage,
+      video,
       avatar
     ) {
       let payload = {
@@ -319,6 +321,7 @@ export default {
         droneModel,
         phone,
         webpage,
+        video,
         avatar,
       };
       this.$store.commit("SET_SELECTED_PILOT", payload);

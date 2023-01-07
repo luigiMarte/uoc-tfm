@@ -266,6 +266,28 @@
       ></b-col>
     </b-row>
 
+    <b-row class="card-box mb-3" v-if="formData.haveDrone">
+      <b-col md="6" class="mb-3">
+        <!-- Price -->
+        <label>{{ $t("video_demo") }}</label>
+        <b-form-input
+          class="input-group-text"
+          id="subject-id"
+          v-model="formData.video"
+        ></b-form-input
+      ></b-col>
+
+      <b-col md="6" class="mb-3">
+        <!-- User URL -->
+        <label>{{ $t("website") }}</label>
+        <b-form-input
+          class="input-group-text"
+          id="subject-id"
+          v-model="formData.website"
+        ></b-form-input
+      ></b-col>
+    </b-row>
+
     <b-row class="card-box mt-5 mb-4">
       <b-col>
         <!-- Price -->
@@ -322,6 +344,7 @@ export default {
         longitude: "",
         price: "",
         website: "",
+        video: "",
         enabled: false,
         status: false,
       },
@@ -434,6 +457,7 @@ export default {
           longitude: this.formData.longitude,
           price: this.formData.price,
           webpage: this.formData.website,
+          video: this.formData.video,
           enabled: false,
           status: false,
         })
