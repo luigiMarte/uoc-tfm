@@ -1,140 +1,96 @@
 <template>
-  <h4 class="mb-4">{{ $t("profile_of") }} {{ userDetails.username }}</h4>
+  <h4 class="mb-4 text-grey-dark">
+    {{ $t("profile_of") }} {{ userDetails.username }}
+  </h4>
   <b-container class="mt-4 cards-container">
-    <b-row class="card-box mb-3">
-      <b-col class="mb-3 card-text">
-        <!-- avatar -->
-        <ImageAvatar style="width: 120px" :imagePath="userDetails.avatar" />
-        <p>{{ userDetails.alias }}</p>
-      </b-col>
-    </b-row>
-
-    <!-- campos responsive formulario -->
-    <b-row class="card-box mb-3">
-      <b-col md="6" class="mb-3 card-text">
-        <!-- Country -->
-        <label>{{ $t("country") }}</label>
-        <p>{{ userDetails.country }}</p>
-      </b-col>
-      <b-col md="6" class="mb-3 card-text">
-        <!-- City -->
-        <label>{{ $t("city") }}</label>
-        <p>{{ userDetails.city }}</p>
-      </b-col>
-    </b-row>
-
-    <b-row class="card-box mb-3">
-      <b-col md="6" class="mb-3 card-text">
-        <!-- phone -->
-        <label>{{ $t("phone") }}</label>
-        <p>{{ userDetails.phone }}</p>
-      </b-col>
-      <b-col md="6" class="mb-3 card-text">
-        <!-- Email -->
-        <label>{{ $t("email") }}</label>
-        <p>{{ userDetails.email }}</p>
-      </b-col>
-    </b-row>
-
-    <div v-if="userDetails.haveDrone">
-      <b-row class="card-box mb-3">
-        <b-col md="6" class="mb-3 card-text">
-          <!-- DroneBrand -->
-          <label>{{ $t("drone_brand") }}</label>
-          <p>{{ userDetails.droneBrand }}</p>
-        </b-col>
-        <b-col md="6" class="mb-3 card-text">
-          <!-- DroneModel -->
-          <label>{{ $t("drone_model") }}</label>
-          <p>{{ formatText(userDetails.droneModel) }}</p>
-        </b-col>
+    <div class="crystal-card">
+      <b-row class="mb-4">
+        <b-col
+          ><h5 class="text-dark-grey">{{ $t("personal_info") }}</h5></b-col
+        >
       </b-row>
-      <b-row class="card-box mb-3">
-        <b-col md="6" class="mb-3 card-text">
-          <!-- latitud -->
-          <label>{{ $t("latitude") }}</label>
-          <p>{{ userDetails.latitude }}</p>
+      <b-row class="mb-3">
+        <b-col md="6" class="first-col mb-4">
+          <b-row class="inner-row">
+            <b-col>
+              <ImageAvatar style="width: 120px" :imagePath="userDetails.avatar"
+            /></b-col>
+            <b-col class="personal-data">
+              <span class="capitalize"
+                >{{ userDetails.city }}, {{ userDetails.country }}</span
+              >
+              <span>
+                <b-badge class="mr-3">{{ userDetails.price }} €</b-badge>
+              </span>
+              <span
+                ><a :href="userDetails.webpage" target="_blank">{{
+                  userDetails.webpage
+                }}</a></span
+              >
+            </b-col>
+          </b-row>
         </b-col>
-        <b-col md="6" class="mb-3 card-text">
-          <!-- longitd -->
-          <label>{{ $t("longitude") }}</label>
-          <p>{{ userDetails.longitude }}</p>
-        </b-col>
-      </b-row>
-      <b-row class="card-box mb-3">
-        <b-col md="6" class="mb-3 card-text">
-          <!-- latitud -->
-          <label>{{ $t("price") }}</label>
-          <p>{{ userDetails.price }} €</p>
-        </b-col>
-        <b-col md="6" class="mb-3 card-text">
-          <!-- latitud -->
-          <label>{{ $t("website") }}</label>
-          <p>{{ userDetails.webpage }}</p>
-        </b-col>
-      </b-row>
-      <b-row class="card-box mb-3">
-        <b-col md="6" class="mb-3 card-text">
-          <!-- video -->
-          <label>{{ $t("video_xample") }}</label>
-          <p>{{ userDetails.video }}</p>
-        </b-col>
-        <b-col md="6" class="mb-3 card-text">
-          <!-- foto -->
+        <b-col md="6">
+          <p class="text-dark-grey">
+            <strong>{{ $t("about_me") }}</strong>
+          </p>
+          <p class="text-grey">{{ userDetails.aboutMe }}</p>
         </b-col>
       </b-row>
     </div>
+    <div class="crystal-card mt-4" v-if="userDetails.haveDrone">
+      <h5 class="text-dark-grey"><strong></strong>{{ $t("my_drone") }}</h5>
+      <p class="capitalize text-grey">
+        {{ userDetails.droneBrand }} -
+        {{ formatText(userDetails.droneModel) }}
+      </p>
+      <b-row class="mb-4">
+        <b-col
+          ><VideoPlayer
+            :hideControls="true"
+            :videoId="userDetails.video"
+          ></VideoPlayer>
+        </b-col>
+      </b-row>
+    </div>
+    <div class="crystal-card mt-4 mb-4">
+      <h5 class="mb-4 text-dark-grey">{{ $t("social_media") }}</h5>
+      <p>
+        <a
+          v-if="userDetails.instagram"
+          :href="userDetails.instagram"
+          target="blank_"
+        >
+          <IconInstagram class="width30 mr-2" />
+        </a>
+        <a
+          v-if="userDetails.facebook"
+          :href="userDetails.facebook"
+          target="blank_"
+        >
+          <IconFacebook class="width30 mr-2" />
+        </a>
+        <a v-if="userDetails.tiktok" :href="userDetails.tiktok" target="blank_">
+          <IconTiktok class="width30 mr-2" />
+        </a>
+        <a
+          v-if="userDetails.twitter"
+          :href="userDetails.twitter"
+          target="blank_"
+        >
+          <IconTwitterColor class="width30 mr-2" />
+        </a>
+        <a
+          v-if="userDetails.youtube"
+          :href="userDetails.youtube"
+          target="blank_"
+        >
+          <IconYoutube class="width30 mr-2" />
+        </a>
+      </p>
+    </div>
 
-    <b-row class="card-box mb-3">
-      <b-col class="mb-3 card-text">
-        <label>{{ $t("social_media") }}</label></b-col
-      >
-    </b-row>
-
-    <b-row class="card-box mb-3">
-      <b-col class="mb-3 card-text">
-        <label>{{ $t("YouTube") }}</label>
-        <p>{{ userDetails.youtube }}</p>
-      </b-col>
-    </b-row>
-
-    <b-row class="card-box mb-3">
-      <b-col class="mb-3 card-text">
-        <label>{{ $t("Instagram") }}</label>
-        <p>{{ userDetails.instagram }}</p>
-      </b-col>
-    </b-row>
-
-    <b-row class="card-box mb-3">
-      <b-col class="mb-3 card-text">
-        <label>{{ $t("TikTok") }}</label>
-        <p>{{ userDetails.tiktok }}</p>
-      </b-col>
-    </b-row>
-
-    <b-row class="card-box mb-3">
-      <b-col class="mb-3 card-text">
-        <label>{{ $t("Facebook") }}</label>
-        <p>{{ userDetails.facebook }}</p>
-      </b-col>
-    </b-row>
-
-    <b-row class="card-box mb-3">
-      <b-col class="mb-3 card-text">
-        <label>{{ $t("Twitter") }}</label>
-        <p>{{ userDetails.twitter }}</p>
-      </b-col>
-    </b-row>
-
-    <b-row class="row-box mb-3">
-      <b-col md="8" class="mb-3 card-text card-description">
-        <!-- description -->
-        <label>{{ $t("about_me") }}</label>
-        <p>{{ userDetails.aboutMe }}</p>
-      </b-col>
-    </b-row>
-
-    <b-row class="row-box">
+    <b-row class="row-box buttons-box">
       <b-col cols="12" md="6">
         <b-button
           class="w-100 mt-2 mb-5"
@@ -247,6 +203,10 @@ label {
   width: 90%;
   margin: 0 auto;
 }
+.width30 {
+  width: toRem(30);
+  margin-left: toRem(15);
+}
 .cards-container {
   max-width: toRem(750);
   padding: toRem(15);
@@ -272,5 +232,47 @@ label {
       font-weight: bold;
     }
   }
+}
+.crystal-card {
+  padding: toRem(20);
+  border-bottom: 1px solid rgb(215, 212, 212);
+  /* From https://css.glass */
+  // background: rgba(253, 252, 252, 0.11);
+  // border-radius: 16px;
+  // box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  // backdrop-filter: blur(5.5px);
+  // -webkit-backdrop-filter: blur(5.5px);
+  // border: 1px solid rgba(253, 252, 252, 0.16);
+  // box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.alias {
+  color: $text-blue;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.circular--square {
+  border-radius: 50%;
+}
+
+.first-col {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.inner-row {
+  align-items: center;
+  .personal-data {
+    display: grid;
+  }
+}
+
+.contact-label {
+  margin-bottom: toRem(5px) !important;
+}
+.buttons-box {
+  margin-top: toRem(50);
 }
 </style>

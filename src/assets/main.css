@@ -38,6 +38,14 @@ li {
   cursor: pointer;
 }
 
+.text-grey {
+  color: #585858;
+}
+.text-dark-grey{
+  color:#534c4c
+}
+
+
 .capitalize {
   text-transform: capitalize;
 }
