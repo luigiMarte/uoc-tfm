@@ -17,7 +17,7 @@
       @played="onPlayed"
     />
   </div>
-  <div v-if="hideControls" class="controls d-flex justify-content-evenly mt-3">
+  <div v-if="showControls" class="controls d-flex justify-content-evenly mt-3">
     <!-- <button @click="applyConfig">Apply</button> -->
     <b-button variant="primary" @click="playCurrentVideo">Play</b-button>
     <b-button variant="danger" @click="stopCurrentVideo">Stop</b-button>
@@ -52,7 +52,7 @@ export default {
       type: String,
       default: "auto",
     },
-    hideControls: {
+    showControls: {
       type: Boolean,
       default: false,
     },

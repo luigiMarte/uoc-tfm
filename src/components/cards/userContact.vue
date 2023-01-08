@@ -30,11 +30,11 @@
                 {{ this.$t("favorites_add") }}
               </b-badge></span
             >
-            <span
+            <!-- <span
               ><a :href="selectedPilot.webpage" target="_blank">{{
                 selectedPilot.webpage
               }}</a></span
-            >
+            > -->
           </b-col>
         </b-row>
       </b-col>
@@ -89,15 +89,16 @@
       </b-col>
     </b-row>
 
-    <b-row>
+    <b-row v-if="selectedPilot.video">
       <b-col
         ><h4 class="mb-4">{{ this.$t("video_xample") }}</h4></b-col
       >
     </b-row>
 
-    <b-row class="mb-5 crystal-card">
-      <!-- <b-col><VideoPlayer videoId="9PYwPBihRAE"></VideoPlayer></b-col> -->
-      <b-col><VideoPlayer :videoId="selectedPilot.video"></VideoPlayer></b-col>
+    <b-row v-if="selectedPilot.video" class="mb-5 crystal-card">
+      <b-col
+        ><VideoPlayer showControls :videoId="selectedPilot.video"></VideoPlayer
+      ></b-col>
     </b-row>
 
     <!-- <b-row class="testing mb-5">
@@ -112,11 +113,11 @@
     </b-row>
     <b-row class="mb-5 crystal-card">
       <b-col md="6"
-        ><label class="mb-3">
+        ><label>
           <strong>{{ this.$t("phone") }}: </strong>
         </label>
         <p>{{ selectedPilot.phone }}</p>
-        <label class="mb-3">
+        <label>
           <strong>{{ this.$t("website") }}: </strong>
         </label>
         <p>
@@ -126,7 +127,7 @@
         </p>
       </b-col>
       <b-col md="6"
-        ><label class="mb-3">
+        ><label>
           <strong>{{ this.$t("whatsApp_msg") }}: </strong>
         </label>
         <p>
@@ -136,7 +137,7 @@
             }}</a>
           </b-badge>
         </p>
-        <label class="mb-3">
+        <label>
           <strong>{{ this.$t("social_media") }}: </strong>
         </label>
         <p>
@@ -349,6 +350,7 @@ a:hover {
   align-items: center;
   .personal-data {
     display: grid;
+    grid-gap: toRem(10);
   }
 }
 

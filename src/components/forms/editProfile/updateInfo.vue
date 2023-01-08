@@ -229,7 +229,7 @@
       ></b-col>
 
       <b-col md="6" class="mb-3">
-        <!-- User URL -->
+        <!-- User web -->
         <label>{{ $t("website") }}</label>
         <b-form-input
           class="input-group-text"
@@ -238,6 +238,74 @@
           :placeholder="userDetails.webpage"
         ></b-form-input
       ></b-col>
+    </b-row>
+    <b-row class="card-box mb-4">
+      <b-col md="6" class="mb-3">
+        <!-- video -->
+        <label>{{ $t("video") }}</label>
+        <b-form-input
+          class="input-group-text"
+          id="subject-id"
+          v-model="formData.video"
+          :placeholder="userDetails.video"
+        ></b-form-input
+      ></b-col>
+
+      <b-col md="6" class="mb-3">
+        <!-- photo -->
+      </b-col>
+    </b-row>
+
+    <b-row class="card-box mb-4 mt-5">
+      <b-col md="8" class="mb-3">
+        <!-- Redes sociales -->
+        <label>{{ $t("social_media") }}</label>
+        <div class="d-flex mt-3">
+          <IconYoutube class="w-36 iconSm grayscale1" />
+          <b-form-input
+            class="input-group-text mb-3"
+            id="subject-id"
+            v-model="formData.youtube"
+            :placeholder="userDetails.youtube"
+          ></b-form-input>
+        </div>
+        <div class="d-flex">
+          <IconInstagram class="w-36 iconSm grayscale1" />
+          <b-form-input
+            class="input-group-text mb-3"
+            id="subject-id"
+            v-model="formData.instagram"
+            :placeholder="userDetails.instagram"
+          ></b-form-input>
+        </div>
+        <div class="d-flex">
+          <IconTiktok class="w-36 iconSm grayscale1" />
+          <b-form-input
+            class="input-group-text mb-3"
+            id="subject-id"
+            v-model="formData.tiktok"
+            :placeholder="userDetails.tiktok"
+          ></b-form-input>
+        </div>
+        <div class="d-flex">
+          <IconTwitterColor class="w-36 iconSm grayscale1" />
+          <b-form-input
+            class="input-group-text mb-3"
+            id="subject-id"
+            v-model="formData.twitter"
+            :placeholder="userDetails.twitter"
+          ></b-form-input>
+        </div>
+        <div class="d-flex">
+          <IconFacebook class="w-36 iconSm grayscale1" />
+          <b-form-input
+            class="input-group-text mb-3"
+            id="subject-id"
+            v-model="formData.facebook"
+            :placeholder="userDetails.facebook"
+          ></b-form-input>
+        </div>
+      </b-col>
     </b-row>
 
     <b-row class="card-box mt-5 mb-4">
@@ -295,6 +363,12 @@ export default {
         longitude: "",
         price: "",
         website: "",
+        video: "",
+        youtube: "",
+        instagram: "",
+        tiktok: "",
+        twitter: "",
+        facebook: "",
         enabled: false,
         status: false,
       },
@@ -377,6 +451,12 @@ export default {
           longitude: this.formData.longitude,
           price: this.formData.price,
           webpage: this.formData.website,
+          video: this.formData.video,
+          youtube: this.formData.youtube,
+          instagram: this.formData.instagram,
+          tiktok: this.formData.tiktok,
+          twitter: this.formData.twitter,
+          facebook: this.formData.facebook,
         })
         .then((response) => {
           console.log("Resp desde update form", response);
@@ -419,7 +499,10 @@ export default {
 //   width: 500px;
 // }
 .form-container {
-  padding: toRem(55);
+  @include phone-up {
+    padding: toRem(55);
+  }
+  padding: toRem(15);
   box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
   -webkit-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
   -moz-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
@@ -460,6 +543,10 @@ export default {
   label {
     font-weight: bold;
   }
+}
+
+.iconSm {
+  margin-right: toRem(15) !important;
 }
 .card-description {
   width: 100%;

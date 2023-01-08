@@ -1,7 +1,12 @@
 <template>
-  <h4 class="mb-4 text-grey-dark">
-    {{ $t("profile_of") }} {{ userDetails.username }}
-  </h4>
+  <b-row>
+    <b-col>
+      <h4 class="mb-4 text-grey-dark">
+        {{ $t("profile_of") }} {{ userDetails.username }}
+      </h4>
+    </b-col>
+  </b-row>
+
   <b-container class="mt-4 cards-container">
     <div class="crystal-card">
       <b-row class="mb-4">
@@ -45,12 +50,7 @@
         {{ formatText(userDetails.droneModel) }}
       </p>
       <b-row class="mb-4">
-        <b-col
-          ><VideoPlayer
-            :hideControls="true"
-            :videoId="userDetails.video"
-          ></VideoPlayer>
-        </b-col>
+        <b-col><VideoPlayer :videoId="userDetails.video"></VideoPlayer> </b-col>
       </b-row>
     </div>
     <div class="crystal-card mt-4 mb-4">
@@ -208,8 +208,11 @@ label {
   margin-left: toRem(15);
 }
 .cards-container {
-  max-width: toRem(750);
-  padding: toRem(15);
+  @include phone-up {
+    padding: toRem(15);
+  }
+
+  padding: toRem(5);
   border-color: 1px solid #827c7ccc;
   box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
   -webkit-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
@@ -234,7 +237,10 @@ label {
   }
 }
 .crystal-card {
-  padding: toRem(20);
+  @include phone-up {
+    padding: toRem(20);
+  }
+  padding: toRem(5);
   border-bottom: 1px solid rgb(215, 212, 212);
   /* From https://css.glass */
   // background: rgba(253, 252, 252, 0.11);

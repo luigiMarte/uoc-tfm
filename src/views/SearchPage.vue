@@ -67,7 +67,6 @@
     <!-- resultados -->
     <div v-if="pilots.length">
       <h2 class="mb-4">{{ $t("results") }}:</h2>
-
       <b-alert
         v-if="this.$store.state.isLogin === false"
         show
@@ -78,46 +77,65 @@
 
     <b-row>
       <b-col>
-        <div class="results">
-          <div v-for="result in pilots" :key="result.latitude">
-            <b-card
-              no-body
-              class="overflow-hidden mb-3 mt-3"
-              style="max-width: 350px"
-            >
-              <b-row no-gutters>
-                <b-col md="6">
-                  <div>
-                    <ImageUrl
-                      style="width: 165px"
-                      :imagePath="result.droneModel"
-                    />
-                  </div>
-                  <div class="pl-3">
-                    <b-badge
-                      @click="
-                        ShowDroneModal(result.droneBrand, result.droneModel)
-                      "
-                      class="badge-position"
-                      variant="success"
-                      >{{ $t("drone_info") }}</b-badge
-                    >
-                  </div>
-                </b-col>
-                <b-col md="6">
-                  <b-card-body :title="result.username">
-                    <b-card-text>
-                      <p class="mb-2">
-                        {{ result.city }} / <span> {{ result.price }}€</span>
-                      </p>
-
-                      <p class="mb-2">
-                        {{ result.droneBrand }} -
-                        {{ formatText(result.droneModel) }}
-                      </p>
-
+        <div class="">
+          <div>
+            <b-row>
+              <b-col
+                v-for="result in pilots"
+                :key="result.latitude"
+                md="6"
+                class="mt-5 resultsCard"
+                ><b-row>
+                  <b-col cols="5" class="ml-3">
+                    <div class="height-175 d-flex justify-content-center">
+                      <ImageUrl
+                        style="width: 165px"
+                        :imagePath="result.droneModel"
+                      />
+                    </div>
+                    <div class="height-50 d-flex justify-content-center">
                       <b-badge
-                        class="profile-badge"
+                        @click="
+                          ShowDroneModal(result.droneBrand, result.droneModel)
+                        "
+                        class="badgeStyles"
+                        variant="success"
+                        >{{ $t("drone_info") }}</b-badge
+                      >
+                    </div></b-col
+                  >
+                  <b-col cols="6" class="ml-3"
+                    ><div
+                      class="height-175 d-flex flex-column justify-content-around"
+                    >
+                      <span>
+                        <span>
+                          <strong>{{ $t("user") }}: </strong>
+                        </span>
+                        <span class="capitalize">{{ result.username }}</span>
+                      </span>
+                      <span>
+                        <span
+                          ><strong>{{ $t("city") }}: </strong></span
+                        >
+                        <span class="capitalize">{{ result.city }}</span>
+                      </span>
+                      <span>
+                        <span
+                          ><strong>{{ $t("price") }}: </strong></span
+                        >{{ result.price }}€
+                      </span>
+                      <span>
+                        <span><strong>Drone: </strong></span>
+                        <span class="capitalize"
+                          >{{ result.droneBrand }} -
+                          {{ formatText(result.droneModel) }}</span
+                        >
+                      </span>
+                    </div>
+                    <div class="height-50">
+                      <b-badge
+                        class="badgeStyles"
                         variant="secondary"
                         @click="
                           goToProfile(
@@ -144,11 +162,11 @@
                         "
                         >{{ $t("go_to_profile") }}</b-badge
                       >
-                    </b-card-text>
-                  </b-card-body>
-                </b-col>
-              </b-row>
-            </b-card>
+                    </div></b-col
+                  >
+                </b-row>
+              </b-col>
+            </b-row>
           </div>
         </div>
       </b-col>
@@ -363,7 +381,25 @@ export default {
   grid-gap: 25px;
   grid-template-columns: 1fr 1fr;
 }
+
+.resultsCard {
+  @include phone-up {
+    width: toRem(520);
+    margin-left: toRem(30);
+  }
+  box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
+  -webkit-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
+  -moz-box-shadow: -4px 16px 18px 0px rgba(51, 50, 50, 0.75);
+}
 .profile-badge {
+  cursor: pointer;
+}
+.badgeStyles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 90px;
   cursor: pointer;
 }
 .badge-position {
@@ -374,5 +410,11 @@ export default {
 }
 .size-drone {
   width: 150px;
+}
+.height-175 {
+  height: toRem(150);
+}
+.height-50 {
+  height: toRem(50);
 }
 </style>
