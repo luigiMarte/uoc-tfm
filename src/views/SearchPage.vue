@@ -27,7 +27,7 @@
           <label>{{ $t("city") }}</label>
           <b-form-input
             v-model="city"
-            class="input-group-text"
+            class=""
             id="subject-id"
             placeholder=""
           ></b-form-input
@@ -81,8 +81,8 @@
           <div>
             <b-row>
               <b-col
-                v-for="result in pilots"
-                :key="result.latitude"
+                v-for="(result, index) in paginatedItems"
+                :key="index"
                 md="6"
                 class="mt-5 resultsCard"
                 ><b-row>
@@ -171,6 +171,26 @@
         </div>
       </b-col>
     </b-row>
+    <!-- pagination -->
+    <b-row class="mt-5">
+      <b-col>
+        <!-- <b-pagination
+          align="center"
+          :total-rows="this.items.length"
+          v-model="paginaActual"
+          :per-page="itemsPorPagina"
+        > 
+         @page-click="onPageChanged()"
+        </b-pagination>-->
+        <b-pagination
+          :total-rows="totalRows"
+          :per-page="perPage"
+          v-model="currentPage"
+        />
+      </b-col>
+    </b-row>
+    <!-- pagination -->
+
     <!-- modal -->
     <b-modal v-model="modalShow" ok-only>
       <b-card tag="article" class="mb-2" v-if="filteredModel">
@@ -294,15 +314,47 @@ export default {
         { text: this.$t("search_by_map"), value: "searchByMap" },
       ],
       droneFeatures: {},
+      paginatedItems: [],
+      currentPage: 1,
+      perPage: 3,
+      totalRows: 0,
     };
   },
-  watch: {},
+  watch: {
+    pilots() {
+      let arrayLength = this.pilots.length;
+      this.totalRows = arrayLength;
+    },
+    currentPage(value) {
+      console.log(value);
+      this.paginatedItems = [];
+      this.paginate(this.perPage, value);
+    },
+  },
   computed: {
     ...mapState({
       pilots: "pilots",
     }),
   },
+  mounted() {
+    //this.totalRows = this.pilots.length;
+    //this.paginate(this.perPage, 1);
+  },
   methods: {
+    paginate(perPage, currentPage) {
+      //debugger;
+      let itemsToParse = this.pilots;
+      this.paginatedItems = itemsToParse.slice(
+        (currentPage - 1) * this.perPage,
+        currentPage * perPage
+      );
+    },
+    // onPageChanged() {
+    //   //debugger;
+    //   console.log("x");
+    //   this.paginate(this.perPage, this.currentPage + 1);
+    // },
+
     ShowDroneModal(brand, model) {
       console.log(brand, model);
       //this.modalShow = !modalShow;
@@ -365,9 +417,16 @@ export default {
       return new URL(`@/${name}.png`, import.meta.url).href;
     },
     getPilots() {
-      this.$store.dispatch("searchByCity", {
-        city: this.city,
-      });
+      this.$store
+        .dispatch("searchByCity", {
+          city: this.city,
+        })
+        .then((res) => {
+          console.log(res.status);
+          if (res.status === 200) {
+            this.paginate(this.perPage, this.currentPage);
+          }
+        });
     },
     loadMap() {
       this.$router.push({ path: "searchMap" });
