@@ -52,12 +52,6 @@
     </nav>
   </header>
   <langSwitcher></langSwitcher>
-  <!-- modal -->
-  <b-modal v-model="modalShow" ok-only title="Log out">
-    <p class="my-4">{{ $t("logout_message") }}</p>
-  </b-modal>
-
-  <!-- modal -->
 </template>
 
 <script>
@@ -67,21 +61,15 @@ export default {
   name: "responsiveNab",
   components: { langSwitcher },
   data() {
-    return {
-      alertMessage: "notification.user_created_success",
-      alertVariant: "success",
-      showAlert: false,
-      modalShow: false,
-    };
+    return {};
   },
   computed: mapState(["token"]),
   methods: {
     UserLogout() {
       console.log("User logged out");
       this.$store.commit("SET_LOGOUT");
-      this.modalShow = true;
+      this.$toast.info(this.$t("logout_message"));
       setTimeout(() => {
-        this.modalShow = false;
         this.$router.push({ name: "landing" });
       }, 2000);
     },

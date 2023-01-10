@@ -1,9 +1,14 @@
 <template>
-  <b-container class="mt-4 m-bot-50">
-    <b-row class="justify-content-md-center"> </b-row>
-  </b-container>
+  <TomtomMap />
 </template>
 
-<script></script>
+<script>
+import TomtomMap from "@/components/maps/TomtomMap.vue";
 
-<style lang="scss" scoped></style>
+export default {
+  name: "SerachMap",
+  components: {
+    TomtomMap,
+  },
+};
+</script>

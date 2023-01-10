@@ -1,80 +1,112 @@
 <template>
-  <b-container class="mt-4">
-    <div class="locale-changer mb-4"></div>
+  <b-container class="view-search">
+    <!-- <div class="locale-changer mb-4 mt-4"></div> -->
     <b-row>
-      <h2 class="mt-5">{{ $t("search") }}</h2>
-      <b-row>
-        <b-col md="6" class="mb-3 mt-5">
-          <b-form-group
-            :label="this.$t('choose_search')"
-            v-slot="{ ariaDescribedby }"
-          >
-            <b-form-radio-group
-              v-model="selected"
-              :options="options"
-              :aria-describedby="ariaDescribedby"
-              name="radio-inline"
-            ></b-form-radio-group>
-          </b-form-group>
-          <!-- <b-button class="mt-3 mb-4" variant="primary">Go to map</b-button> -->
-        </b-col>
-      </b-row>
+      <b-col class="mb-4">
+        <h3>{{ $t("search_title") }}</h3>
+      </b-col>
     </b-row>
-    <!-- busquedas -->
     <b-row class="card-box mb-3">
-      <div v-if="selected === 'searchByCity'">
+      <div>
+        <label class="mb-3">{{ $t("search_instructions") }}</label>
         <b-col md="3" class="mb-3">
-          <label>{{ $t("city") }}</label>
           <b-form-input
             v-model="city"
             class=""
             id="subject-id"
-            placeholder=""
+            :placeholder="this.$t('city')"
           ></b-form-input
         ></b-col>
       </div>
-      <div v-if="selected === 'searchByCoords'">
-        <b-col md="3" class="mb-3">
-          <label>{{ $t("latitude") }}</label>
-          <b-form-input
-            class="input-group-text"
-            id="subject-id"
-            placeholder=""
-          ></b-form-input
-        ></b-col>
-        <b-col md="3" class="mb-3">
-          <label>{{ $t("longitude") }}</label>
-          <b-form-input
-            class="input-group-text"
-            id="subject-id"
-            placeholder=""
-          ></b-form-input
-        ></b-col>
-      </div>
+
       <b-col md="3" class="mb-3">
         <b-button
-          v-if="selected === 'searchByCoords' || selected === 'searchByCity'"
           class="mt-3 mb-4"
           variant="primary"
+          :disabled="city.length < 2"
           @click="getPilots"
           >{{ $t("buttons.search") }}</b-button
         >
-        <b-button v-else @click="loadMap" class="mt-3 mb-4" variant="primary">{{
-          $t("go_to_map")
-        }}</b-button></b-col
-      >
+      </b-col>
     </b-row>
-    <!-- resultados -->
-    <div v-if="pilots.length">
-      <h2 class="mb-4">{{ $t("results") }}:</h2>
-      <b-alert
-        v-if="this.$store.state.isLogin === false"
-        show
-        variant="warning"
-        >{{ $t("limited_results") }}</b-alert
-      >
-    </div>
 
+    <!-- filtros -->
+    <b-row v-if="pilotsList.length && this.$store.state.isLogin === true">
+      <b-col md="2" class="mb-3">
+        <label for="">{{ $t("drone_brand") }}</label>
+        <b-form-select
+          class="input-group-text"
+          id="subject-id1"
+          :options="droneBrands"
+          v-model="selectedBrand"
+          size="sm"
+        ></b-form-select
+      ></b-col>
+      <b-col md="2" class="mb-3">
+        <label for="">{{ $t("drone_model") }}</label>
+        <b-form-select
+          class="input-group-text"
+          id="subject-id2"
+          :options="droneModels"
+          v-model="selectedModel"
+          size="sm"
+        ></b-form-select
+      ></b-col>
+      <b-col md="2" class="mb-3">
+        <label for="">{{ $t("price") }}</label>
+        <b-form-select
+          class="input-group-text"
+          id="subject-id3"
+          :options="sortPrice"
+          v-model="sortedPrice"
+          size="sm"
+        ></b-form-select
+      ></b-col>
+      <b-col md="2" class="mb-3">
+        <b-button
+          class="button-reset"
+          :disabled="city.length < 2"
+          @click="resetFilters()"
+          >{{ $t("reset_filters") }}</b-button
+        >
+      </b-col>
+    </b-row>
+    <b-row
+      class="mt-4"
+      v-if="pilotsList.length && this.$store.state.isLogin === true"
+    >
+      <b-col>
+        <b-form-checkbox v-model="showMap" name="check-button" switch>
+          {{ $t("show_in_map") }}
+        </b-form-checkbox>
+      </b-col>
+    </b-row>
+
+    <!-- alert login for more options -->
+    <b-col>
+      <b-row>
+        <div v-if="pilots.length">
+          <b-alert
+            v-if="this.$store.state.isLogin === false"
+            show
+            variant="warning"
+            >{{ $t("limited_results") }}</b-alert
+          >
+        </div>
+      </b-row>
+    </b-col>
+
+    <!-- mapa -->
+    <b-row
+      v-if="pilotsList.length && this.$store.state.isLogin === true"
+      class="mt-5"
+    >
+      <b-col v-if="showMap">
+        <TomtomMap :locations="PilotsLocations" :key="componentKey" />
+      </b-col>
+    </b-row>
+
+    <!-- results -->
     <b-row>
       <b-col>
         <div class="">
@@ -172,16 +204,11 @@
       </b-col>
     </b-row>
     <!-- pagination -->
-    <b-row class="mt-5">
-      <b-col>
-        <!-- <b-pagination
-          align="center"
-          :total-rows="this.items.length"
-          v-model="paginaActual"
-          :per-page="itemsPorPagina"
-        > 
-         @page-click="onPageChanged()"
-        </b-pagination>-->
+    <b-row
+      v-if="pilotsList.length && this.$store.state.isLogin === true"
+      class="mt-5"
+    >
+      <b-col class="mt-5">
         <b-pagination
           :total-rows="totalRows"
           :per-page="perPage"
@@ -297,18 +324,27 @@ import { mapState } from "vuex";
 import ImageUrl from "@/components/Image.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
 import dronesInfo from "@/services/drones/technicalInfo.json";
+import TomtomMap from "@/components/maps/TomtomMap.vue";
 export default {
   components: {
     ImageUrl,
+    TomtomMap,
   },
   data() {
     return {
       techInfo: dronesInfo,
       filteredModel: [],
       modalShow: false,
+      showMap: false,
       showResults: false,
+      selectedBrand: "",
+      selectedModel: "",
+      sortedPrice: "",
+      pilotsList: [],
       selected: "searchByCity",
       city: "",
+      PilotsLocations: "",
+      componentKey: 0,
       options: [
         { text: this.$t("search_by_city"), value: "searchByCity" },
         { text: this.$t("search_by_map"), value: "searchByMap" },
@@ -318,17 +354,68 @@ export default {
       currentPage: 1,
       perPage: 3,
       totalRows: 0,
+      droneBrands: [
+        { value: "dji", text: "Dji" },
+        { value: "autel", text: "Autel" },
+        { value: "hubsan", text: "Hubsan" },
+      ],
+      droneModels: [],
+      sortPrice: [
+        { value: "asc", text: "Asc" },
+        { value: "desc", text: "Desc" },
+      ],
     };
   },
   watch: {
-    pilots() {
-      let arrayLength = this.pilots.length;
+    pilotsList() {
+      let arrayLength = this.pilotsList.length;
       this.totalRows = arrayLength;
+      this.getLocations();
     },
     currentPage(value) {
       console.log(value);
-      this.paginatedItems = [];
+      //this.paginatedItems = [];
+      console.log("this.paginatedItems", this.paginatedItems);
       this.paginate(this.perPage, value);
+    },
+    selectedBrand(value) {
+      console.log("selected", value);
+      this.filterBrand(value);
+      if (value === "dji") {
+        this.droneModels = [
+          { value: "mini_2", text: "Mini 2" },
+          { value: "mini_3", text: "Mini 3" },
+          { value: "mini_3_pro", text: "Mini 3 Pro" },
+          { value: "avata", text: "Avata" },
+          { value: "mavic_2", text: "Mavic 2" },
+          { value: "mavic_3", text: "Mavic 3" },
+          { value: "air_2", text: "Air 2" },
+          { value: "phantom_3", text: "Phantom 3" },
+        ];
+      }
+      if (value === "autel") {
+        this.droneModels = [
+          { value: "evo_nano", text: "Evo Nano" },
+          { value: "evo_nano_plus", text: "Evo Nano +" },
+          { value: "evo_lite", text: "Evo Lite" },
+          { value: "evo_lite_plus", text: "Evo Lite +" },
+          { value: "evo_2", text: "Evo 2" },
+        ];
+      }
+      if (value === "hubsan") {
+        this.droneModels = [
+          { value: "zino_mini", text: "Zino mini" },
+          { value: "zino_mini_pro", text: "Zino mini pro" },
+          { value: "ace_pro", text: "Ace pro" },
+        ];
+      }
+    },
+    selectedModel(value) {
+      console.log("selected", value);
+      this.filterModel(value);
+    },
+    sortedPrice(value) {
+      this.applySorting(value);
     },
   },
   computed: {
@@ -336,28 +423,96 @@ export default {
       pilots: "pilots",
     }),
   },
-  mounted() {
-    //this.totalRows = this.pilots.length;
-    //this.paginate(this.perPage, 1);
-  },
+
   methods: {
-    paginate(perPage, currentPage) {
-      //debugger;
-      let itemsToParse = this.pilots;
-      this.paginatedItems = itemsToParse.slice(
-        (currentPage - 1) * this.perPage,
-        currentPage * perPage
-      );
+    getLocations() {
+      console.log("getlocations", this.pilotsList);
+      const locations = this.pilotsList.map((datum) => {
+        return {
+          lat: datum.latitude,
+          lng: datum.longitude,
+          name: datum.username,
+          id: datum._id,
+        };
+      });
+      this.PilotsLocations = locations;
+      this.componentKey += 1;
+      // const locations = this.pilotsList.reduce(
+      //   (acc, cur) => ({ ...acc, [cur.latitude]: cur.latitude }),
+      //   {}
+      // );
+      console.log("getlocations", locations);
+      // const locations = this.pilotsList.reduce(
+      //   (acc, cur) => ({
+      //     ...acc,
+      //     ["lat"]: cur.latitude,
+      //     ["lgt"]: cur.longitude,
+      //   }),
+      //   {}
     },
-    // onPageChanged() {
-    //   //debugger;
-    //   console.log("x");
-    //   this.paginate(this.perPage, this.currentPage + 1);
-    // },
+    paginate(perPage, currentPage) {
+      let itemsToParse = this.pilotsList;
+      if (itemsToParse.length) {
+        let filteredResult = itemsToParse.slice(
+          (currentPage - 1) * this.perPage,
+          currentPage * perPage
+        );
+        this.paginatedItems = filteredResult;
+        console.log("this.paginatedItems", this.paginatedItems);
+        console.log("paginated", filteredResult);
+      }
+    },
+
+    filterBrand(model) {
+      let tempRecipes = this.pilots;
+      let sortedPilots = tempRecipes.filter((item) => {
+        return item.droneBrand === model;
+      });
+      this.pilotsList = sortedPilots;
+      this.currentPage = 1;
+      this.paginate(this.perPage, this.currentPage);
+    },
+
+    filterModel(model) {
+      let tempRecipes = this.pilots;
+      let sortedPilots = tempRecipes.filter((item) => {
+        return item.droneModel === model;
+      });
+      this.pilotsList = sortedPilots;
+      this.currentPage = 1;
+      this.paginate(this.perPage, this.currentPage);
+    },
+
+    applySorting(value) {
+      console.log(value);
+      if (value === "asc") {
+        let pilots = this.pilots;
+        let sortedPilots = pilots.sort((a, b) => {
+          return a.price - b.price;
+        });
+        //this.paginatedItems = sortedPilots;
+        this.currentPage = 1;
+        this.paginate(this.perPage, this.currentPage, sortedPilots);
+      } else {
+        let pilots = this.pilots;
+        let sortedPilots = pilots.sort((a, b) => {
+          return b.price - a.price;
+        });
+        //this.paginatedItems = sortedPilots;
+        this.currentPage = 1;
+        this.paginate(this.perPage, this.currentPage, sortedPilots);
+      }
+    },
+
+    resetFilters() {
+      this.selectedBrand = "";
+      this.selectedModel = "";
+      this.sortedPrice = "";
+      this.currentPage = 1;
+      this.getPilots();
+    },
 
     ShowDroneModal(brand, model) {
-      console.log(brand, model);
-      //this.modalShow = !modalShow;
       this.modalShow = true;
       const filtered = this.techInfo.filter((data) => {
         return data.model === model;
@@ -419,22 +574,30 @@ export default {
     getPilots() {
       this.$store
         .dispatch("searchByCity", {
-          city: this.city,
+          city: this.city.toLowerCase(),
         })
         .then((res) => {
           console.log(res.status);
           if (res.status === 200) {
+            this.pilotsList = this.pilots;
             this.paginate(this.perPage, this.currentPage);
           }
         });
-    },
-    loadMap() {
-      this.$router.push({ path: "searchMap" });
     },
   },
 };
 </script>
 <style lang="scss" scoped>
+.view-search {
+  margin-top: $margin-top-views;
+  max-width: toRem(1175);
+  padding-left: toRem(20);
+  padding-right: toRem(20);
+  @include phone-up {
+    padding-left: toRem(45);
+    padding-right: toRem(45);
+  }
+}
 .results {
   display: grid;
   grid-gap: 25px;
@@ -475,5 +638,8 @@ export default {
 }
 .height-50 {
   height: toRem(50);
+}
+.button-reset {
+  margin-top: toRem(23);
 }
 </style>
