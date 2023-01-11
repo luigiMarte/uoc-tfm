@@ -1,9 +1,9 @@
 <template>
   <b-container class="about-container">
     <b-row class="mb-4">
+      <!-- creamos bucle  -->
+      <h4 class="mb-4">About us</h4>
       <b-col>
-        <!-- creamos bucle  -->
-        <h4 class="mb-4">About us</h4>
         <div v-for="(item, i) in aboutUs" :key="i">
           <label
             ><b>{{ item.question }}</b></label
@@ -30,6 +30,7 @@
 export default {
   data() {
     return {
+      text: "hello",
       aboutUs: [
         {
           question: "Lorem ipsum dolor sit amet",

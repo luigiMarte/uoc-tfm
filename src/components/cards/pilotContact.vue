@@ -88,14 +88,6 @@
             }}</a>
           </p>
         </div>
-
-        <!-- <b-badge
-          @click="favoritesAdd"
-          variant="warning"
-          class="favorites-badge"
-        >
-          {{ $t("favorites_add") }}
-        </b-badge> -->
       </b-col>
     </b-row>
   </b-container>

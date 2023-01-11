@@ -32,6 +32,32 @@
 
       <!-- new-->
     </b-row>
+    <b-row>
+      <b-col>
+        <!-- modal video -->
+        <b-modal v-model="modalVideoShow" ok-only>
+          <b-card :title="$t('hint.youtube_modal_title')" sub-title="">
+            <b-card-text class="mt-5 mb-4 adjustments"
+              ><b-badge variant="secondary">1</b-badge>
+              {{ $t("hint.youtube_modal_step1") }}.</b-card-text
+            >
+            <b-card-text class="mb-3 adjustments"
+              ><b-badge variant="secondary">2</b-badge>
+              {{ $t("hint.youtube_modal_step2") }}:
+              <img
+                class="pb-2 pt-2"
+                src="@/assets/img/youtube_instructions.png"
+                alt=""
+            /></b-card-text>
+            <b-card-text class="mb-3 adjustments"
+              ><b-badge variant="secondary">3</b-badge>
+              {{ $t("hint.youtube_modal_step3") }}.</b-card-text
+            >
+          </b-card>
+        </b-modal>
+        <!-- modal video -->
+      </b-col>
+    </b-row>
     <b-row class="mb-4 card-box">
       <b-col>
         <ImageAvatar style="width: 90px" :imagePath="avatarImg" />
@@ -270,7 +296,7 @@
           >{{ $t("video_xample") }}
           <b-badge
             class="show-pointer"
-            @click="showToast"
+            @click="modalVideoShow = !modalVideoShow"
             pill
             variant="secondary"
             >?</b-badge
@@ -285,13 +311,13 @@
 
       <b-col md="6" class="mb-3">
         <!-- User URL -->
-        <label>{{ $t("photo") }}</label>
+        <!-- <label>{{ $t("photo") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
           v-model="formData.website"
-        ></b-form-input
-      ></b-col>
+        ></b-form-input> -->
+      </b-col>
     </b-row>
 
     <b-row class="card-box mb-3">
@@ -410,6 +436,7 @@ export default {
       show: true,
       showAlert: false,
       modalShow: false,
+      modalVideoShow: false,
       latitude: "",
       longitude: "",
       spinner: false,
@@ -500,9 +527,9 @@ export default {
           email,
           password,
           avatar: this.formData.avatar,
-          alias: this.formData.alias,
-          country: this.formData.country,
-          city: this.formData.city,
+          alias: this.formData.alias.toLowerCase(),
+          country: this.formData.country.toLowerCase(),
+          city: this.formData.city.toLowerCase(),
           postalCode: this.formData.postalCode,
           phone: this.formData.phone,
           aboutMe: this.formData.aboutMe,
@@ -624,5 +651,10 @@ export default {
 }
 .show-pointer {
   cursor: pointer;
+}
+.adjustments {
+  .badge {
+    padding-bottom: 2px;
+  }
 }
 </style>

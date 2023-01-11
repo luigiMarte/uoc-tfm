@@ -11,7 +11,13 @@
   },
   "hint": {
     "email": "Introduce tu email",
-    "password": "Introduce tu contraseña"
+    "password": "Introduce tu contraseña",
+    "youtube_modal_title":"Sube un video filmado con tu drone.",
+    "youtube_modal_exp":"Muestra en tu perfil lo que eres capaz de hacer con tu drone.",
+    "youtube_modal_inst":"Instruciones.",
+    "youtube_modal_step1":"Necesitas tener tu vídeo alojado en YouTube",
+    "youtube_modal_step2":"Copia el ID de tu vídeo",
+    "youtube_modal_step3":"Pega el ID en el campo del formulario"
   },
   "notification": {
     "user_created_success": "Usuario creado correctamente",
