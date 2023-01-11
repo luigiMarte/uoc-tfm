@@ -1,44 +1,59 @@
 <template>
-  <b-container class="mt-4">
-    <h3 class="mb-5">{{ $t("favorites") }}</h3>
+  <b-container class="mt-4 favorites-view">
+    <h3 class="mb-2">{{ $t("favorites") }}</h3>
+    <!-- favorites card new -->
     <b-row>
-      <b-col sm="12" lg="6">
-        <div v-for="favorite in userInfo.favorites" :key="favorite.id">
-          <b-card
-            no-body
-            class="overflow-hidden mt-3 mb-3"
-            style="max-width: 300px"
+      <b-col
+        v-for="favorite in userInfo.favorites"
+        :key="favorite.id"
+        md="6"
+        class="mt-5 results-card"
+        ><b-row>
+          <b-col cols="5" class="ml-3">
+            <div class="height-175 d-flex justify-content-center">
+              <ImageUrl style="width: 165px" :imagePath="favorite.droneModel" />
+            </div>
+          </b-col>
+          <b-col cols="6" class="ml-3"
+            ><div class="height-175 d-flex flex-column justify-content-around">
+              <span>
+                <span>
+                  <strong>{{ $t("user") }}: </strong>
+                </span>
+                <span class="capitalize">{{ favorite.alias }}</span>
+              </span>
+              <span>
+                <span
+                  ><strong>{{ $t("city") }}: </strong></span
+                >
+                <span class="capitalize">{{ favorite.city }}</span>
+              </span>
+              <span>
+                <span
+                  ><strong>{{ $t("price") }}: </strong></span
+                >{{ favorite.price }}€
+              </span>
+              <span>
+                <span><strong>Drone: </strong></span>
+                <span class="capitalize"
+                  >{{ favorite.droneBrand }} -
+                  {{ formatText(favorite.droneModel) }}</span
+                >
+              </span>
+            </div>
+            <div class="height-50">
+              <b-badge
+                class="badgeStyles"
+                variant="warning"
+                @click="goToPilotProfile(favorite.id)"
+                >{{ $t("go_to_profile") }}</b-badge
+              >
+            </div></b-col
           >
-            <b-row no-gutters>
-              <b-col md="6">
-                <ImageUrl
-                  style="width: 140px"
-                  :imagePath="favorite.droneModel"
-                />
-              </b-col>
-              <b-col md="6">
-                <b-card-body :title="favorite.alias">
-                  <b-card-text>
-                    <p>
-                      {{ favorite.droneBrand }}
-                      {{ formatText(favorite.droneModel) }}
-                    </p>
-                    <b-badge variant="light"> {{ favorite.phone }}</b-badge>
-                    <b-badge
-                      class="cursor-pointer"
-                      variant="success"
-                      @click="goToPilotProfile(favorite.id)"
-                    >
-                      {{ $t("go_to_profile") }}</b-badge
-                    >
-                  </b-card-text>
-                </b-card-body>
-              </b-col>
-            </b-row>
-          </b-card>
-        </div>
+        </b-row>
       </b-col>
     </b-row>
+    <!-- favorites Card New -->
   </b-container>
 </template>
 
@@ -101,4 +116,27 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.favorites-view {
+  margin-top: $margin-top-views !important;
+  padding-left: toRem(25);
+  padding-right: toRem(25);
+  @include phone-up {
+    padding-left: toRem(20);
+    padding-right: toRem(20);
+  }
+}
+.results-card {
+  @include phone-up {
+    width: toRem(520);
+    margin-left: toRem(30);
+  }
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.height-175 {
+  margin-top: toRem(10);
+  @include phone-up {
+    margin-top: toRem(20);
+  }
+}
+</style>

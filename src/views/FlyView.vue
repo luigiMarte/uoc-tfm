@@ -1,6 +1,6 @@
 <template>
-  <b-container class="mt-4">
-    <h3 class="mt-5 mb-4">{{ $t("fly") }}</h3>
+  <b-container class="mt-4 view-fly">
+    <h3 class="mt-5 mb-5">{{ $t("fly") }}</h3>
     <b-row class="boxes">
       <b-col sm="6" class="mb-4">
         <div class="card box-shadow">
@@ -64,6 +64,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.view-fly {
+  margin-top: 30px !important;
+  padding-left: toRem(20);
+  padding-right: toRem(20);
+  @include phone-up {
+    margin-top: $margin-top-views !important;
+  }
+}
 .card {
   padding: toRem(20);
 }

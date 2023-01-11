@@ -225,7 +225,7 @@
           <b-card-text class="d-flex justify-content-between">
             <div>
               <h4>
-                <b-badge variant="success"
+                <b-badge class="capitalize" variant="success"
                   >{{ data.brand }} - {{ formatText(data.model) }}</b-badge
                 >
               </h4>

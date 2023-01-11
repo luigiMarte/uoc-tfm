@@ -1,5 +1,5 @@
 <script setup>
-import userContact from "../components/cards/pilotContact.vue";
+import userContact from "../components/cards/pilotContactNew.vue";
 </script>
 
 <template>
