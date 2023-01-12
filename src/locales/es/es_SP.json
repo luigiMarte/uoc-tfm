@@ -33,7 +33,8 @@
     "error_login_password": "Introduce una contraseña válida",
     "user_not_found": "Usuario incorrecto",
     "invalid_password": "Contraseña incorrecta",
-    "unable_delete_user": "Error al eliminar usuario. Inténtalo mas tarde"
+    "unable_delete_user": "Error al eliminar usuario. Inténtalo mas tarde",
+    "enter_valid_email": "Por favor introduce un email válido para continuar con el proceso de registro"
   },
   "locationModal":{
     "title": "No sabes tus coordenadas?",
@@ -43,6 +44,7 @@
     "latitude":"Latitud",
     "longitude":"Longitud"
   },
+  "advise_mandatory":"Los campos marcados con un asterisco (*) son obligatorios",
   "about": "Información",
   "about_me": "Sobre mi",
   "alias": "Alias",
@@ -67,6 +69,7 @@
   "go_to" :"Ir a",
   "go_to_map": "Mostrar mapa",
   "go_to_profile" :"Ir al perfil",
+  "have_drone_question":"Tienes un drone ?",
   "iso_photo": "ISO foto",
   "iso_video": "ISO vídeo",
   "landing_text": "Elige a dónde quieres ir entre las siguientes opciones",

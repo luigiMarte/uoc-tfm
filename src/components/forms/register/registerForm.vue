@@ -69,7 +69,8 @@
               class="col-12 mt-4"
               type="submit"
               variant="primary"
-              @click="sendForm()"
+              :disabled="isDisabled"
+              @click="isEmailValid()"
               >{{ $t("buttons.send") }}</b-button
             >
           </b-form-group>
@@ -101,6 +102,8 @@ export default {
       alertMessage: "",
       show: true,
       showAlert: false,
+      disabledButton: true,
+      reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
     };
   },
 
@@ -108,7 +111,21 @@ export default {
     // this.showResponse();
     // this.showState();
   },
+  computed: {
+    isDisabled() {
+      return !(this.username && this.email && this.password);
+    },
+  },
+
   methods: {
+    isEmailValid: function () {
+      return this.email == ""
+        ? ""
+        : this.reg.test(this.email)
+        ? this.sendForm()
+        : this.$toast.error(this.$t("error.enter_valid_email"));
+    },
+
     sendForm() {
       console.log("test-send");
       this.$store
@@ -123,26 +140,6 @@ export default {
             this.$router.push({ name: "completeProfile" });
           }, 2000);
         });
-      // .then((response) => {
-      //   console.log("Resp desde FORM", response);
-      //   if (response.status === 200) {
-      //     this.alertMessage = "notification.user_created_success";
-      //     this.alertVariant = "success";
-      //     this.showAlert = true;
-      //     setTimeout(() => {
-      //       this.showAlert = false;
-      //       this.$router.push({ name: "login" });
-      //     }, 2000);
-      //   } else {
-      //     console.log(response.status);
-      //     this.alertVariant = "danger";
-      //     this.alertMessage = "errors.error_ocurred";
-      //     this.showAlert = true;
-      //     setTimeout(() => {
-      //       this.showAlert = false;
-      //     }, 2000);
-      //   }
-      // });
     },
     async showResponse() {
       await getUsers().then((response) => {

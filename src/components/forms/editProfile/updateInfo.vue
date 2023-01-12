@@ -418,10 +418,14 @@ export default {
       }
     },
   },
+
   computed: {
     ...mapState({
       userDetails: "userInfo",
     }),
+    isDisabled() {
+      return !(this.username && this.email && this.password);
+    },
   },
   methods: {
     setAvatar(value) {

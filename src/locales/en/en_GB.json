@@ -33,7 +33,8 @@
     "error_login_password": "Introduce a valid password",
     "user_not_found": "User not found",
     "invalid_password": "Invalid password",
-    "unable_delete_user": "Unable to delete user. Try again later"
+    "unable_delete_user": "Unable to delete user. Try again later",
+    "enter_valid_email": "Please enter a valid email address to go on with registration process",
   },
   "locationModal":{
     "title": "You don't know your coordinates ?",
@@ -43,6 +44,7 @@
     "latitude":"Latitude",
     "longitude":"Longitude"
   },
+  "advise_mandatory":"Fields marked with an asterisk (*) are required",
   "about": "About",
   "about_me": "About me",
   "alias": "Nick",
@@ -68,6 +70,7 @@
   "go_to" :"Go to",
   "go_to_map": "Go to map",
   "go_to_profile" :"Go to profile",
+  "have_drone_question":"Do you have a drone ?",
   "iso_photo": "ISO photo",
   "iso_video": "ISO video",
   "landing_text": "Choose where you want to go from the following options",

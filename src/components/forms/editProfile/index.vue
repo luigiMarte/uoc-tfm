@@ -1,7 +1,6 @@
 <template>
-  <h4>
-    {{ $t("register_form_text") }}
-  </h4>
+  <h4>{{ $t("register_form_text") }}</h4>
+  <p class="text-grey">{{ $t("advise_mandatory") }}</p>
   <b-container class="mt-4 form-container">
     <!-- modal -->
     <b-row>
@@ -136,7 +135,7 @@
       </b-col>
       <b-col md="6">
         <!-- Name -->
-        <label>{{ $t("alias") }}</label>
+        <label class="required">{{ $t("alias") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
@@ -149,7 +148,7 @@
     <b-row class="card-box mb-3">
       <b-col md="6" class="mb-3">
         <!-- Country -->
-        <label>{{ $t("country") }}</label>
+        <label class="required">{{ $t("country") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
@@ -158,7 +157,7 @@
       ></b-col>
       <b-col md="6" class="mb-3">
         <!-- City -->
-        <label>{{ $t("city") }}</label>
+        <label class="required">{{ $t("city") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
@@ -170,7 +169,7 @@
     <b-row class="card-box mb-3">
       <b-col md="6" class="mb-3">
         <!-- Postal Code -->
-        <label>{{ $t("postal_code") }}</label>
+        <label class="required">{{ $t("postal_code") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
@@ -179,7 +178,7 @@
       ></b-col>
       <b-col md="6" class="mb-3">
         <!-- Postal Code -->
-        <label>{{ $t("phone") }}</label>
+        <label class="required">{{ $t("phone") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
@@ -191,7 +190,8 @@
     <b-row class="card-box mb-3">
       <b-col class="mb-3 mt-3">
         <!-- Drone question -->
-        <b-form-group label="Do you have a drone">
+        <label class="required mb-2">{{ $t("have_drone_question") }}</label>
+        <b-form-group>
           <b-form-radio
             v-model="formData.haveDrone"
             :aria-describedby="ariaDescribedby"
@@ -213,7 +213,7 @@
     <b-row class="card-box mb-3" v-if="formData.haveDrone">
       <b-col md="6" class="mb-3">
         <!-- Drone brand -->
-        <label>{{ $t("drone_brand") }}</label>
+        <label class="required">{{ $t("drone_brand") }}</label>
         <b-form-select
           class="input-group-text"
           id="subject-id"
@@ -225,7 +225,7 @@
 
       <b-col md="6" class="mb-3" v-if="formData.haveDrone">
         <!-- Drone model -->
-        <label>{{ $t("drone_model") }}</label>
+        <label class="required">{{ $t("drone_model") }}</label>
         <b-form-select
           class="input-group-text"
           id="subject-id"
@@ -239,7 +239,7 @@
     <b-row class="card-box mb-3" v-if="formData.haveDrone">
       <b-col md="6" class="mb-3">
         <!-- latitude -->
-        <label
+        <label class="required"
           >{{ $t("latitude") }}
           <b-badge
             class="show-pointer"
@@ -258,7 +258,7 @@
 
       <b-col md="6" class="mb-3">
         <!--  longitude -->
-        <label>{{ $t("longitude") }}</label>
+        <label class="required">{{ $t("longitude") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
@@ -270,7 +270,7 @@
     <b-row class="card-box mb-3" v-if="formData.haveDrone">
       <b-col md="6" class="mb-3">
         <!-- Price -->
-        <label>{{ $t("price") }}</label>
+        <label class="required">{{ $t("price") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
@@ -383,8 +383,9 @@
           class="col-12 mt-4"
           type="submit"
           @click="sendForm()"
-          variant="secondary"
-          >{{ $t("buttons.save") }}</b-button
+          variant="primary"
+          :disabled="isDisabled"
+          >{{ $t("buttons.send") }}</b-button
         >
       </div>
     </b-row>
@@ -404,7 +405,7 @@ export default {
     return {
       cardFields: [],
       formData: {
-        avatar: "",
+        avatar: "user_0",
         alias: "",
         country: "",
         city: "",
@@ -479,6 +480,32 @@ export default {
           { value: "zino_mini_pro", text: "Zino mini pro" },
           { value: "ace_pro", text: "Ace pro" },
         ];
+      }
+    },
+  },
+  computed: {
+    isDisabled() {
+      if (this.formData.haveDrone === false) {
+        return !(
+          this.formData.alias &&
+          this.formData.country &&
+          this.formData.city &&
+          this.formData.postalCode &&
+          this.formData.phone
+        );
+      } else {
+        return !(
+          this.formData.alias &&
+          this.formData.country &&
+          this.formData.city &&
+          this.formData.postalCode &&
+          this.formData.phone &&
+          this.formData.droneBrand &&
+          this.formData.droneModel &&
+          this.formData.longitude &&
+          this.formData.latitude &&
+          this.formData.price
+        );
       }
     },
   },
@@ -576,6 +603,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.required:after {
+  content: " *";
+  color: rgb(45, 126, 218);
+  font-size: 20px;
+}
 .avatar-dropdown {
   ul {
     margin-left: 0;
