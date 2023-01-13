@@ -1,13 +1,14 @@
-import request from "@/utils/axiosInstance";
-import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
+//import axios from "axios";
 
 /**
  * GET: get all users data
  */
-export function getUsers() {
-  const url = "/users";
-  return request.get(url);
-}
+// export function getUsers() {
+//   console.log("getUser 1");
+//   const url = "/users";
+//   return axiosInstance.get(url);
+// }
 
 /**
  * POST: new user sign up
@@ -15,23 +16,28 @@ export function getUsers() {
 export function createUser(params) {
   console.log(params);
   //const baseUrl = import.meta.env.VITE_ROOT_API;
-  return axios.post("http://localhost:3000/api/auth/sign_up", params);
+  return axiosInstance.post("/auth/sign_up", params);
 }
 
 /**
  * POST: User login
  */
-export function userLogin(params) {
-  return axios.post("http://localhost:3000/api/auth/sign_in", params);
+// export function userLogin(params) {
+//   console.log("login req", params);
+//   return axios.post("http://localhost:3000/api/auth/sign_in", params);
+// }
+
+export function userLogin(payload) {
+  return axiosInstance.post("/auth/sign_in", payload);
 }
 
 /**
  * GET: user data by ID
  */
 export function getUser(userId) {
-  console.log("getUser 2", userId);
+  console.log("getUser 3", userId);
   if (userId) {
-    return axios.get(`http://localhost:3000/api/auth/${userId}`);
+    return axiosInstance.get(`/auth/${userId}`);
   } else {
     console.log("User not found");
   }
@@ -44,7 +50,7 @@ export function getUser(userId) {
 export function getPilot(userId) {
   console.log("getPilot 2", userId);
   if (userId) {
-    return axios.get(`http://localhost:3000/api/auth/${userId}`);
+    return axiosInstance.get(`/auth/${userId}`);
   } else {
     console.log("User not found");
   }

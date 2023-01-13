@@ -9,7 +9,7 @@ import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 
 export default ({ mode }) => {
   // Load app-level env vars to node-level env vars.
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+  //process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({
     base: "/uoc-tfm/",
@@ -40,6 +40,7 @@ export default ({ mode }) => {
       },
     },
     //define: processEnvValues,
+    envDir: "src",
   });
 };
 

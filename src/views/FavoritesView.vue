@@ -43,7 +43,7 @@
             </div>
             <div class="height-50">
               <b-badge
-                class="badgeStyles"
+                class="badgeStyles cursor-pointer"
                 variant="warning"
                 @click="goToPilotProfile(favorite.id)"
                 >{{ $t("go_to_profile") }}</b-badge

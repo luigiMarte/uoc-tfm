@@ -44,6 +44,8 @@
     "latitude":"Latitude",
     "longitude":"Longitude"
   },
+  "account_create_top_text":"Create your user account",
+  "account_create_second_text":"Complete the form to create your user account",
   "advise_mandatory":"Fields marked with an asterisk (*) are required",
   "about": "About",
   "about_me": "About me",

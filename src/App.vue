@@ -3,7 +3,6 @@ import responsiveNab from "./components/header/responsiveNab.vue";
 import AppFooter from "./components/footer/index.vue";
 import "@/assets/main.css";
 </script>
-
 <template>
   <div class="app">
     <header>

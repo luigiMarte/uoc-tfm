@@ -419,6 +419,10 @@ export default {
     },
   },
 
+  created() {
+    this.setHaveDroneValue();
+  },
+
   computed: {
     ...mapState({
       userDetails: "userInfo",
@@ -428,6 +432,9 @@ export default {
     },
   },
   methods: {
+    setHaveDroneValue() {
+      this.formData.haveDrone = this.userDetails.haveDrone;
+    },
     setAvatar(value) {
       console.log("avatar", value);
       this.formData.avatar = value;

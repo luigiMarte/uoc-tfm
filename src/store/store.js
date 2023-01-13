@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import { createUser, userLogin, getUser, getPilot } from "@/services/api/auth";
-import { createUserData, removeUser } from "@/services/api/user";
+import { removeUser } from "@/services/api/user";
 import { updateUserProfile } from "../services/api/user";
 import { getPilotsByCity } from "../services/api/user";
 //import axios from "axios";
@@ -91,18 +91,18 @@ export default createStore({
       }
     },
 
-    async sendUserData({ state }, payload) {
-      try {
-        let stateUserId = state.userId;
-        let stateToken = state.token;
-        console.log("ACTION", stateUserId, stateToken);
-        const resp = await createUserData(payload, stateUserId, stateToken);
-        console.log("resp -> data", resp.data);
-        return resp;
-      } catch (error) {
-        return error;
-      }
-    },
+    // async sendUserData({ state }, payload) {
+    //   try {
+    //     let stateUserId = state.userId;
+    //     let stateToken = state.token;
+    //     console.log("ACTION", stateUserId, stateToken);
+    //     const resp = await createUserData(payload, stateUserId, stateToken);
+    //     console.log("resp -> data", resp.data);
+    //     return resp;
+    //   } catch (error) {
+    //     return error;
+    //   }
+    // },
     // When get id from state - for user that is logged
     async getUserbyId({ commit, state }) {
       try {

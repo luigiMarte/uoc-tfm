@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col>
-      <h4 class="mb-4 text-grey-dark">
+      <h4 class="mb-4 text-grey-dark capitalize">
         {{ $t("profile_of") }} {{ userDetails.username }}
       </h4>
     </b-col>
@@ -49,7 +49,7 @@
         {{ userDetails.droneBrand }} -
         {{ formatText(userDetails.droneModel) }}
       </p>
-      <b-row class="mb-4">
+      <b-row class="mb-4" v-if="userDetails.video">
         <b-col><VideoPlayer :videoId="userDetails.video"></VideoPlayer> </b-col>
       </b-row>
     </div>

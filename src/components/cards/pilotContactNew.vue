@@ -23,7 +23,7 @@
             <span>
               <b-badge class="mr-3">{{ selectedPilot.price }} €</b-badge>
               <b-badge
-                @click="favoritesAdd"
+                @click="favoriteRemove(selectedPilot._id)"
                 variant="danger"
                 class="favorites-badge"
               >
@@ -187,8 +187,9 @@ import { mapState } from "vuex";
 import ImageAvatar from "@/components/ImageAvatar.vue";
 import ImageUrl from "@/components/Image.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
-import { addFavorite } from "@/services/api/user";
+//import { addFavorite } from "@/services/api/user";
 import dronesInfo from "@/services/drones/technicalInfo.json";
+import { removeFavorite } from "@/services/api/user";
 export default {
   name: "userContact",
   components: {
@@ -225,26 +226,44 @@ export default {
     formatText(text) {
       return removeDashes(text);
     },
-    async favoritesAdd() {
+    async favoriteRemove(id) {
+      let stateUserId = this.$store.state.userId;
+      //let stateToken = this.$store.state.token;
       try {
-        let stateUserId = this.$store.state.userId;
-        let stateToken = this.$store.state.token;
-        console.log("ACTION", this.selectedPilot.id, stateUserId, stateToken);
-        const pilotData = {
-          id: this.selectedPilot.id,
-          droneBrand: this.selectedPilot.droneBrand,
-          droneModel: this.selectedPilot.droneModel,
-          alias: this.selectedPilot.alias,
-          price: this.selectedPilot.price,
-        };
-        const resp = await addFavorite(pilotData, stateUserId, stateToken);
-        console.log("resp favorites", resp);
-        this.$toast.info(this.$t("notification.favorite_added"));
-        return resp;
+        console.log("favorite remove", id);
+        const resp = await removeFavorite(id, stateUserId);
+        console.log(resp);
+        if (resp.status === 200) {
+          this.$toast.success(this.$t("notification.user_updated_success"));
+          setTimeout(() => {
+            this.$router.push({ path: "favorites" });
+          }, 1000);
+        }
       } catch (error) {
         return error;
       }
     },
+
+    // async favoritesAdd() {
+    //   try {
+    //     let stateUserId = this.$store.state.userId;
+    //     let stateToken = this.$store.state.token;
+    //     console.log("ACTION", this.selectedPilot.id, stateUserId, stateToken);
+    //     const pilotData = {
+    //       id: this.selectedPilot.id,
+    //       droneBrand: this.selectedPilot.droneBrand,
+    //       droneModel: this.selectedPilot.droneModel,
+    //       alias: this.selectedPilot.alias,
+    //       price: this.selectedPilot.price,
+    //     };
+    //     const resp = await addFavorite(pilotData, stateUserId, stateToken);
+    //     console.log("resp favorites", resp);
+    //     this.$toast.info(this.$t("notification.favorite_added"));
+    //     return resp;
+    //   } catch (error) {
+    //     return error;
+    //   }
+    // },
   },
 };
 </script>

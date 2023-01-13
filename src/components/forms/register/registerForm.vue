@@ -3,8 +3,12 @@
     <div></div>
     <b-row>
       <b-col class="text-center">
-        <h3 class="mb-3">Crate your user account</h3>
-        <p>Complete the form to create your user account</p>
+        <h3 class="mb-3">
+          {{ $t("account_create_top_text") }}
+        </h3>
+        <p>
+          {{ $t("account_create_second_text") }}
+        </p>
       </b-col>
     </b-row>
     <b-row>
@@ -81,11 +85,6 @@
 </template>
 
 <script>
-import { getUsers } from "@/services/api/auth";
-
-//import { createUser } from "@/services/api/auth";
-//import axios from "axios";
-
 export default {
   name: "registerForm",
   data() {
@@ -107,10 +106,6 @@ export default {
     };
   },
 
-  created() {
-    // this.showResponse();
-    // this.showState();
-  },
   computed: {
     isDisabled() {
       return !(this.username && this.email && this.password);
@@ -141,38 +136,11 @@ export default {
           }, 2000);
         });
     },
-    async showResponse() {
-      await getUsers().then((response) => {
-        console.log("Resp", response);
-        if (response.status === 200) {
-          console.log("Do something");
-          this.router.push({ name: "login" });
-          //show confirmation
-        } else {
-          //show error
-        }
-      });
-    },
+
     showState() {
       let state = this.$store.state.userData;
       console.log("state", state);
     },
-    // onSubmit(event) {
-    //   event.preventDefault();
-    //   alert(JSON.stringify(this.form));
-    // },
-    // onReset(event) {
-    //   event.preventDefault();
-    //   // Reset our form values
-    //   this.form.user = "";
-    //   this.form.password = "";
-    //   this.form.checked = [];
-    //   // Trick to reset/clear native browser form validation state
-    //   this.show = false;
-    //   this.$nextTick(() => {
-    //     this.show = true;
-    //   });
-    // },
   },
 };
 </script>

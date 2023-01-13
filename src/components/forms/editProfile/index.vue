@@ -405,7 +405,7 @@ export default {
     return {
       cardFields: [],
       formData: {
-        avatar: "user_0",
+        avatar: "user_1",
         alias: "",
         country: "",
         city: "",
