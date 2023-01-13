@@ -92,7 +92,7 @@ export function addFavorite(params, userId, token) {
 export function removeFavorite(id, userId) {
   //console.log("api remove Fav", params);
   //console.log("api remove Fav", userId);
-  return axiosInstance.post(
+  return axiosInstance.put(
     `/auth/favorites/remove/${userId}`,
     {
       params: {
