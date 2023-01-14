@@ -1,5 +1,5 @@
 <template>
-  <img src="@/assets/img/landing.jpg" alt="" />
+  <!-- <img src="@/assets/img/landing.jpg" alt="" /> -->
   <b-container class="mt-4 m-bot-50">
     <div>
       <div></div>
@@ -194,7 +194,7 @@ img {
 
 /* start home */
 #home {
-  background: url("../images/home-bg.jpg") no-repeat;
+  //background: url("../images/home-bg.jpg") no-repeat;
   background-size: cover;
   color: #fff;
   margin-top: 70px;
@@ -347,7 +347,7 @@ img {
 
 /* start contact */
 #contact {
-  background: url("../images/contact-bg.jpg") no-repeat;
+  //background: url("../images/contact-bg.jpg") no-repeat;
   background-size: cover;
   color: #fff;
 }
