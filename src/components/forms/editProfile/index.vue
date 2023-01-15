@@ -279,14 +279,16 @@
       ></b-col>
 
       <b-col md="6" class="mb-3">
-        <!-- User URL -->
-        <label>{{ $t("website") }}</label>
-        <b-form-input
+        <!-- User currency -->
+        <label class="required">{{ $t("currency") }}</label>
+        <b-form-select
           class="input-group-text"
           id="subject-id"
-          v-model="formData.website"
-        ></b-form-input
-      ></b-col>
+          :options="optionsCurrency"
+          v-model="formData.currency"
+          size="sm"
+        ></b-form-select>
+      </b-col>
     </b-row>
 
     <b-row class="card-box mb-3" v-if="formData.haveDrone">
@@ -310,13 +312,13 @@
       ></b-col>
 
       <b-col md="6" class="mb-3">
-        <!-- User URL -->
-        <!-- <label>{{ $t("photo") }}</label>
+        <!-- User website -->
+        <label>{{ $t("website") }}</label>
         <b-form-input
           class="input-group-text"
           id="subject-id"
           v-model="formData.website"
-        ></b-form-input> -->
+        ></b-form-input>
       </b-col>
     </b-row>
 
@@ -404,6 +406,10 @@ export default {
   data() {
     return {
       cardFields: [],
+      optionsCurrency: [
+        { value: "euro", text: "euro" },
+        { value: "dollar", text: "dollar" },
+      ],
       formData: {
         avatar: "user_1",
         alias: "",
@@ -427,6 +433,8 @@ export default {
         facebook: "",
         enabled: false,
         status: false,
+        currency: "",
+        finalPrice: 1,
       },
       showAvatar: false,
       avatarImg: "",
@@ -482,6 +490,33 @@ export default {
         ];
       }
     },
+    "formData.currency"(value) {
+      switch (value) {
+        case "euro":
+          this.formData.finalPrice = this.formData.price * 1;
+          break;
+        case "dollar":
+          this.formData.finalPrice = this.formData.price * 0.92;
+          break;
+        case "pound":
+          this.formData.finalPrice = this.formData.price * 1.13;
+          break;
+        case "real":
+          this.formData.finalPrice = this.formData.price * 0.18;
+          break;
+        case "yen":
+          this.formData.finalPrice = this.formData.price * 0.0072;
+          break;
+        case "yuan":
+          this.formData.finalPrice = this.formData.price * 0.14;
+          break;
+        case "peso":
+          this.formData.finalPrice = this.formData.price * 0.049;
+          break;
+        default:
+          console.log("Bem-vinda!");
+      }
+    },
   },
   computed: {
     isDisabled() {
@@ -504,7 +539,8 @@ export default {
           this.formData.droneModel &&
           this.formData.longitude &&
           this.formData.latitude &&
-          this.formData.price
+          this.formData.price &&
+          this.formData.currency
         );
       }
     },
@@ -538,16 +574,12 @@ export default {
     },
     saveData() {
       console.log("save");
-      //this.$router.push({ name: "user" });
     },
     showToast() {
       this.$toast.info(this.$t("notification.favorite_added"));
     },
     sendForm() {
-      console.log("test-send user");
-      //let userLoginInfo = this.$store.state.newUser;
       const { username, email, password } = this.$store.state.newUser;
-
       this.$store
         .dispatch("completeNewUser", {
           username,
@@ -565,7 +597,7 @@ export default {
           droneModel: this.formData.droneModel,
           latitude: this.formData.latitude,
           longitude: this.formData.longitude,
-          price: this.formData.price,
+          price: this.formData.finalPrice,
           webpage: this.formData.website,
           video: this.formData.video,
           youtube: this.formData.youtube,
@@ -575,9 +607,9 @@ export default {
           facebook: this.formData.facebook,
           enabled: false,
           status: false,
+          currency: this.formData.currency,
         })
         .then((response) => {
-          console.log("Resp desde FORM", response);
           if (response.status === 200) {
             this.alertMessage = "notification.user_created_success";
             this.alertVariant = "success";
@@ -587,7 +619,6 @@ export default {
               this.$router.push({ name: "login" });
             }, 2000);
           } else {
-            console.log(response.status);
             this.alertVariant = "danger";
             this.alertMessage = "errors.error_ocurred";
             this.showAlert = true;
@@ -617,14 +648,6 @@ export default {
     min-width: 70px;
   }
 }
-// .avatar-container {
-//   ul {
-//     padding: 0 !important;
-//   }
-//   :deep(button) {
-//     padding: 0 !important;
-//   }
-// }
 .form-container {
   padding: toRem(25);
   @include phone-up {

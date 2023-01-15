@@ -155,7 +155,9 @@
                       <span>
                         <span
                           ><strong>{{ $t("price") }}: </strong></span
-                        >{{ result.price }}€
+                        >
+                        {{ getCurrency(result.price) }}
+                        {{ getSymbol() }}
                       </span>
                       <span>
                         <span><strong>Drone: </strong></span>
@@ -316,15 +318,12 @@
 </template>
 
 <script>
-//import searchForm from "../components/forms/searchForm/index.vue";
-//import leafletMap from "../components/maps/leaflets.vue";
-//import geoMap from "../components/maps/index.vue";
-//import leaflet from "../components/leaflet.vue";
 import { mapState } from "vuex";
 import ImageUrl from "@/components/Image.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
 import dronesInfo from "@/services/drones/technicalInfo.json";
 import TomtomMap from "@/components/maps/TomtomMap.vue";
+import { getCurrencySymbol, getCurrencyValue } from "@/utils/currency.js";
 export default {
   components: {
     ImageUrl,
@@ -373,13 +372,10 @@ export default {
       this.getLocations();
     },
     currentPage(value) {
-      console.log(value);
-      //this.paginatedItems = [];
       console.log("this.paginatedItems", this.paginatedItems);
       this.paginate(this.perPage, value);
     },
     selectedBrand(value) {
-      console.log("selected", value);
       this.filterBrand(value);
       if (value === "dji") {
         this.droneModels = [
@@ -411,7 +407,6 @@ export default {
       }
     },
     selectedModel(value) {
-      console.log("selected", value);
       this.filterModel(value);
     },
     sortedPrice(value) {
@@ -421,12 +416,20 @@ export default {
   computed: {
     ...mapState({
       pilots: "pilots",
+      userCurrency: "userInfo.currency",
     }),
   },
 
   methods: {
+    getCurrency(price) {
+      let currency = this.$store.state.userInfo.currency;
+      return getCurrencyValue(price, currency);
+    },
+    getSymbol() {
+      let currency = this.$store.state.userInfo.currency;
+      return getCurrencySymbol(currency);
+    },
     getLocations() {
-      console.log("getlocations", this.pilotsList);
       const locations = this.pilotsList.map((datum) => {
         return {
           lat: datum.latitude,
@@ -437,18 +440,6 @@ export default {
       });
       this.PilotsLocations = locations;
       this.componentKey += 1;
-      // const locations = this.pilotsList.reduce(
-      //   (acc, cur) => ({ ...acc, [cur.latitude]: cur.latitude }),
-      //   {}
-      // );
-      console.log("getlocations", locations);
-      // const locations = this.pilotsList.reduce(
-      //   (acc, cur) => ({
-      //     ...acc,
-      //     ["lat"]: cur.latitude,
-      //     ["lgt"]: cur.longitude,
-      //   }),
-      //   {}
     },
     paginate(perPage, currentPage) {
       let itemsToParse = this.pilotsList;
@@ -458,8 +449,6 @@ export default {
           currentPage * perPage
         );
         this.paginatedItems = filteredResult;
-        console.log("this.paginatedItems", this.paginatedItems);
-        console.log("paginated", filteredResult);
       }
     },
 
@@ -577,7 +566,6 @@ export default {
           city: this.city.toLowerCase(),
         })
         .then((res) => {
-          console.log(res.status);
           if (res.status === 200) {
             this.pilotsList = this.pilots;
             this.paginate(this.perPage, this.currentPage);

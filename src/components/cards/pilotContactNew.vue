@@ -21,7 +21,10 @@
               >{{ selectedPilot.city }}, {{ selectedPilot.country }}</span
             >
             <span>
-              <b-badge class="mr-3">{{ selectedPilot.price }} €</b-badge>
+              <b-badge class="mr-3"
+                >{{ getCurrency(selectedPilot.price) }}
+                {{ getSymbol() }}</b-badge
+              >
               <b-badge
                 @click="favoriteRemove(selectedPilot._id)"
                 variant="danger"
@@ -190,6 +193,7 @@ import { removeDashes } from "@/utils/removeDashes.js";
 //import { addFavorite } from "@/services/api/user";
 import dronesInfo from "@/services/drones/technicalInfo.json";
 import { removeFavorite } from "@/services/api/user";
+import { getCurrencySymbol, getCurrencyValue } from "@/utils/currency.js";
 export default {
   name: "userContact",
   components: {
@@ -217,6 +221,14 @@ export default {
     }),
   },
   methods: {
+    getCurrency(price) {
+      let currency = this.$store.state.userInfo.currency;
+      return getCurrencyValue(price, currency);
+    },
+    getSymbol() {
+      let currency = this.$store.state.userInfo.currency;
+      return getCurrencySymbol(currency);
+    },
     droneData(model) {
       const filtered = this.techInfo.filter((data) => {
         return data.model === model;

@@ -25,7 +25,10 @@
                 >{{ userDetails.city }}, {{ userDetails.country }}</span
               >
               <span>
-                <b-badge class="mr-3">{{ userDetails.price }} €</b-badge>
+                <b-badge class="mr-3">
+                  {{ getCurrency(userDetails.price, userDetails.currency) }}
+                  {{ getSymbol(userDetails.currency) }}</b-badge
+                >
               </span>
               <span
                 ><a :href="userDetails.webpage" target="_blank">{{
@@ -129,6 +132,7 @@
 import { mapState } from "vuex";
 import ImageAvatar from "@/components/ImageAvatar.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
+import { getCurrencySymbol, getCurrencyValue } from "@/utils/currency.js";
 
 export default {
   name: "userInfoCard",
@@ -139,6 +143,8 @@ export default {
     return {
       modalShow: false,
       modalTitle: this.$t("delete_account"),
+      finalPrice: 0,
+      symbol: "",
     };
   },
   created() {
@@ -150,9 +156,14 @@ export default {
     }),
   },
   methods: {
-    // getImgUrl(name) {
-    //   return new URL(`.@/assets/img/avatars/${name}.png`, import.meta.url).href;
-    // },
+    getCurrency(price, currency) {
+      console.log("grt curr");
+      return getCurrencyValue(price, currency);
+    },
+    getSymbol(value) {
+      console.log("get symnbol", value);
+      return getCurrencySymbol(value);
+    },
     goToEdit() {
       this.$router.push({ name: "edit" });
     },
@@ -242,14 +253,6 @@ label {
   }
   padding: toRem(5);
   border-bottom: 1px solid rgb(215, 212, 212);
-  /* From https://css.glass */
-  // background: rgba(253, 252, 252, 0.11);
-  // border-radius: 16px;
-  // box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  // backdrop-filter: blur(5.5px);
-  // -webkit-backdrop-filter: blur(5.5px);
-  // border: 1px solid rgba(253, 252, 252, 0.16);
-  // box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
 
 .alias {

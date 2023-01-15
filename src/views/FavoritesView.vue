@@ -31,7 +31,9 @@
               <span>
                 <span
                   ><strong>{{ $t("price") }}: </strong></span
-                >{{ favorite.price }}€
+                >
+                {{ getCurrency(favorite.price) }}
+                {{ getSymbol() }}
               </span>
               <span>
                 <span><strong>Drone: </strong></span>
@@ -62,6 +64,7 @@ import { mapState } from "vuex";
 import { getUser } from "@/services/api/auth";
 import ImageUrl from "@/components/Image.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
+import { getCurrencySymbol, getCurrencyValue } from "@/utils/currency.js";
 
 export default {
   name: "searchForm",
@@ -76,7 +79,6 @@ export default {
   watch: {
     userInfo(value) {
       if (value) {
-        console.log("watch if", value);
         this.getFavorites();
       } else {
         console.log("watch else", value);
@@ -91,6 +93,14 @@ export default {
   created() {},
 
   methods: {
+    getCurrency(price) {
+      let currency = this.$store.state.userInfo.currency;
+      return getCurrencyValue(price, currency);
+    },
+    getSymbol() {
+      let currency = this.$store.state.userInfo.currency;
+      return getCurrencySymbol(currency);
+    },
     async getFavorites() {
       let favorites = this.userInfo.favorites;
       const resp = await getUser(favorites);
@@ -102,7 +112,7 @@ export default {
     },
     goToPilotProfile(id) {
       this.$store.dispatch("getPilotById", id).then((response) => {
-        console.log("response pilot", response.data);
+        console.log("goToPilotProfile pilot", response.data);
         this.$router.push({ name: "pilotContact" });
       });
     },

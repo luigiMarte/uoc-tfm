@@ -21,7 +21,10 @@
               >{{ selectedPilot.city }}, {{ selectedPilot.country }}</span
             >
             <span>
-              <b-badge class="mr-3">{{ selectedPilot.price }} €</b-badge>
+              <b-badge class="mr-3"
+                >{{ getCurrency(selectedPilot.price) }}
+                {{ getSymbol(userCurrency) }}</b-badge
+              >
               <b-badge
                 @click="favoritesAdd"
                 variant="warning"
@@ -30,11 +33,6 @@
                 {{ this.$t("favorites_add") }}
               </b-badge></span
             >
-            <!-- <span
-              ><a :href="selectedPilot.webpage" target="_blank">{{
-                selectedPilot.webpage
-              }}</a></span
-            > -->
           </b-col>
         </b-row>
       </b-col>
@@ -62,10 +60,6 @@
               style="width: 180px"
               :imagePath="selectedPilot.droneModel"
           /></b-col>
-          <!-- <b-col class="personal-data">
-            <p>{{ selectedPilot.droneBrand }}</p>
-            <p>{{ selectedPilot.droneModel }}</p>
-          </b-col> -->
         </b-row>
       </b-col>
       <b-col md="6">
@@ -189,6 +183,7 @@ import ImageUrl from "@/components/Image.vue";
 import { removeDashes } from "@/utils/removeDashes.js";
 import { addFavorite } from "@/services/api/user";
 import dronesInfo from "@/services/drones/technicalInfo.json";
+import { getCurrencySymbol, getCurrencyValue } from "@/utils/currency.js";
 export default {
   name: "userContact",
   components: {
@@ -213,9 +208,20 @@ export default {
       selectedPilot: "selectedPilot",
       userInfo: "userInfo",
       pilotInfo: "pilotInfo",
+      userCurrency: "userInfo.currency",
     }),
   },
   methods: {
+    getCurrency(price) {
+      let currency = this.$store.state.userInfo.currency;
+      console.log("grt curr", price, currency);
+      return getCurrencyValue(price, currency);
+    },
+    getSymbol(value) {
+      console.log("get symnbol", value);
+      let currency = this.$store.state.userInfo.currency;
+      return getCurrencySymbol(currency);
+    },
     droneData(model) {
       const filtered = this.techInfo.filter((data) => {
         return data.model === model;
@@ -306,9 +312,6 @@ a:hover {
 }
 .profile-container {
   background-color: #ffffff;
-  //background-image: url("https://www.transparenttextures.com/patterns/brushed-alum-dark.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
   padding: toRem(25);
   @include phone-up {
     padding: toRem(45);
