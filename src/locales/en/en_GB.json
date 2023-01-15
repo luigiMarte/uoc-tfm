@@ -1,4 +1,17 @@
 {
+  "aboutSection": {
+    "question1":"¿What is GeoDrones??",
+    "answer1":"GeoDrones is an application that allows you to locate and contact people who have a drone (pilots) anywhere in the world.",
+    "question2":"What is GeoDrones for?",
+    "answer2":"Imagine that you are traveling and you arrive at a place with an incredible landscape. You are amazed by the landscape and you wish you could have a drone to take some souvenir images but you don't have any. Well, that's what Geodrones is for.",
+    "question3":"How does it work?",
+    "answer3":"The operation is very simple",
+    "answer3-1" :"Create a user account. If in the registration form you indicate that you have a drone you will be considered as a pilot. In this case you can search or be searched. If you don't have a drone you can only look for pilots.",
+    "answer3-2" :"Access the search section",
+    "answer3-3" :"Enter a town or city in the search engine",
+    "answer3-4" :"Choose the driver you want among the search results and contact by WhatsApp",
+    "answer3-5" :"You can also save your favorite pilots and check the flight conditions anywhere"
+  },
   "buttons": {
     "clear": "Clear",
     "editProfile":"Edit profile",
@@ -19,6 +32,14 @@
     "youtube_modal_step2":"Copy your video ID",
     "youtube_modal_step3":"Paste the ID into the form field"
   },
+  "faqs":{
+    "question1":"Can professional pilots sign up?",
+    "answer1":"In principle, the application is designed for amateur pilots, since its target audience is not looking for a professional product. Seeks to be able to have some shots at an affordable price. Professional pilots use more expensive equipment that increases the costs of their services. However, they can also register in the application.",
+    "question2":"How much to charge per hour?",
+    "answer2":"You can charge what you deem appropriate. Look at the average prices offered by drones with a quality similar to yours and offers a similar price.",
+    "question3":"My drone model is not on the list",
+    "answer3":"If you have a model that is not in our database, contact us so that we can add it."
+},
   "notification": {
     "user_created_success": "User created successfully",
     "user_login_success" : "Sign-in confirmed",
@@ -73,6 +94,7 @@
   "go_to_map": "Go to map",
   "go_to_profile" :"Go to profile",
   "have_drone_question":"Do you have a drone ?",
+  "info": "About",
   "iso_photo": "ISO photo",
   "iso_video": "ISO video",
   "landing_text": "Choose where you want to go from the following options",

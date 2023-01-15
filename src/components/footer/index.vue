@@ -2,8 +2,12 @@
   <footer class="pt-4 pb-4">
     <div class="d-flex flex-column align-items-center justify-content-center">
       <div class="d-flex justify-content-around pb-2 width-icons">
-        <IconGithub class="mr-2" />
-        <IconTwitter class="ml-2" />
+        <a href="https://github.com/luigiMarte" target="_blank_">
+          <IconGithub class="mr-2"
+        /></a>
+        <a href="https://github.com/luigiMarte" target="_blank_">
+          <IconTwitter class="ml-2"
+        /></a>
       </div>
       <div>
         <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -28,6 +32,25 @@ footer {
   color: $white;
   width: 100%;
   font-size: toRem(14);
+}
+a {
+  color: $white;
+}
+
+a:visited {
+  color: $white;
+}
+
+a:focus {
+  color: $white;
+}
+
+a:hover {
+  color: rgb(163, 215, 243);
+}
+
+a:active {
+  color: $white;
 }
 .width-icons {
   width: toRem(50);

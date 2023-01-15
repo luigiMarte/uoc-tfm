@@ -1,4 +1,17 @@
  {
+"aboutSection": {
+  "question1":"¿Que es GeoDrones?",
+  "answer1":"GeoDrones es una aplicación que permite localizar y contactar con personas que tengan un drone (pilotos) en cualquier lugar del mundo.",
+  "question2":"¿Para que sirve GeoDrones?",
+  "answer2":"Imagina que estás viajando y llegas a un lugar con un paisaje increible. Te quedas maravillado con el paisaje y te gustaría poder tenerun drone para llevarte algunas imagénes de recuerdo pero no tienes ninguno. Pues para eso sirve Geodrones.  ",
+  "question3":"¿Como funciona ?",
+  "answer3":"El funcionamiento es muy sencillo",
+  "answer3-1" :"Crea una cuenta de usuario. Si en el formulario de registro indicas que tines un drone serás considerado como un piloto. En este caso podrás buscar o ser buscado. Si no tienes un drone solo podras buscar pilotos.",
+  "answer3-2" :"Accede a la sección de búsquedas",
+  "answer3-3" :"Introduce una población en el buscador",
+  "answer3-4" :"Elige el piloto que quieras entre los resultados de búsqueda y contacta por whatsApp",
+  "answer3-5" :"Además puedes guardar tus pilotos favoritos y consultar las condiciones de vuelo en cualquier lugar."
+},
   "buttons": {
     "clear": "Borrar",
     "editProfile":"Editar perfil",
@@ -19,6 +32,14 @@
     "youtube_modal_step2":"Copia el ID de tu vídeo",
     "youtube_modal_step3":"Pega el ID en el campo del formulario"
   },
+  "faqs":{
+    "question1":"¿Pueden los pilotos profesionales inscribirse?",
+    "answer1":"En principio la aplicación esta pensada para pilotos aficionadas, ya que el público objetivo de la misma no busca un producto profesional. Busca poder tener unas tomas a un precio económico. Los pilotos profesionales utilizan equipo mas caro que incrementa los costes de sus servicios. No obstante también pueden inscribirse en la aplicación.",
+    "question2":"¿Cuanto cobrar por hora?",
+    "answer2":"Puedes cobrar lo que estimes oportuno. Fijate en la media de precios que ofrecen drones con una calidad similar al tuyo y ofrece un precio similar.",
+    "question3":"Mi modelo de drone no está en la lista",
+    "answer3":"Si tienes un modelo que no esta en nuestrea base de datos contactanos para que lo añadamos."
+},
   "notification": {
     "user_created_success": "Usuario creado correctamente",
     "user_login_success" : "Usuario y Contraseña correctos",
@@ -72,6 +93,7 @@
   "go_to_map": "Mostrar mapa",
   "go_to_profile" :"Ir al perfil",
   "have_drone_question":"Tienes un drone ?",
+  "info": "Información",
   "iso_photo": "ISO foto",
   "iso_video": "ISO vídeo",
   "landing_text": "Elige a dónde quieres ir entre las siguientes opciones",
