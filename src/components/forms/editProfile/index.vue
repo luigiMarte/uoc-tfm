@@ -409,6 +409,11 @@ export default {
       optionsCurrency: [
         { value: "euro", text: "euro" },
         { value: "dollar", text: "dollar" },
+        { value: "pound", text: "pound" },
+        { value: "real", text: "BR real" },
+        { value: "yuan", text: "yuan" },
+        { value: "yen", text: "yen" },
+        { value: "peso", text: "peso MX" },
       ],
       formData: {
         avatar: "user_1",
