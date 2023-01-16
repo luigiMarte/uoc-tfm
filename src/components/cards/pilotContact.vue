@@ -128,6 +128,7 @@ export default {
         let stateToken = this.$store.state.token;
         const pilotData = {
           id: this.selectedPilot.id,
+          city: this.selectedPilot.city,
           droneBrand: this.selectedPilot.droneBrand,
           droneModel: this.selectedPilot.droneModel,
           alias: this.selectedPilot.alias,

@@ -71,6 +71,7 @@ export function addFavorite(params, userId, token) {
     `/auth/favorites/${userId}`,
     {
       id: params.id,
+      city: params.city,
       droneBrand: params.droneBrand,
       droneModel: params.droneModel,
       alias: params.alias,

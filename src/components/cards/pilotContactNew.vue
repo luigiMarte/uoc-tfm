@@ -246,6 +246,7 @@ export default {
         const resp = await removeFavorite(id, stateUserId);
         console.log(resp);
         if (resp.status === 200) {
+          this.$store.dispatch("getUserbyId");
           this.$toast.success(this.$t("notification.user_updated_success"));
           setTimeout(() => {
             this.$router.push({ path: "favorites" });

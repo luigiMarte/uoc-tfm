@@ -95,11 +95,6 @@
       ></b-col>
     </b-row>
 
-    <!-- <b-row class="testing mb-5">
-      <b-col md="6"><p>photo gallery</p></b-col>
-      <b-col md="6"><p>hola</p></b-col>
-    </b-row> -->
-
     <b-row>
       <b-col
         ><h4 class="mb-4">{{ this.$t("contact") }}</h4></b-col
@@ -233,16 +228,24 @@ export default {
       try {
         let stateUserId = this.$store.state.userId;
         let stateToken = this.$store.state.token;
-        console.log("ACTION", this.selectedPilot.id, stateUserId, stateToken);
         const pilotData = {
           id: this.selectedPilot.id,
+          city: this.selectedPilot.city,
           droneBrand: this.selectedPilot.droneBrand,
           droneModel: this.selectedPilot.droneModel,
           alias: this.selectedPilot.alias,
           price: this.selectedPilot.price,
         };
-        const resp = await addFavorite(pilotData, stateUserId, stateToken);
-        this.$toast.info(this.$t("notification.favorite_added"));
+        const resp = await addFavorite(pilotData, stateUserId, stateToken).then(
+          (resp) => {
+            if (resp.status === 200) {
+              this.$store.dispatch("getUserbyId");
+              this.$toast.info(this.$t("notification.favorite_added"));
+            } else {
+              this.$toast.error(this.$t("error.error_ocurred"));
+            }
+          }
+        );
         return resp;
       } catch (error) {
         return error;

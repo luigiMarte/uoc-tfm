@@ -55,7 +55,7 @@
     "user_not_found": "User not found",
     "invalid_password": "Invalid password",
     "unable_delete_user": "Unable to delete user. Try again later",
-    "enter_valid_email": "Please enter a valid email address to go on with registration process",
+    "enter_valid_email": "Please enter a valid email address to go on with registration process"
   },
   "locationModal":{
     "title": "You don't know your coordinates ?",
