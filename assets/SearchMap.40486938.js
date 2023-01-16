@@ -1,1 +1,0 @@
-import{_ as o}from"./TomtomMap.8ca772e2.js";import{_ as n,o as t,e as a}from"./index.fc05a11d.js";const c={name:"SerachMap",components:{TomtomMap:o}};function p(r,s,_,m,f,i){const e=o;return t(),a(e)}const l=n(c,[["render",p]]);export{l as default};
