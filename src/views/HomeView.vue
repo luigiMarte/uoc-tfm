@@ -145,7 +145,6 @@ export default {
     async getFavorites() {
       let favorites = this.userInfo.favorites;
       const resp = await getUser(favorites);
-      console.log("favorites", resp.data);
       this.favorites = resp.data;
     },
     formatText(text) {

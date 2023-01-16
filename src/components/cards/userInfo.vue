@@ -161,7 +161,6 @@ export default {
       return getCurrencyValue(price, currency);
     },
     getSymbol(value) {
-      console.log("get symnbol", value);
       return getCurrencySymbol(value);
     },
     goToEdit() {
@@ -178,7 +177,6 @@ export default {
     },
     killUser() {
       this.$store.dispatch("deleteUser").then((resp) => {
-        console.log(resp);
         if (resp.status === 204) {
           this.$toast.error(this.$t("notification.user_deleted_success"));
           setTimeout(() => {

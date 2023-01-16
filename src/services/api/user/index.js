@@ -37,7 +37,6 @@ export function getPilotsByCity(city) {
  * POST: new user sign up
  */
 export function createUserData(params, userId, token) {
-  console.log("userfile createUserData", params, userId, token);
   //userId = "639dc0697f4bcfea89356276";
   //return axios.post(`"http://localhost:3000/api/userData/"${userId}`, params, {
   return axiosInstance.post(
@@ -57,7 +56,6 @@ export function createUserData(params, userId, token) {
  * PUT: user profile update
  */
 export function updateUserProfile(params, userId, token) {
-  console.log("api server update", params, userId, token);
   return axiosInstance.put(`/auth/${userId}`, params, {
     headers: {
       "x-access-token": token,
@@ -112,7 +110,6 @@ export function removeFavorite(id, userId) {
  * DELETE: DELETE user by ID
  */
 export function removeUser(userId, token) {
-  console.log("userId 1", userId);
   return axiosInstance.delete(`/auth/${userId}`, {
     headers: {
       "x-access-token": token,

@@ -351,7 +351,7 @@ export default {
       droneFeatures: {},
       paginatedItems: [],
       currentPage: 1,
-      perPage: 3,
+      perPage: 5,
       totalRows: 0,
       droneBrands: [
         { value: "dji", text: "Dji" },
@@ -372,7 +372,6 @@ export default {
       this.getLocations();
     },
     currentPage(value) {
-      console.log("this.paginatedItems", this.paginatedItems);
       this.paginate(this.perPage, value);
     },
     selectedBrand(value) {
@@ -473,7 +472,6 @@ export default {
     },
 
     applySorting(value) {
-      console.log(value);
       if (value === "asc") {
         let pilots = this.pilots;
         let sortedPilots = pilots.sort((a, b) => {

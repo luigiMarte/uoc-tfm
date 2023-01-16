@@ -519,7 +519,7 @@ export default {
           this.formData.finalPrice = this.formData.price * 0.049;
           break;
         default:
-          console.log("Bem-vinda!");
+          console.log("");
       }
     },
   },
@@ -555,7 +555,6 @@ export default {
       this.spinner = true;
       this.$getLocation()
         .then((coordinates) => {
-          console.log(coordinates);
           this.latitude = coordinates.lat;
           this.longitude = coordinates.lng;
           this.spinner = false;
@@ -566,7 +565,6 @@ export default {
         });
     },
     setAvatar(value) {
-      console.log("avatar", value);
       this.formData.avatar = value;
       this.avatarImg = value;
       let avatarUrl = "@/assets/img/avatars/user_1.png";

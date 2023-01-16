@@ -126,7 +126,6 @@ export default {
       try {
         let stateUserId = this.$store.state.userId;
         let stateToken = this.$store.state.token;
-        console.log("ACTION", this.selectedPilot.id, stateUserId, stateToken);
         const pilotData = {
           id: this.selectedPilot.id,
           droneBrand: this.selectedPilot.droneBrand,
@@ -135,7 +134,6 @@ export default {
           price: this.selectedPilot.price,
         };
         const resp = await addFavorite(pilotData, stateUserId, stateToken);
-        console.log("resp favorites", resp);
         return resp;
       } catch (error) {
         return error;

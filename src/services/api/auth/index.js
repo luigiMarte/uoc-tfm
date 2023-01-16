@@ -14,7 +14,6 @@ import axiosInstance from "@/utils/axiosInstance";
  * POST: new user sign up
  */
 export function createUser(params) {
-  console.log(params);
   //const baseUrl = import.meta.env.VITE_ROOT_API;
   return axiosInstance.post("/auth/sign_up", params);
 }
@@ -35,7 +34,6 @@ export function userLogin(payload) {
  * GET: user data by ID
  */
 export function getUser(userId) {
-  console.log("getUser 3", userId);
   if (userId) {
     return axiosInstance.get(`/auth/${userId}`);
   } else {
@@ -48,7 +46,6 @@ export function getUser(userId) {
  * GET: pilot data by ID
  */
 export function getPilot(userId) {
-  console.log("getPilot 2", userId);
   if (userId) {
     return axiosInstance.get(`/auth/${userId}`);
   } else {

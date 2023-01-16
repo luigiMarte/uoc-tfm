@@ -23,7 +23,7 @@
             <span>
               <b-badge class="mr-3"
                 >{{ getCurrency(selectedPilot.price) }}
-                {{ getSymbol(userCurrency) }}</b-badge
+                {{ getSymbol() }}</b-badge
               >
               <b-badge
                 @click="favoritesAdd"
@@ -214,11 +214,9 @@ export default {
   methods: {
     getCurrency(price) {
       let currency = this.$store.state.userInfo.currency;
-      console.log("grt curr", price, currency);
       return getCurrencyValue(price, currency);
     },
-    getSymbol(value) {
-      console.log("get symnbol", value);
+    getSymbol() {
       let currency = this.$store.state.userInfo.currency;
       return getCurrencySymbol(currency);
     },
@@ -244,7 +242,6 @@ export default {
           price: this.selectedPilot.price,
         };
         const resp = await addFavorite(pilotData, stateUserId, stateToken);
-        console.log("resp favorites", resp);
         this.$toast.info(this.$t("notification.favorite_added"));
         return resp;
       } catch (error) {

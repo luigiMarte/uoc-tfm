@@ -255,27 +255,6 @@ export default {
         return error;
       }
     },
-
-    // async favoritesAdd() {
-    //   try {
-    //     let stateUserId = this.$store.state.userId;
-    //     let stateToken = this.$store.state.token;
-    //     console.log("ACTION", this.selectedPilot.id, stateUserId, stateToken);
-    //     const pilotData = {
-    //       id: this.selectedPilot.id,
-    //       droneBrand: this.selectedPilot.droneBrand,
-    //       droneModel: this.selectedPilot.droneModel,
-    //       alias: this.selectedPilot.alias,
-    //       price: this.selectedPilot.price,
-    //     };
-    //     const resp = await addFavorite(pilotData, stateUserId, stateToken);
-    //     console.log("resp favorites", resp);
-    //     this.$toast.info(this.$t("notification.favorite_added"));
-    //     return resp;
-    //   } catch (error) {
-    //     return error;
-    //   }
-    // },
   },
 };
 </script>

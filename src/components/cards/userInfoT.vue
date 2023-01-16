@@ -16,17 +16,6 @@ export default {
     };
   },
 };
-
-// let name = "user_1";
-
-// function getImageUrl(name) {
-//   return new URL(`/src/assets/img/avatars/${name}.png`, import.meta.url).href;
-// }
-
-// const store = useStore();
-
-// const userInfo = store.state.userInfo;
-// console.log("UI", userInfo);
 </script>
 
 <template>

@@ -387,7 +387,6 @@ export default {
   },
   watch: {
     "formData.droneBrand"(newValue) {
-      console.log(newValue);
       if (newValue === "dji") {
         this.optionsModel = [
           { value: "mini_2", text: "Mini 2" },
@@ -436,16 +435,13 @@ export default {
       this.formData.haveDrone = this.userDetails.haveDrone;
     },
     setAvatar(value) {
-      console.log("avatar", value);
       this.formData.avatar = value;
       this.avatarImg = value;
-      //let avatarUrl = "@/assets/img/avatars/user_1.png";
       this.selectedAvatar = value;
       this.showAvatar = true;
     },
 
     sendForm() {
-      //const { username, email, password } = this.$store.state.newUser;
       this.$store
         .dispatch("updateProfile", {
           avatar: this.formData.avatar,
@@ -470,14 +466,12 @@ export default {
           facebook: this.formData.facebook,
         })
         .then((response) => {
-          console.log("Resp desde update form", response);
           if (response.status === 200) {
             this.$toast.success(this.$t("notification.user_updated_success"));
             setTimeout(() => {
               this.$router.push({ path: "user" });
             }, 1000);
           } else {
-            console.log(response.status);
             this.$toast.error(this.$t("error.error.ocurred"));
             setTimeout(() => {
               this.showAlert = false;

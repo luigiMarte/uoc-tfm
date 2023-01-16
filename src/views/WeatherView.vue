@@ -120,7 +120,6 @@ export default {
   },
   watch: {
     windSpeed(value) {
-      console.log(value);
       if (value < 8) {
         this.variant = "success";
         this.flyingMsg = this.$t("optimum");

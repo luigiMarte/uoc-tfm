@@ -59,7 +59,6 @@ export default {
       this.$router.push({ name: "user" });
     },
     sendForm() {
-      console.log("test-send");
       this.$store
         .dispatch("userLogin", {
           email: this.form.email,

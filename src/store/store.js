@@ -39,7 +39,6 @@ export default createStore({
       state.userId = "";
     },
     SET_DATA(state, data) {
-      console.log("mutation data", data);
       state.userInfo = data;
     },
     SET_USER_INFO(state, data) {
@@ -71,7 +70,6 @@ export default createStore({
     },
     async completeNewUser({ commit }, payload) {
       try {
-        console.log("ACTION", payload);
         const resp = await createUser(payload);
         commit("SET_USER_COMPLETE", resp.data);
         return resp;
@@ -82,7 +80,6 @@ export default createStore({
 
     async userLogin({ commit }, payload) {
       try {
-        console.log("ACTION LOGIN");
         const resp = await userLogin(payload);
         commit("SET_LOGIN", resp.data);
         return resp;
@@ -91,19 +88,6 @@ export default createStore({
       }
     },
 
-    // async sendUserData({ state }, payload) {
-    //   try {
-    //     let stateUserId = state.userId;
-    //     let stateToken = state.token;
-    //     console.log("ACTION", stateUserId, stateToken);
-    //     const resp = await createUserData(payload, stateUserId, stateToken);
-    //     console.log("resp -> data", resp.data);
-    //     return resp;
-    //   } catch (error) {
-    //     return error;
-    //   }
-    // },
-    // When get id from state - for user that is logged
     async getUserbyId({ commit, state }) {
       try {
         let stateUserId = state.userId;
@@ -116,7 +100,6 @@ export default createStore({
     },
     // When we send id from user card
     async getPilotById({ commit }, userId) {
-      console.log("actin getPilotById", userId);
       try {
         const resp = await getPilot(userId);
         commit("SET_PILOT_INFO", resp.data);
@@ -129,7 +112,6 @@ export default createStore({
     async deleteUser({ state }) {
       let stateUserId = state.userId;
       let userToken = state.token;
-      console.log("delete user action", stateUserId, userToken);
       try {
         const resp = await removeUser(stateUserId, userToken);
         return resp;
