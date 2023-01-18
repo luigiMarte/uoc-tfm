@@ -10,7 +10,13 @@
         /></a>
       </div>
       <div>
-        <span>&copy; {{ new Date().getFullYear() }}</span>
+        <!-- <span>&copy; {{ new Date().getFullYear() }}</span> -->
+        <img
+          src="@/assets/img/GeoDronesWhite.png"
+          style="width: 140px"
+          alt="Logo"
+          class="logo"
+        />
       </div>
     </div>
   </footer>
@@ -27,7 +33,7 @@ footer {
   bottom: 0;
   position: absolute;
   height: auto;
-  height: toRem(80);
+  height: toRem(100);
   background: $gunmetal;
   color: $white;
   width: 100%;

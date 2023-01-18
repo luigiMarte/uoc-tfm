@@ -1,10 +1,17 @@
 <template>
-  <img src="@/assets/img/landing.jpg" alt="" />
+  <div class="img-landing">
+    <img src="@/assets/img/landing.jpg" alt="" />
+    <img
+      src="@/assets/img/GeoDronesBlack.png"
+      alt="Logo"
+      class="logo-landing"
+    />
+  </div>
   <b-container class="mt-4 m-bot-50">
     <div>
       <div></div>
     </div>
-    <b-row class="justify-content-md-center">
+    <b-row class="justify-content-md-center mt-5">
       <register-form></register-form>
     </b-row>
   </b-container>
@@ -54,11 +61,35 @@ p {
 }
 /* img */
 img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
+  object-fit: fill;
+  @include tablet-landscape-up {
+    object-fit: scale-down;
+  }
 }
 /* img */
-
+.img-landing {
+  width: 100%;
+  margin: 0 auto;
+  @include tablet-landscape-up {
+    width: 100%;
+  }
+}
+.logo-landing {
+  position: absolute;
+  top: 40px;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 45%;
+  @include tablet-landscape-up {
+    width: 100%;
+    top: 100px;
+  }
+  @include desktop-up {
+    top: 180px;
+  }
+}
 /* overlay */
 .overlay {
   width: 100%;
